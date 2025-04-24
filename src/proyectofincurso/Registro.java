@@ -165,16 +165,19 @@ public class Registro extends javax.swing.JFrame {
             
             String Nom,Ap1,Ap2,DNI,Tel,CE,codEmp,Con="";  
             char[] Cont,repCont;
-            
+            int Telf = 0;
+                       
             //preparamos el codigo de registro para ambos casos
             String T="INSERT INTO trabajadores VALUES (DNI,id_compañia,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES (?,1,?,?,?,?,?,?);";
-            
-  
+
             Nom=Nomtxt.getText();
             Ap1=Ap1txt.getText();
             Ap2=Ap2txt.getText();
             DNI=DNItxt.getText();
             Tel=Teltxt.getText();
+            if(Tel.trim().length()>0){
+                Telf =Integer.parseInt(Tel);
+            }
             CE=CEtxt.getText();
             Cont=Conttxt.getPassword();
             repCont=repConttxt.getPassword();
@@ -185,46 +188,48 @@ public class Registro extends javax.swing.JFrame {
                 Con=Con+Cont[i];
             }
             
-            if(Trabajador.isSelected()){              
+            if(Trabajador.isSelected()){
                 Statement s = c.createStatement();
                 ResultSet t= s.executeQuery("SELECT codigo FROM compañias WHERE codigo LIKE'"+codEmp+"'");             
-                if(t.next()){
-                    if((CE.trim().length()==0)||(Ap1.trim().length()==0)||(DNI.trim().length()==0)||(Tel.trim().length()==0)||(CE.trim().length()==0)||(Cont.length==0)||(repCont.length==0)||(codEmp.trim().length()==0)){
-                    JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos");
+                if(t.next()){ //se comprueba que el codigo de la empresa coincida
+                    if((CE.trim().length()==0)||(Ap1.trim().length()==0)||(DNI.trim().length()==0)||(Tel.trim().length()==0)||(CE.trim().length()==0)||(Cont.length==0)||(repCont.length==0)){
+                    JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos necesarios");
                     }
-                    else
+                    else{
                         if(Arrays.equals(Cont, repCont)==false){
                             JOptionPane.showMessageDialog(null, "La contraseña no coincide");
                         }
-                    else{
-                        int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
-                        if(op==0){//si
-                            if(Ap2.trim().length()==0){//sin apellido2
-                            s.executeUpdate("INSERT INTO trabajadores VALUES (DNI,id_compañia,nombre,apellido1,correo,contraseña,telefono) VALUES ('"+DNI+"',1,'"+Nom+"','"+Ap1+"','"+CE+"','"+Con+"',"+Tel+");");
-                        }
                         else{
-                            s.executeUpdate("INSERT INTO trabajadores VALUES (DNI,id_compañia,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"',1,'"+Nom+"','"+Ap1+"','"+Ap2+"','"+CE+"','"+Con+"',"+Tel+");");
-                        }
+                            int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
+                            if(op==0){//si
+                                if(Ap2.trim().length()==0){//sin apellido2
+                                int filas=s.executeUpdate("INSERT INTO trabajadores (DNI,id_compañia,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"',1,'"+Nom+"','"+Ap1+"',NULL,'"+CE+"','"+Con+"',"+Telf+");");
+                                System.out.println(filas+" filas afectadas");
+                                }
+                                else{
+                                int filas=s.executeUpdate("INSERT INTO trabajadores (DNI,id_compañia,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"',1,'"+Nom+"','"+Ap1+"','"+Ap2+"','"+CE+"','"+Con+"',"+Telf+");");
+                                    System.out.println(filas+" filas afectadas");
+                                }
                             JOptionPane.showMessageDialog(null, "Registro exitoso");
                             dispose();
                             Inicio i=new Inicio();
                             i.setVisible(true);
+                            }
                         }
                     }
                 }
-                else{
+                else{ //el codigo de empresa no coincide
                     JOptionPane.showMessageDialog(null, "Codigo de empresa no valido");
                 }
-                
             }
             else{ //Cliente
                 if((codEmp.trim().length()>0)){
                     JOptionPane.showMessageDialog(null, "si desea registrarse como cliente no es necesario un codigo de empresa");
                 }
                 if((CE.trim().length()==0)||(Ap1.trim().length()==0)||(DNI.trim().length()==0)||(Tel.trim().length()==0)||(CE.trim().length()==0)||(Cont.length==0)||(repCont.length==0)){
-                    JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos");
+                    JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos necesarios");
                 }
-                else
+                else{
                     if(Arrays.equals(Cont, repCont)==false){
                         JOptionPane.showMessageDialog(null, "La contraseña no coincide");
                     }
@@ -233,22 +238,25 @@ public class Registro extends javax.swing.JFrame {
                     if(op==0){//si
                         Statement s = c.createStatement();
                         if(Ap2.trim().length()==0){//sin apellido2
-                            s.executeUpdate("INSERT INTO clientes VALUES (DNI,nombre,apellido1,correo,contraseña,telefono) VALUES ('"+DNI+"','"+Nom+"','"+Ap1+"','"+CE+"','"+Con+"',"+Tel+");");
+                            int filas=s.executeUpdate("INSERT INTO clientes (DNI,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"','"+Nom+"','"+Ap1+"',NULL,'"+CE+"','"+Con+"',"+Telf+");");
+                            System.out.println(filas+" filas afectadas");
                         }
                         else{    
-                            s.executeUpdate("INSERT INTO clientes VALUES (DNI,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"','"+Nom+"','"+Ap1+"',"+Ap1+"','"+CE+"','"+Con+"',"+Tel+");");
+                            int filas=s.executeUpdate("INSERT INTO clientes (DNI,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"','"+Nom+"','"+Ap1+"','"+Ap2+"','"+CE+"','"+Con+"',"+Telf+");");
+                            System.out.println(filas+" filas afectadas");
                         }          
                         JOptionPane.showMessageDialog(null, "Registro exitoso");
                         dispose();
                         Inicio i=new Inicio();
                         i.setVisible(true);
                     }
+                    }
                 }
             }       
         }
         
         catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error en la BD");
+            JOptionPane.showMessageDialog(null, "Usuario ya existente");
         }
         
     }//GEN-LAST:event_btnRegActionPerformed
