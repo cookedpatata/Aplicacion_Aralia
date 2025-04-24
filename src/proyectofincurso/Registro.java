@@ -258,7 +258,9 @@ public class Registro extends javax.swing.JFrame {
         catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Usuario ya existente");
         }
-        
+        catch (NumberFormatException ne){
+            JOptionPane.showMessageDialog(null, "Porfavor introduca un telefono en formato numerico");
+        }
     }//GEN-LAST:event_btnRegActionPerformed
 
     private void DNItxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNItxtActionPerformed
