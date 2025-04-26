@@ -4,6 +4,11 @@
  */
 package proyectofincurso;
 
+import proyectofincurso.clases.ConectBD;
+import java.sql.*;
+import javax.swing.*;
+import proyectofincurso.clases.UsuarioConectado;
+
 /**
  *
  * @author DAW
@@ -14,6 +19,16 @@ public class Mis_servicios extends javax.swing.JFrame {
      * Creates new form Mis_servicios
      */
     public Mis_servicios() {
+        ConectBD BD=new ConectBD();
+        try{
+            Connection c =DriverManager.getConnection("jdbc:mysql://localhost/limpieza", "JavierC","Arcoiris");
+            String CE=UsuarioConectado.CEU;
+            JOptionPane.showMessageDialog(null, CE);
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, "error en la BD");
+        }
+        setLocation(800,400);
         initComponents();
     }
 
@@ -27,32 +42,218 @@ public class Mis_servicios extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        Hora = new javax.swing.JTabbedPane();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        EstablecimientosAñadir = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        EstablecimientosAñadidos = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        CB1Hora = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        CB2Hora = new javax.swing.JComboBox<>();
+        jPanel6 = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        EstablecimientosAñadir1 = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        EstablecimientosAñadidos1 = new javax.swing.JList<>();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Mis servicios");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
 
-        jButton1.setText("Volver");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        volver.setText("Volver");
+        volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                volverActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 260, -1, -1));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jButton2.setText("Filtrar");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, -1, -1));
+        jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jTable2.setAutoCreateRowSorter(true);
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Establecimiento", "Fecha", "Hora", "Trabajos"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable2);
+
+        jTabbedPane1.addTab("Servicios", jScrollPane1);
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EstablecimientosAñadir.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(EstablecimientosAñadir);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 160));
+
+        EstablecimientosAñadidos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(EstablecimientosAñadidos);
+
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 140, 160));
+
+        jButton2.setText("añadir");
+        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+
+        jButton3.setText("eliminar");
+        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+
+        Hora.addTab("Establecimientos", jPanel3);
+
+        jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CB1Hora.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        CB1Hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        jPanel5.add(CB1Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 10, 90, 30));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setText("Entre las                            y");
+        jPanel5.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 180, 20));
+
+        CB2Hora.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        CB2Hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        jPanel5.add(CB2Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 90, 30));
+
+        Hora.addTab("Hora", jPanel5);
+
+        jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "Enero  ", "Febrero  ", "Marzo  ", "Abril  ", "Mayo  ", "Junio  ", "Julio  ", "Agosto  ", "Septiembre  ", "Octubre  ", "Noviembre  ", "Diciembre" }));
+        jPanel6.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
+        jPanel6.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel6.setText("Del");
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setText("de");
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setText("de");
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+
+        Hora.addTab("Fecha", jPanel6);
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        EstablecimientosAñadir1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(EstablecimientosAñadir1);
+
+        jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 160));
+
+        EstablecimientosAñadidos1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(EstablecimientosAñadidos1);
+
+        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 140, 160));
+
+        jButton4.setText("añadir");
+        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+
+        jButton5.setText("eliminar");
+        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+
+        Hora.addTab("Trabajos", jPanel4);
+
+        jPanel1.add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 210));
+
+        jTabbedPane1.addTab("Filtros", jPanel1);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 390, 250));
+
+        jButton1.setText("Filtrar");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        dispose();
+        Cliente C=new Cliente();
+        C.setVisible(true);
+    }//GEN-LAST:event_volverActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -90,8 +291,41 @@ public class Mis_servicios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CB1Hora;
+    private javax.swing.JComboBox<String> CB2Hora;
+    private javax.swing.JList<String> EstablecimientosAñadidos;
+    private javax.swing.JList<String> EstablecimientosAñadidos1;
+    private javax.swing.JList<String> EstablecimientosAñadir;
+    private javax.swing.JList<String> EstablecimientosAñadir1;
+    private javax.swing.JTabbedPane Hora;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }

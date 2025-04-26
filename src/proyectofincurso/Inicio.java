@@ -4,6 +4,9 @@
  */
 package proyectofincurso;
 
+import proyectofincurso.clases.ConectBD;
+
+import proyectofincurso.clases.UsuarioConectado;
 import java.sql.*;
 import java.io.*;
 import java.util.logging.Level;
@@ -20,6 +23,7 @@ public class Inicio extends javax.swing.JFrame {
     public Inicio() {
         setLocation(800,400);
         initComponents();
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -117,6 +121,7 @@ public class Inicio extends javax.swing.JFrame {
                 Trabajador tr= new Trabajador();
                 tr.setVisible(true);
                 System.out.println("trabajador");
+                UsuarioConectado.CEU=CE;
             }
             else
                 if(cl.next()){
@@ -124,6 +129,7 @@ public class Inicio extends javax.swing.JFrame {
                 Cliente tr= new Cliente();
                 tr.setVisible(true);
                 System.out.println("cliente");
+                UsuarioConectado.CEU=CE;
             }
             else
                     if((CE.trim().length()==0)||(Contr.trim().length()==0)){

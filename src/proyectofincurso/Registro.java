@@ -4,6 +4,7 @@
  */
 package proyectofincurso;
 
+import proyectofincurso.clases.ConectBD;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.logging.Level;

@@ -14,6 +14,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
      * Creates new form Pedir_servicio
      */
     public Pedir_servicio() {
+        setLocation(800,400);
         initComponents();
     }
 
@@ -31,7 +32,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        volver = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,14 +53,25 @@ public class Pedir_servicio extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 40, -1, -1));
 
-        jButton1.setText("Volver");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        volver.setText("Volver");
+        volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                volverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
 
         jButton2.setText("Enviar");
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverActionPerformed
+        dispose();
+        Cliente C=new Cliente();
+        C.setVisible(true);
+    }//GEN-LAST:event_volverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -97,12 +109,12 @@ public class Pedir_servicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }
