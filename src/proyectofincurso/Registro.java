@@ -158,6 +158,47 @@ public class Registro extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnSalActionPerformed
 
+    public static boolean C9(String a){
+        if(a.length()==9)
+            return true;
+        else
+            return false;
+    }
+    
+    public static boolean CE(String a){
+        int p = a.lastIndexOf("@");
+        int ap=a.length();
+        if(p==-1)
+            return false;
+        else
+            if(a.equals("@gmail.com"))
+                return false;
+            else
+                if("@gmail.com".equals(a.substring(p, ap)))
+                    return true;
+                else
+                    return false;
+    }
+    public static boolean DNI(String a){
+        String n="0123456789";
+        String l="ABCDEFGHIJKLMNOPRSTVWXYZ";
+        int c=0;
+        for(int i=0;i<8;i++){//nº numeros
+            for(int j=0;j<10;j++){//nºs
+                if(a.substring(i, i+1).equals(n.substring(j, j+1))){
+                    c++;
+                    break;
+                }
+            }
+        }
+        for(int i=0;i<l.length();i++){//Letra al final
+            if(a.substring(8).equals(l.substring(i,i+1)))
+                if(c==8)
+                    return true;
+        }
+        return false;
+    }
+    
     private void btnRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActionPerformed
         ConectBD bd= new ConectBD();
         
@@ -169,8 +210,7 @@ public class Registro extends javax.swing.JFrame {
             int Telf = 0;
                        
             //preparamos el codigo de registro para ambos casos
-            String T="INSERT INTO trabajadores VALUES (DNI,id_compañia,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES (?,1,?,?,?,?,?,?);";
-
+            
             Nom=Nomtxt.getText();
             Ap1=Ap1txt.getText();
             Ap2=Ap2txt.getText();
@@ -191,15 +231,23 @@ public class Registro extends javax.swing.JFrame {
             
             if(Trabajador.isSelected()){
                 Statement s = c.createStatement();
-                ResultSet t= s.executeQuery("SELECT codigo FROM compañias WHERE codigo LIKE'"+codEmp+"'");             
+                ResultSet t= s.executeQuery("SELECT código FROM compañias WHERE codigo LIKE'"+codEmp+"'");             
                 if(t.next()){ //se comprueba que el codigo de la empresa coincida
                     if((CE.trim().length()==0)||(Ap1.trim().length()==0)||(DNI.trim().length()==0)||(Tel.trim().length()==0)||(CE.trim().length()==0)||(Cont.length==0)||(repCont.length==0)){
                     JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos necesarios");
-                    }
+                    }   
                     else{
-                        if(Arrays.equals(Cont, repCont)==false){
-                            JOptionPane.showMessageDialog(null, "La contraseña no coincide");
-                        }
+                        if(C9(Tel)==false)
+                            JOptionPane.showMessageDialog(null, "Telfono no valido");
+                        if(C9(DNI)==false)
+                            JOptionPane.showMessageDialog(null, "DNI no valido");
+                            else
+                                if(DNI(DNI)==false)
+                                    JOptionPane.showMessageDialog(null, "DNI no valido");
+                        if(CE(CE)==false)
+                            JOptionPane.showMessageDialog(null, "Correo electronico no valido");
+                        if(Arrays.equals(Cont, repCont)==false)
+                            JOptionPane.showMessageDialog(null, "La contraseña no coincide");             
                         else{
                             int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
                             if(op==0){//si
@@ -229,11 +277,19 @@ public class Registro extends javax.swing.JFrame {
                 }
                 if((CE.trim().length()==0)||(Ap1.trim().length()==0)||(DNI.trim().length()==0)||(Tel.trim().length()==0)||(CE.trim().length()==0)||(Cont.length==0)||(repCont.length==0)){
                     JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos necesarios");
-                }
+                }                       
                 else{
-                    if(Arrays.equals(Cont, repCont)==false){
-                        JOptionPane.showMessageDialog(null, "La contraseña no coincide");
-                    }
+                    if((C9(Tel)==false))
+                        JOptionPane.showMessageDialog(null, "Telfono no valido");
+                    else
+                        if((C9(DNI)==false)||(DNI(DNI)==false))
+                            JOptionPane.showMessageDialog(null, "DNI no valido");
+                    else
+                        if(CE(CE)==false)
+                            JOptionPane.showMessageDialog(null, "Correo electronico no valido");
+                    else
+                        if(Arrays.equals(Cont, repCont)==false)
+                            JOptionPane.showMessageDialog(null, "La contraseña no coincide");
                 else{
                     int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
                     if(op==0){//si
