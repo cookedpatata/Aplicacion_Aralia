@@ -54,29 +54,35 @@ public class Mis_servicios extends javax.swing.JFrame {
         EstablecimientosAñadir = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         EstablecimientosAñadidos = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        AñadEstab = new javax.swing.JButton();
+        ElimEstab = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         CB1Hora = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         CB2Hora = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        Dia1 = new javax.swing.JComboBox<>();
+        Mes1 = new javax.swing.JComboBox<>();
+        Año1 = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        Dia2 = new javax.swing.JComboBox<>();
+        Mes2 = new javax.swing.JComboBox<>();
+        Año2 = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         EstablecimientosAñadir1 = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
         EstablecimientosAñadidos1 = new javax.swing.JList<>();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        AñadTrab = new javax.swing.JButton();
+        ElimTrab = new javax.swing.JButton();
+        btnFiltrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -90,7 +96,7 @@ public class Mis_servicios extends javax.swing.JFrame {
                 volverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -131,29 +137,19 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EstablecimientosAñadir.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane2.setViewportView(EstablecimientosAñadir);
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 160));
 
-        EstablecimientosAñadidos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane3.setViewportView(EstablecimientosAñadidos);
 
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 140, 160));
 
-        jButton2.setText("añadir");
-        jPanel3.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+        AñadEstab.setText("añadir");
+        jPanel3.add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
 
-        jButton3.setText("eliminar");
-        jPanel3.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        ElimEstab.setText("eliminar");
+        jPanel3.add(ElimEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
         Hora.addTab("Establecimientos", jPanel3);
 
@@ -175,61 +171,77 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        Dia1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
+        Dia1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                Dia1ActionPerformed(evt);
             }
         });
-        jPanel6.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+        jPanel6.add(Dia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "Enero  ", "Febrero  ", "Marzo  ", "Abril  ", "Mayo  ", "Junio  ", "Julio  ", "Agosto  ", "Septiembre  ", "Octubre  ", "Noviembre  ", "Diciembre" }));
-        jPanel6.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+        Mes1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "Enero  ", "Febrero  ", "Marzo  ", "Abril  ", "Mayo  ", "Junio  ", "Julio  ", "Agosto  ", "Septiembre  ", "Octubre  ", "Noviembre  ", "Diciembre" }));
+        jPanel6.add(Mes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
-        jPanel6.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, -1, -1));
+        Año1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
+        jPanel6.add(Año1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
         jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
         jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Del");
-        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("de");
-        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("de");
-        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+        jPanel6.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        Dia2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
+        Dia2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Dia2ActionPerformed(evt);
+            }
+        });
+        jPanel6.add(Dia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        Mes2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "Enero  ", "Febrero  ", "Marzo  ", "Abril  ", "Mayo  ", "Junio  ", "Julio  ", "Agosto  ", "Septiembre  ", "Octubre  ", "Noviembre  ", "Diciembre" }));
+        jPanel6.add(Mes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+
+        Año2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
+        jPanel6.add(Año2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setText("de");
+        jPanel6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("de");
+        jPanel6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel12.setText("Hasta el");
+        jPanel6.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, -1, -1));
 
         Hora.addTab("Fecha", jPanel6);
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        EstablecimientosAñadir1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(EstablecimientosAñadir1);
 
         jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 160));
 
-        EstablecimientosAñadidos1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane5.setViewportView(EstablecimientosAñadidos1);
 
         jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 140, 160));
 
-        jButton4.setText("añadir");
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+        AñadTrab.setText("añadir");
+        jPanel4.add(AñadTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
 
-        jButton5.setText("eliminar");
-        jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        ElimTrab.setText("eliminar");
+        jPanel4.add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
 
         Hora.addTab("Trabajos", jPanel4);
 
@@ -239,8 +251,8 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 390, 250));
 
-        jButton1.setText("Filtrar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 20, -1, -1));
+        btnFiltrar.setText("Filtrar");
+        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -251,9 +263,13 @@ public class Mis_servicios extends javax.swing.JFrame {
         C.setVisible(true);
     }//GEN-LAST:event_volverActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void Dia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dia1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_Dia1ActionPerformed
+
+    private void Dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dia2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Dia2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -291,22 +307,28 @@ public class Mis_servicios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AñadEstab;
+    private javax.swing.JButton AñadTrab;
+    private javax.swing.JComboBox<String> Año1;
+    private javax.swing.JComboBox<String> Año2;
     private javax.swing.JComboBox<String> CB1Hora;
     private javax.swing.JComboBox<String> CB2Hora;
+    private javax.swing.JComboBox<String> Dia1;
+    private javax.swing.JComboBox<String> Dia2;
+    private javax.swing.JButton ElimEstab;
+    private javax.swing.JButton ElimTrab;
     private javax.swing.JList<String> EstablecimientosAñadidos;
     private javax.swing.JList<String> EstablecimientosAñadidos1;
     private javax.swing.JList<String> EstablecimientosAñadir;
     private javax.swing.JList<String> EstablecimientosAñadir1;
     private javax.swing.JTabbedPane Hora;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> Mes1;
+    private javax.swing.JComboBox<String> Mes2;
+    private javax.swing.JButton btnFiltrar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
