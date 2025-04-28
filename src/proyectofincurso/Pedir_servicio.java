@@ -49,6 +49,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
         AñadTrab = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -127,10 +128,13 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(AñadTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 70, -1));
 
         jLabel3.setText("Establecimientos");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jLabel5.setText("Trabajos");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
+
+        jButton1.setText("añadir");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 70, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -193,6 +197,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
     private javax.swing.JButton EstabSelec;
     private javax.swing.JComboBox<String> Hora;
     private javax.swing.JComboBox<String> Mes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

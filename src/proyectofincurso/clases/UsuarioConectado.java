@@ -9,5 +9,5 @@ package proyectofincurso.clases;
  * @author Usuario
  */
 public class UsuarioConectado {
-    public static String CEU;
+    public static int idU;    
 }

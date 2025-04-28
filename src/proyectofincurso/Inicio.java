@@ -113,15 +113,18 @@ public class Inicio extends javax.swing.JFrame {
             
             Statement s1 = c.createStatement();
             Statement s2 = c.createStatement();
-                    
-            ResultSet t = s1.executeQuery("SELECT correo,contraseña FROM trabajadores \nWHERE correo ='"+CE+"' AND contraseña ='"+Contr+"';");
-            ResultSet cl= s2.executeQuery("SELECT correo,contraseña FROM clientes \nWHERE correo ='"+CE+"' AND contraseña ='"+Contr+"';");
+            Statement s3 = c.createStatement();
+            
+            ResultSet t = s1.executeQuery("SELECT id_trabajador FROM trabajadores \nWHERE correo ='"+CE+"' AND contraseña ='"+Contr+"';");
+            ResultSet cl= s2.executeQuery("SELECT id_cliente FROM clientes \nWHERE correo ='"+CE+"' AND contraseña ='"+Contr+"';");
+            ResultSet comp= s3.executeQuery("SELECT id_compañia FROM compañias \nWHERE correo ='"+CE+"' AND contraseña ='"+Contr+"';");
+            
             if(t.next()){
                 dispose();
                 Trabajador tr= new Trabajador();
                 tr.setVisible(true);
                 System.out.println("trabajador");
-                UsuarioConectado.CEU=CE;
+                UsuarioConectado.idU=t.getInt(1);
             }
             else
                 if(cl.next()){
@@ -129,10 +132,18 @@ public class Inicio extends javax.swing.JFrame {
                 Cliente tr= new Cliente();
                 tr.setVisible(true);
                 System.out.println("cliente");
-                UsuarioConectado.CEU=CE;
+                UsuarioConectado.idU=cl.getInt(1);
             }
+                else
+                    if(comp.next()){
+                        dispose();
+                        Compañia cm= new Compañia();
+                        cm.setVisible(true);
+                        System.out.println("compañia");
+                        UsuarioConectado.idU=comp.getInt(1);
+                    }
             else
-                    if((CE.trim().length()==0)||(Contr.trim().length()==0)){
+                if((CE.trim().length()==0)||(Contr.trim().length()==0)){
                 JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos");
                 CEtxt.setText("");
                 Contrtxt.setText("");

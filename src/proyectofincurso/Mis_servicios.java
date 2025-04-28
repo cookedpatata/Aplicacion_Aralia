@@ -22,8 +22,8 @@ public class Mis_servicios extends javax.swing.JFrame {
         ConectBD BD=new ConectBD();
         try{
             Connection c =DriverManager.getConnection("jdbc:mysql://localhost/limpieza", "JavierC","Arcoiris");
-            String CE=UsuarioConectado.CEU;
-            JOptionPane.showMessageDialog(null, CE);
+            int idU=UsuarioConectado.idU;
+            JOptionPane.showMessageDialog(null, idU);
         }
         catch(SQLException e){
             JOptionPane.showMessageDialog(null, "error en la BD");
