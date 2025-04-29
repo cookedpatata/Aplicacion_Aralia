@@ -50,29 +50,29 @@ public class Inicio extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, -1, -1));
 
         jLabel2.setText("Bienvenido a OrgAralia");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
 
         jLabel5.setText("Correo Electronico");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
         jLabel6.setText("Contraseña");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 130, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel7.setText("INICIO DE SESION");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 60, -1, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, -1, -1));
 
         CEtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CEtxtActionPerformed(evt);
             }
         });
-        getContentPane().add(CEtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 150, -1));
-        getContentPane().add(Contrtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 130, 150, -1));
+        getContentPane().add(CEtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, 150, -1));
+        getContentPane().add(Contrtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 150, -1));
 
         jLabel8.setText("¿Aun no tienes una cuenta? ¡Registrate!");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         Reg.setText("Registrarse");
         Reg.addActionListener(new java.awt.event.ActionListener() {
@@ -80,7 +80,7 @@ public class Inicio extends javax.swing.JFrame {
                 RegActionPerformed(evt);
             }
         });
-        getContentPane().add(Reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
+        getContentPane().add(Reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, -1, -1));
 
         IniciarS.setText("Iniciar sesión");
         IniciarS.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +88,7 @@ public class Inicio extends javax.swing.JFrame {
                 IniciarSActionPerformed(evt);
             }
         });
-        getContentPane().add(IniciarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
+        getContentPane().add(IniciarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -137,7 +137,7 @@ public class Inicio extends javax.swing.JFrame {
                 else
                     if(comp.next()){
                         dispose();
-                        Compañia cm= new Compañia();
+                        Compania cm= new Compania();
                         cm.setVisible(true);
                         System.out.println("compañia");
                         UsuarioConectado.idU=comp.getInt(1);
