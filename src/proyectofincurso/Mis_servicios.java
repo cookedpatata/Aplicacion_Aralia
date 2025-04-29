@@ -4,9 +4,11 @@
  */
 package proyectofincurso;
 
+import java.awt.Dimension;
 import proyectofincurso.clases.ConectBD;
 import java.sql.*;
 import javax.swing.*;
+import javax.swing.table.*;
 import proyectofincurso.clases.UsuarioConectado;
 
 /**
@@ -14,22 +16,51 @@ import proyectofincurso.clases.UsuarioConectado;
  * @author DAW
  */
 public class Mis_servicios extends javax.swing.JFrame {
-
+    DefaultTableModel mod=new DefaultTableModel();
     /**
      * Creates new form Mis_servicios
      */
     public Mis_servicios() {
         ConectBD BD=new ConectBD();
+        
+        setLocation(800,400);
+        initComponents();
         try{
+            String id,E,F,H,T;
+            int idn;
+            
             Connection c =DriverManager.getConnection("jdbc:mysql://localhost/limpieza", "JavierC","Arcoiris");
+            
             int idU=UsuarioConectado.idU;
-            JOptionPane.showMessageDialog(null, idU);
+            idU=1;
+             
+            String titulosC[]={"Servicio","Establecimiento","Fecha","Hora","Trabajos"};
+            mod.setColumnIdentifiers(titulosC);
+            Tabla.setModel(mod);
+            Tabla.setPreferredScrollableViewportSize(new Dimension(700, 150));
+            
+            String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,t.nombre FROM servicios s\n" +
+                        "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
+                        "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
+                        "JOIN trabajos t ON l.id_trabajo = t.id_trabajo\n" +
+                        "WHERE s.id_cliente ="+idU+";";                
+            Statement s= c.createStatement();
+            ResultSet a= s.executeQuery(sql);
+            
+            while (a.next()){
+                idn=a.getInt(1);
+                id=Integer.toString(idn);
+                E=a.getString(2);
+                F=a.getString(3);
+                H=a.getString(4);
+                T=a.getString(5);
+                String row[]={id,E,F,H,T};
+                mod.addRow(row);
+            }
         }
         catch(SQLException e){
             JOptionPane.showMessageDialog(null, "error en la BD");
         }
-        setLocation(800,400);
-        initComponents();
     }
 
     /**
@@ -44,10 +75,9 @@ public class Mis_servicios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         volver = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        ScrollTabla = new javax.swing.JScrollPane();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
         Hora = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -88,7 +118,7 @@ public class Mis_servicios extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Mis servicios");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
 
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
@@ -96,60 +126,42 @@ public class Mis_servicios extends javax.swing.JFrame {
                 volverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Establecimiento", "Fecha", "Hora", "Trabajos"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
+        ));
+        jScrollPane7.setViewportView(Tabla);
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+        ScrollTabla.setViewportView(jScrollPane7);
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable2);
-
-        jTabbedPane1.addTab("Servicios", jScrollPane1);
-
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
+        jTabbedPane1.addTab("Servicios", ScrollTabla);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane2.setViewportView(EstablecimientosAñadir);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 160));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 160));
 
         jScrollPane3.setViewportView(EstablecimientosAñadidos);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 140, 160));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 140, 160));
 
         AñadEstab.setText("añadir");
-        jPanel3.add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+        jPanel3.add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
 
         ElimEstab.setText("eliminar");
-        jPanel3.add(ElimEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        jPanel3.add(ElimEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
 
         Hora.addTab("Establecimientos", jPanel3);
 
@@ -231,28 +243,26 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(EstablecimientosAñadir1);
 
-        jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 140, 160));
+        jPanel4.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 160));
 
         jScrollPane5.setViewportView(EstablecimientosAñadidos1);
 
-        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, 140, 160));
+        jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 140, 160));
 
         AñadTrab.setText("añadir");
-        jPanel4.add(AñadTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, -1, -1));
+        jPanel4.add(AñadTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
 
         ElimTrab.setText("eliminar");
-        jPanel4.add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, -1, -1));
+        jPanel4.add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
 
         Hora.addTab("Trabajos", jPanel4);
 
-        jPanel1.add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 210));
+        jTabbedPane1.addTab("Filtros", Hora);
 
-        jTabbedPane1.addTab("Filtros", jPanel1);
-
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 390, 250));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 460, 250));
 
         btnFiltrar.setText("Filtrar");
-        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
+        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -263,13 +273,13 @@ public class Mis_servicios extends javax.swing.JFrame {
         C.setVisible(true);
     }//GEN-LAST:event_volverActionPerformed
 
-    private void Dia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dia1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Dia1ActionPerformed
-
     private void Dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dia2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Dia2ActionPerformed
+
+    private void Dia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dia1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Dia1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -324,30 +334,29 @@ public class Mis_servicios extends javax.swing.JFrame {
     private javax.swing.JTabbedPane Hora;
     private javax.swing.JComboBox<String> Mes1;
     private javax.swing.JComboBox<String> Mes2;
+    private javax.swing.JScrollPane ScrollTabla;
+    private javax.swing.JTable Tabla;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton volver;
     // End of variables declaration//GEN-END:variables
 }
