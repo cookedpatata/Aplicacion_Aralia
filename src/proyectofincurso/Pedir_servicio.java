@@ -145,6 +145,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
 
         AñadEstab.setText("Añadir");
+        AñadEstab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AñadEstabActionPerformed(evt);
+            }
+        });
         getContentPane().add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 70, -1));
 
         jLabel3.setText("Establecimientos");
@@ -171,6 +176,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
     private void DiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DiaActionPerformed
+
+    private void AñadEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadEstabActionPerformed
+        Añadir_Establecimiento AE= new Añadir_Establecimiento();
+        AE.setVisible(true);
+    }//GEN-LAST:event_AñadEstabActionPerformed
 
     /**
      * @param args the command line arguments

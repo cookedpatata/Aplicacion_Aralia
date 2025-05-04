@@ -158,9 +158,19 @@ public class Mis_servicios extends javax.swing.JFrame {
         jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 140, 160));
 
         AñadEstab.setText("añadir");
+        AñadEstab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AñadEstabActionPerformed(evt);
+            }
+        });
         jPanel3.add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
 
         ElimEstab.setText("eliminar");
+        ElimEstab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ElimEstabActionPerformed(evt);
+            }
+        });
         jPanel3.add(ElimEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
 
         Hora.addTab("Establecimientos", jPanel3);
@@ -250,9 +260,19 @@ public class Mis_servicios extends javax.swing.JFrame {
         jPanel4.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 140, 160));
 
         AñadTrab.setText("añadir");
+        AñadTrab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AñadTrabActionPerformed(evt);
+            }
+        });
         jPanel4.add(AñadTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
 
         ElimTrab.setText("eliminar");
+        ElimTrab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ElimTrabActionPerformed(evt);
+            }
+        });
         jPanel4.add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
 
         Hora.addTab("Trabajos", jPanel4);
@@ -262,6 +282,11 @@ public class Mis_servicios extends javax.swing.JFrame {
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 460, 250));
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, -1, -1));
 
         pack();
@@ -280,6 +305,26 @@ public class Mis_servicios extends javax.swing.JFrame {
     private void Dia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dia1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Dia1ActionPerformed
+
+    private void AñadEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadEstabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AñadEstabActionPerformed
+
+    private void ElimEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimEstabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ElimEstabActionPerformed
+
+    private void AñadTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadTrabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AñadTrabActionPerformed
+
+    private void ElimTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimTrabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ElimTrabActionPerformed
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFiltrarActionPerformed
 
     /**
      * @param args the command line arguments

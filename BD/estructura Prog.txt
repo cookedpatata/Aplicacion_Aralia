@@ -1,0 +1,111 @@
+CREATE DATABASE If NOT EXISTS Limpieza;
+
+USE Limpieza;
+
+CREATE TABLE if NOT EXISTS clientes(
+id_cliente INT AUTO_INCREMENT,
+DNI CHAR(9) NOT NULL UNIQUE,
+nombre VARCHAR(20) NOT NULL,
+apellido1 VARCHAR(20) NOT NULL,
+apellido2 VARCHAR(20) NULL,
+correo VARCHAR(30) NOT NULL UNIQUE,
+contraseña VARCHAR(20) NOT NULL,
+telefono INT(9) NOT NULL UNIQUE,
+PRIMARY KEY (id_cliente, DNI)
+)
+ENGINE =INNODB
+;
+
+CREATE TABLE if NOT EXISTS compañias(
+id_compañia INT AUTO_INCREMENT,
+nombre VARCHAR(30) NOT NULL,
+direccion VARCHAR(50) NOT NULL,
+telefono INT(9) NOT NULL UNIQUE,
+correo VARCHAR(30) NOT NULL UNIQUE,
+contraseña VARCHAR(20) NOT NULL,
+código CHAR(8) NULL UNIQUE,
+PRIMARY KEY (id_compañia)
+)
+ENGINE =INNODB
+;
+
+CREATE TABLE  if NOT EXISTS trabajos(
+id_trabajo INT AUTO_INCREMENT,
+nombre VARCHAR(20) NOT NULL,
+PRIMARY KEY (id_trabajo)
+)
+ENGINE =INNODB
+;
+
+CREATE TABLE if NOT EXISTS establecimientos(
+id_establecimiento INT AUTO_INCREMENT,
+id_cliente INT NOT NULL,
+direccion VARCHAR(50) NOT NULL,
+PRIMARY KEY (id_establecimiento),
+FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE =INNODB
+;
+
+CREATE TABLE  if NOT EXISTS trabajadores(
+id_trabajador INT AUTO_INCREMENT,
+DNI CHAR(9) NOT NULL UNIQUE,
+id_compañia INT(100),
+nombre VARCHAR(20) NOT NULL,
+apellido1 VARCHAR(20) NOT NULL,
+apellido2 VARCHAR(20) NULL,
+correo VARCHAR(30) NOT NULL UNIQUE,
+contraseña VARCHAR(20) NOT NULL,
+telefono INT(9) NOT NULL UNIQUE,
+PRIMARY KEY (id_trabajador, DNI),
+FOREIGN KEY (id_compañia) REFERENCES compañias(id_compañia) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE =INNODB
+;
+
+CREATE TABLE if NOT EXISTS servicios(
+id_servicio INT AUTO_INCREMENT,
+id_compañia INT NOT NULL,
+id_cliente INT NOT NULL,
+id_establecimiento INT NOT NULL,
+fecha_inicio DATE NOT NULL,
+hora_inicio TIME NOT NULL,
+fecha_fin DATE NULL,
+hora_fin TIME NULL,
+PRIMARY KEY (id_servicio),
+FOREIGN KEY (id_establecimiento) REFERENCES establecimientos (id_establecimiento) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY (id_compañia) REFERENCES compañias(id_compañia) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE =INNODB
+;
+
+CREATE TABLE if NOT EXISTS  empresas(
+NIF CHAR(9) NOT NULL,
+id_cliente INT NOT NULL,
+nombre VARCHAR(20) NOT NULL,
+PRIMARY KEY (NIF),
+FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente) ON DELETE CASCADE
+)
+ENGINE =INNODB
+;
+
+CREATE TABLE if NOT EXISTS labores(
+id_servicio INT NOT NULL,
+id_trabajo INT NOT NULL,
+PRIMARY KEY (id_servicio, id_trabajo),
+FOREIGN KEY (id_servicio) REFERENCES servicios(id_servicio) ON DELETE CASCADE,
+FOREIGN KEY (id_trabajo) REFERENCES trabajos(id_trabajo) ON DELETE CASCADE
+)
+ENGINE =INNODB
+;
+
+CREATE TABLE if NOT EXISTS jornadas(
+id_servicio INT NOT NULL,
+id_trabajador INT NOT NULL,
+PRIMARY KEY (id_servicio, id_trabajador),
+FOREIGN KEY (id_servicio) REFERENCES servicios(id_servicio) ON DELETE CASCADE,
+FOREIGN KEY (id_trabajador) REFERENCES trabajadores(id_trabajador) ON DELETE CASCADE
+)
+ENGINE =INNODB
+;

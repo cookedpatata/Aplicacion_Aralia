@@ -23,7 +23,7 @@ public class ConectBD {
     private final String pwd= "Arcoiris";
     private final String Driver="com.mysql.jdbc.Driver";
 
-    public ConectBD() {
+    public Connection ConectBD() {
         try{
             Class.forName(Driver);
             c = DriverManager.getConnection(url, usrName, pwd);
@@ -35,6 +35,7 @@ public class ConectBD {
         catch (ClassNotFoundException ex) {            
             JOptionPane.showMessageDialog(null, "error al encontrar Drivers");
         }
+        return c;
     }
     
     public static void main(String[] args) {
