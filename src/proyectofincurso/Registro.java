@@ -198,6 +198,22 @@ public class Registro extends javax.swing.JFrame {
         }
         return false;
     }
+    public static boolean CERep(String CE) throws SQLException{
+        Connection c = ConectBD.Conexion();
+        Statement s = c.createStatement();
+        ResultSet cc =s.executeQuery("SELECT correo FROM clientes;");
+        Statement s1 = c.createStatement();
+        ResultSet ct =s1.executeQuery("SELECT correo FROM trabajadores;");
+        while (cc.next()){
+            if(CE.equals(cc.getString(1)))
+                return true;                    
+        }
+        while (ct.next()){
+            if(CE.equals(ct.getString(1)))
+                return true;
+        }
+        return false;
+    }
     
     private void btnRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActionPerformed
             try{
@@ -237,15 +253,19 @@ public class Registro extends javax.swing.JFrame {
                     else{
                         if(C9(Tel)==false)
                             JOptionPane.showMessageDialog(null, "Telfono no valido");
-                        if(C9(DNI)==false)
+                        else
+                        if((C9(DNI))||(DNI(DNI)==false))
                             JOptionPane.showMessageDialog(null, "DNI no valido");
-                            else
-                                if(DNI(DNI)==false)
-                                    JOptionPane.showMessageDialog(null, "DNI no valido");
+                        else
                         if(CE(CE)==false)
                             JOptionPane.showMessageDialog(null, "Correo electronico no valido");
+                        else
                         if(Arrays.equals(Cont, repCont)==false)
-                            JOptionPane.showMessageDialog(null, "La contraseña no coincide");             
+                            JOptionPane.showMessageDialog(null, "La contraseña no coincide");
+                        else
+                        if(CERep(CE)==true){
+                            JOptionPane.showMessageDialog(null, "Usuario Ya existente");
+                        }
                         else{
                             int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
                             if(op==0){//si
@@ -278,16 +298,20 @@ public class Registro extends javax.swing.JFrame {
                 }                       
                 else{
                     if((C9(Tel)==false))
-                        JOptionPane.showMessageDialog(null, "Telfono no valido");
+                        JOptionPane.showMessageDialog(null, "Telfono no valido");  
                     else
-                        if((C9(DNI)==false)||(DNI(DNI)==false))
-                            JOptionPane.showMessageDialog(null, "DNI no valido");
+                    if((C9(DNI)==false)||(DNI(DNI)==false))
+                        JOptionPane.showMessageDialog(null, "DNI no valido");
                     else
-                        if(CE(CE)==false)
-                            JOptionPane.showMessageDialog(null, "Correo electronico no valido");
+                    if(CE(CE)==false)
+                        JOptionPane.showMessageDialog(null, "Correo electronico no valido");
                     else
-                        if(Arrays.equals(Cont, repCont)==false)
-                            JOptionPane.showMessageDialog(null, "La contraseña no coincide");
+                    if(Arrays.equals(Cont, repCont)==false)
+                        JOptionPane.showMessageDialog(null, "La contraseña no coincide"); 
+                    else
+                    if(CERep(CE)==true){
+                        JOptionPane.showMessageDialog(null, "Usuario Ya existente");
+                    }
                 else{
                     int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
                     if(op==0){//si
@@ -311,7 +335,7 @@ public class Registro extends javax.swing.JFrame {
         }
         
         catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Usuario ya existente");
+            JOptionPane.showMessageDialog(null, "Error en la BD");
         }
         catch (NumberFormatException ne){
             JOptionPane.showMessageDialog(null, "Porfavor introduca un telefono en formato numerico");
