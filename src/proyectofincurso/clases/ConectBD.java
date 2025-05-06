@@ -5,9 +5,6 @@
 package proyectofincurso.clases;
 
 import java.sql.*;
-import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 /**
  *
@@ -15,19 +12,16 @@ import javax.swing.*;
  */
 public class ConectBD {
     
-    private Connection c = null;
-    private String query = null;
-    private ResultSet rs;
-    private final String url="jdbc:mysql://localhost/limpieza";
-    private final String usrName = "JavierC";
-    private final String pwd= "Arcoiris";
-    private final String Driver="com.mysql.jdbc.Driver";
+    private static Connection c = null;
+    private static final String url="jdbc:mysql://localhost/limpieza";
+    private static final String usrName = "JavierC";
+    private static final String pwd= "Arcoiris";
+    private static final String Driver="com.mysql.jdbc.Driver";
 
-    public Connection ConectBD() {
+    public static Connection Conexion() {
         try{
             Class.forName(Driver);
-            c = DriverManager.getConnection(url, usrName, pwd);
-            
+            c = DriverManager.getConnection(url, usrName, pwd);      
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, "Error en la BD");

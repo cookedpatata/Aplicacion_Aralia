@@ -21,7 +21,6 @@ public class Mis_servicios extends javax.swing.JFrame {
      * Creates new form Mis_servicios
      */
     public Mis_servicios() {
-        ConectBD BD=new ConectBD();
         
         setLocation(800,400);
         initComponents();
@@ -29,7 +28,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             String id,E,F,H,T;
             int idn;
             
-            Connection c =DriverManager.getConnection("jdbc:mysql://localhost/limpieza", "JavierC","Arcoiris");
+            Connection c = ConectBD.Conexion();
             
             int idU=UsuarioConectado.idU;
             idU=1;
@@ -151,11 +150,11 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(EstablecimientosAñadir);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 140, 160));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 140, 160));
 
         jScrollPane3.setViewportView(EstablecimientosAñadidos);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 140, 160));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 140, 160));
 
         AñadEstab.setText("añadir");
         AñadEstab.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +170,7 @@ public class Mis_servicios extends javax.swing.JFrame {
                 ElimEstabActionPerformed(evt);
             }
         });
-        jPanel3.add(ElimEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
+        jPanel3.add(ElimEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 110, 80, -1));
 
         Hora.addTab("Establecimientos", jPanel3);
 

@@ -22,12 +22,12 @@ public class Pedir_servicio extends javax.swing.JFrame {
         setLocation(800,400);
         initComponents();    
         try{
+            Connection c = ConectBD.Conexion();
+            
             int idU=UsuarioConectado.idU;
             idU=1;
-            ConectBD bd=new ConectBD();
-            Estab.removeAllItems();
-            Connection c =DriverManager.getConnection("jdbc:mysql://localhost/limpieza", "JavierC","Arcoiris");
             
+            Estab.removeAllItems();
             //establecimientos
             String sql="SELECT direccion from establecimientos WHERE id_cliente="+idU+";";
             Statement s= c.createStatement();

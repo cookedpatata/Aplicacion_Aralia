@@ -100,7 +100,6 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_RegActionPerformed
 
     private void IniciarSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IniciarSActionPerformed
-        ConectBD bd=new ConectBD();
         String CE,Contr;
         CE=CEtxt.getText();
         Contr=Contrtxt.getText();
@@ -109,7 +108,7 @@ public class Inicio extends javax.swing.JFrame {
             //PassJuan01
             //carlos.gomez@mail.com
             //Pass1234
-            Connection c =DriverManager.getConnection("jdbc:mysql://localhost/limpieza", "JavierC","Arcoiris");
+            Connection c = ConectBD.Conexion();
             
             Statement s1 = c.createStatement();
             Statement s2 = c.createStatement();

@@ -200,10 +200,8 @@ public class Registro extends javax.swing.JFrame {
     }
     
     private void btnRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActionPerformed
-        ConectBD bd= new ConectBD();
-        
-        try{
-            Connection c =DriverManager.getConnection("jdbc:mysql://localhost/limpieza", "JavierC","Arcoiris");
+            try{
+            Connection c = ConectBD.Conexion();
             
             String Nom,Ap1,Ap2,DNI,Tel,CE,codEmp,Con="";  
             char[] Cont,repCont;
