@@ -14,13 +14,17 @@ import proyectofincurso.clases.UsuarioConectado;
  * @author DAW
  */
 public class Pedir_servicio extends javax.swing.JFrame {
-
+    private DefaultListModel añadList= new DefaultListModel();
+    private DefaultListModel obList= new DefaultListModel();
+    
     /**
      * Creates new form Pedir_servicio
      */
     public Pedir_servicio() {
         setLocation(800,400);
-        initComponents();    
+        initComponents();
+        ListTrab1.setModel(añadList);
+        Listrab2.setModel(obList);
         try{
             Connection c = ConectBD.Conexion();
             
@@ -38,13 +42,14 @@ public class Pedir_servicio extends javax.swing.JFrame {
             }
             
             //trabajos
-            sql="SELECT direccion from establecimientos WHERE id_cliente="+idU+";";
+            sql="SELECT nombre FROM trabajos;";
             s= c.createStatement();
             a= s.executeQuery(sql);
             
-            while (a.next()){
-                ListTrab1.add(sql, Hora);
-            }
+            while(a.next()){
+                Object Trab=a.getString(1);
+                añadList.addElement(Trab);
+            }   
         }
         catch (SQLException e){
             JOptionPane.showMessageDialog(null, "error en la base de datos");
@@ -142,6 +147,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 100, 130));
 
         ElimTrab.setText("Eliminar");
+        ElimTrab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ElimTrabActionPerformed(evt);
+            }
+        });
         getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
 
         AñadEstab.setText("Añadir");
@@ -162,6 +172,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(Estab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 160, -1));
 
         AñadTrab1.setText("Añadir");
+        AñadTrab1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AñadTrab1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(AñadTrab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 70, -1));
 
         pack();
@@ -181,6 +196,37 @@ public class Pedir_servicio extends javax.swing.JFrame {
         Añadir_Establecimiento AE= new Añadir_Establecimiento();
         AE.setVisible(true);
     }//GEN-LAST:event_AñadEstabActionPerformed
+
+    private void AñadTrab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadTrab1ActionPerformed
+        String Trab1,Trab2;
+        int s=obList.size(),c = 0;
+        String Trabs []= new String [s];
+        Trab1=(String)ListTrab1.getSelectedValue();
+        
+        if(s>0){
+            for(int i=0;i!=s;i++){
+                Trab2=(String)obList.getElementAt(i);
+                Trabs[i]=Trab2;
+            }
+            for(int i=0;i!=s;i++){
+                if(Trabs[i].equals(Trab1))
+                    c++;
+            }
+            if(c>0){
+            }
+            else
+                obList.addElement(Trab1);
+        }
+        else{
+            obList.addElement(Trab1);
+        }
+    }//GEN-LAST:event_AñadTrab1ActionPerformed
+
+    private void ElimTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimTrabActionPerformed
+        int indice=Listrab2.getSelectedIndex();
+        
+        obList.remove(indice); 
+    }//GEN-LAST:event_ElimTrabActionPerformed
 
     /**
      * @param args the command line arguments
