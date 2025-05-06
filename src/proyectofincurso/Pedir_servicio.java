@@ -114,6 +114,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(Dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
         Mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "Enero  ", "Febrero  ", "Marzo  ", "Abril  ", "Mayo  ", "Junio  ", "Julio  ", "Agosto  ", "Septiembre  ", "Octubre  ", "Noviembre  ", "Diciembre" }));
+        Mes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MesActionPerformed(evt);
+            }
+        });
         getContentPane().add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
 
         Año.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
@@ -225,8 +230,16 @@ public class Pedir_servicio extends javax.swing.JFrame {
     private void ElimTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimTrabActionPerformed
         int indice=Listrab2.getSelectedIndex();
         
+        try{
         obList.remove(indice); 
+        }
+        catch(IndexOutOfBoundsException ie){
+        }
     }//GEN-LAST:event_ElimTrabActionPerformed
+
+    private void MesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MesActionPerformed
 
     /**
      * @param args the command line arguments
