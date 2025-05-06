@@ -296,7 +296,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                             Fecha=Fecha+F[i].trim()+"-";
                     }
                     String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
-                    String sql="INSERT INTO servicios (id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
+                    String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
                     sql=sql+Values;
                     System.out.println(sql);
                 }
