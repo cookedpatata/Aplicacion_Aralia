@@ -7,6 +7,7 @@ package proyectofincurso;
 import proyectofincurso.clases.ConectBD;
 import java.sql.*;
 import javax.swing.*;
+import proyectofincurso.clases.UsuarioConectado;
 /**
  *
  * @author Usuario
@@ -32,7 +33,7 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        Estabtxt = new javax.swing.JTextField();
         Añadir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -41,12 +42,12 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
         jLabel1.setText("Añadir Establecimiento");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        Estabtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                EstabtxtActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 140, -1));
+        getContentPane().add(Estabtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 140, -1));
 
         Añadir.setText("Añadir");
         Añadir.addActionListener(new java.awt.event.ActionListener() {
@@ -61,22 +62,33 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
 
     private void AñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirActionPerformed
         try{
-        String sql="INSER INTO establecimientos VALUES";
+        int idU=UsuarioConectado.idU, f;
+        idU=1;
+        String Estab=Estabtxt.getText();
         Connection c= ConectBD.Conexion();
         Statement s= c.createStatement();
         
-        
-        
-        int e= s.executeUpdate(sql);
+        ResultSet e= s.executeQuery("SELECT direccion FROM establecimientos WHERE id_cliente="+idU+" AND direccion LIKE '"+Estab+"';");
+        if (e.next())
+            JOptionPane.showMessageDialog(null, "Ya posee dicho establecimiento");
+        else{
+            int conf=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
+            if(conf==0){
+                f= s.executeUpdate("INSERT INTO establecimientos (id_cliente, direccion) VALUES ("+idU+", '"+Estab+"');");
+                System.out.println(f+" filas afectadas");
+            }
+            else{
+            }            
+        }
         }
         catch(SQLException se){
-            System.out.println("error en la BD");
+            JOptionPane.showMessageDialog(null, "Error en la BD");
         }
     }//GEN-LAST:event_AñadirActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void EstabtxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstabtxtActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_EstabtxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,7 +127,7 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Añadir;
+    private javax.swing.JTextField Estabtxt;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

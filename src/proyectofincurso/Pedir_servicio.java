@@ -8,6 +8,7 @@ import java.sql.*;
 import javax.swing.*;
 import proyectofincurso.clases.ConectBD;
 import proyectofincurso.clases.UsuarioConectado;
+import static proyectofincurso.clases.UsuarioConectado.idU;
 
 /**
  *
@@ -16,7 +17,6 @@ import proyectofincurso.clases.UsuarioConectado;
 public class Pedir_servicio extends javax.swing.JFrame {
     private DefaultListModel añadList= new DefaultListModel();
     private DefaultListModel obList= new DefaultListModel();
-    
     /**
      * Creates new form Pedir_servicio
      */
@@ -33,6 +33,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
             
             Estab.removeAllItems();
             //establecimientos
+            Estab.addItem("<Seleccionar>");
             String sql="SELECT direccion from establecimientos WHERE id_cliente="+idU+";";
             Statement s= c.createStatement();
             ResultSet a= s.executeQuery(sql);
@@ -103,6 +104,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         EnvServicio.setText("Enviar");
+        EnvServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EnvServicioActionPerformed(evt);
+            }
+        });
         getContentPane().add(EnvServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 90, 30));
 
         Dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
@@ -113,7 +119,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
         });
         getContentPane().add(Dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        Mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "Enero  ", "Febrero  ", "Marzo  ", "Abril  ", "Mayo  ", "Junio  ", "Julio  ", "Agosto  ", "Septiembre  ", "Octubre  ", "Noviembre  ", "Diciembre" }));
+        Mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         Mes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MesActionPerformed(evt);
@@ -122,7 +128,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
 
         Año.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
-        getContentPane().add(Año, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, -1, -1));
+        getContentPane().add(Año, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("de");
@@ -130,7 +136,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("de");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("El");
@@ -138,18 +144,18 @@ public class Pedir_servicio extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("a las");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
 
         Hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
-        getContentPane().add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, -1, -1));
+        getContentPane().add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
 
         jScrollPane2.setViewportView(Listrab2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 110, 100, 130));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 110, 130));
 
         jScrollPane3.setViewportView(ListTrab1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 100, 130));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 110, 130));
 
         ElimTrab.setText("Eliminar");
         ElimTrab.addActionListener(new java.awt.event.ActionListener() {
@@ -157,7 +163,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 ElimTrabActionPerformed(evt);
             }
         });
-        getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
+        getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
 
         AñadEstab.setText("Añadir");
         AñadEstab.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +177,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jLabel5.setText("Trabajos");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
 
         Estab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(Estab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 160, -1));
@@ -182,7 +188,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 AñadTrab1ActionPerformed(evt);
             }
         });
-        getContentPane().add(AñadTrab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 130, 70, -1));
+        getContentPane().add(AñadTrab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 70, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -240,6 +246,68 @@ public class Pedir_servicio extends javax.swing.JFrame {
     private void MesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MesActionPerformed
+
+    private void EnvServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnvServicioActionPerformed
+        int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0, Index ;
+        int idU=UsuarioConectado.idU, idEst = 0; //id_cliente
+            idU=1;
+        
+        Idia= Dia.getSelectedIndex();
+        Imes= Mes.getSelectedIndex();
+        Iaño= Año.getSelectedIndex();
+        Ihora= Hora.getSelectedIndex();
+        Iest= Estab.getSelectedIndex();
+        int I[]={Idia,Imes,Iaño,Iest};
+        
+        
+        for(int i=0;i<4;i++){//CBox seleccionados
+            if(I[i]==0)
+                f++;
+        }
+
+        if ((f>0)||(obList.size()==0))
+            JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos");
+        else{
+            int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
+            if(op==0){
+                String D,M,A,H;
+                D= (String) Dia.getSelectedItem();
+                M= (String) Mes.getSelectedItem();
+                A= (String) Año.getSelectedItem();
+                H= (String) Hora.getSelectedItem();//Hora_inicio
+                String F[]={A,M,D};
+            
+                try{   
+                    Connection c= ConectBD.Conexion();
+                    Statement s= c.createStatement();
+                
+                    String est=Estab.getItemAt(Iest); 
+                
+                    ResultSet r= s.executeQuery("SELECT id_establecimiento FROM establecimientos WHERE direccion LIKE '"+est+"';");
+                    while (r.next())
+                        idEst=r.getInt(1);//id_establecimiento
+                
+                    String Fecha="'"; //fecha_inicio
+                    for(int i=0;i<3;i++){
+                        if(i==2){
+                            Fecha=Fecha+F[i].trim()+"'";
+                        }
+                        else
+                            Fecha=Fecha+F[i].trim()+"-";
+                    }
+                    String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
+                    String sql="INSERT INTO servicios (id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
+                    sql=sql+Values;
+                    System.out.println(sql);
+                }
+                catch(SQLException se){
+                    JOptionPane.showMessageDialog(null, "Error en la base de datos");
+                }
+            }
+            else{    
+            }
+        }
+    }//GEN-LAST:event_EnvServicioActionPerformed
 
     /**
      * @param args the command line arguments
