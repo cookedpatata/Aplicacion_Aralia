@@ -119,7 +119,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
         });
         getContentPane().add(Dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
 
-        Mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        Mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         Mes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MesActionPerformed(evt);
@@ -151,11 +151,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(Listrab2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 140, 160));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 150, 160));
 
         jScrollPane3.setViewportView(ListTrab1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 130, 160));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 150, 160));
 
         ElimTrab.setText("Eliminar");
         ElimTrab.addActionListener(new java.awt.event.ActionListener() {
@@ -282,11 +282,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
                     Statement s= c.createStatement();
                 
                     String est=Estab.getItemAt(Iest); 
-                
-                    ResultSet r= s.executeQuery("SELECT id_establecimiento FROM establecimientos WHERE direccion LIKE '"+est+"';");
+                    
+                    ResultSet r;
+                    r= s.executeQuery("SELECT id_establecimiento FROM establecimientos WHERE direccion LIKE '"+est+"';");
                     while (r.next())
                         idEst=r.getInt(1);//id_establecimiento
-                
                     String Fecha="'"; //fecha_inicio
                     for(int i=0;i<3;i++){
                         if(i==2){
@@ -295,10 +295,21 @@ public class Pedir_servicio extends javax.swing.JFrame {
                         else
                             Fecha=Fecha+F[i].trim()+"-";
                     }
-                    String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
-                    String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
-                    sql=sql+Values;
-                    System.out.println(sql);
+                    r= s.executeQuery("SELECT id_servicio FROM servicios WHERE fecha_inicio LIKE "+Fecha+" AND id_establecimiento="+idEst+";");
+                    if(r.next())
+                        JOptionPane.showMessageDialog(null, "Ya ha pedido un servicio en ese establecimiento con esa fecha");
+                    else
+                        r= s.executeQuery("SELECT curdate();");
+                        String Cd=r.getString(1);
+                    if(1==1){
+                    }
+                    else{
+                        String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
+                        String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
+                        sql=sql+Values;
+                        s.executeUpdate(sql);
+                        JOptionPane.showMessageDialog(null, "¡Servicio pedido con exito!");
+                    } 
                 }
                 catch(SQLException se){
                     JOptionPane.showMessageDialog(null, "Error en la base de datos");

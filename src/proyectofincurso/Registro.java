@@ -7,8 +7,8 @@ package proyectofincurso;
 import proyectofincurso.clases.ConectBD;
 import java.sql.*;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
+import java.util.regex.*;
 import javax.swing.*;
 
 /**
@@ -166,19 +166,17 @@ public class Registro extends javax.swing.JFrame {
     }
     
     public static boolean CE(String a){
-        int p = a.lastIndexOf("@");
-        int ap=a.length();
-        if(p==-1)
-            return false;
-        else
-            if(a.equals("@gmail.com"))
-                return false;
-            else
-                if("@gmail.com".equals(a.substring(p, ap)))
-                    return true;
-                else
-                    return false;
+        Pattern pat = Pattern.compile("^[a-zA-Z0-9_-]{2,}@[a-zA-Z0-9_-]{2,}.[a-zA-Z]{2,4}(.[a-zA-Z]{2,4})?$");
+        Matcher mat = pat.matcher(a);
+        return mat.find();
     }
+    
+    public static boolean Contr(String a){
+        Pattern pat= Pattern.compile("^(?=.*[A-Z])(?=.*\\d).{7,}$");
+        Matcher mat= pat.matcher(a);
+        return mat.find();   
+    }
+    
     public static boolean DNI(String a){
         String n="0123456789";
         String l="ABCDEFGHIJKLMNOPRSTVWXYZ";
@@ -263,6 +261,9 @@ public class Registro extends javax.swing.JFrame {
                         if(Arrays.equals(Cont, repCont)==false)
                             JOptionPane.showMessageDialog(null, "La contraseña no coincide");
                         else
+                        if(Contr(Con)==false)
+                            JOptionPane.showMessageDialog(null, "Formato de contraseña no valido, prueba a utilizar mayusculas y numeros");
+                        else
                         if(CERep(CE)==true){
                             JOptionPane.showMessageDialog(null, "Usuario Ya existente");
                         }
@@ -307,7 +308,10 @@ public class Registro extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(null, "Correo electronico no valido");
                     else
                     if(Arrays.equals(Cont, repCont)==false)
-                        JOptionPane.showMessageDialog(null, "La contraseña no coincide"); 
+                        JOptionPane.showMessageDialog(null, "La contraseña no coincide");
+                    else
+                    if(Contr(Con)==false)
+                        JOptionPane.showMessageDialog(null, "Formato de contraseña no valido, prueba a utilizar mayusculas y numeros");
                     else
                     if(CERep(CE)==true){
                         JOptionPane.showMessageDialog(null, "Usuario Ya existente");
@@ -317,12 +321,10 @@ public class Registro extends javax.swing.JFrame {
                     if(op==0){//si
                         Statement s = c.createStatement();
                         if(Ap2.trim().length()==0){//sin apellido2
-                            int filas=s.executeUpdate("INSERT INTO clientes (DNI,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"','"+Nom+"','"+Ap1+"',NULL,'"+CE+"','"+Con+"',"+Telf+");");
-                            System.out.println(filas+" filas afectadas");
+                            s.executeUpdate("INSERT INTO clientes (DNI,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"','"+Nom+"','"+Ap1+"',NULL,'"+CE+"','"+Con+"',"+Telf+");");               
                         }
                         else{    
-                            int filas=s.executeUpdate("INSERT INTO clientes (DNI,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"','"+Nom+"','"+Ap1+"','"+Ap2+"','"+CE+"','"+Con+"',"+Telf+");");
-                            System.out.println(filas+" filas afectadas");
+                            s.executeUpdate("INSERT INTO clientes (DNI,nombre,apellido1,apellido2,correo,contraseña,telefono) VALUES ('"+DNI+"','"+Nom+"','"+Ap1+"','"+Ap2+"','"+CE+"','"+Con+"',"+Telf+");");  
                         }          
                         JOptionPane.showMessageDialog(null, "Registro exitoso");
                         dispose();
@@ -335,7 +337,7 @@ public class Registro extends javax.swing.JFrame {
         }
         
         catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error en la BD");
+            JOptionPane.showMessageDialog(null, "Usuario ya existente");
         }
         catch (NumberFormatException ne){
             JOptionPane.showMessageDialog(null, "Porfavor introduca un telefono en formato numerico");
