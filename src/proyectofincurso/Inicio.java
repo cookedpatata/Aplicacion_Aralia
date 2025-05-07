@@ -104,9 +104,9 @@ public class Inicio extends javax.swing.JFrame {
         CE=CEtxt.getText();
         Contr=Contrtxt.getText();
         try{
-            //juan.perez@mail.com
+            //juan.perez@gmail.com
             //PassJuan01
-            //carlos.gomez@mail.com
+            //carlos.gomez@gmail.com
             //Pass1234
             Connection c = ConectBD.Conexion();
             

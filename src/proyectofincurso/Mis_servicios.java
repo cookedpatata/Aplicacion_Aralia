@@ -150,11 +150,11 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(EstablecimientosAñadir);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 140, 160));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 20, 140, 160));
 
         jScrollPane3.setViewportView(EstablecimientosAñadidos);
 
-        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 10, 140, 160));
+        jPanel3.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 140, 160));
 
         AñadEstab.setText("añadir");
         AñadEstab.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +162,7 @@ public class Mis_servicios extends javax.swing.JFrame {
                 AñadEstabActionPerformed(evt);
             }
         });
-        jPanel3.add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
+        jPanel3.add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
 
         ElimEstab.setText("eliminar");
         ElimEstab.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +170,7 @@ public class Mis_servicios extends javax.swing.JFrame {
                 ElimEstabActionPerformed(evt);
             }
         });
-        jPanel3.add(ElimEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(183, 110, 80, -1));
+        jPanel3.add(ElimEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 80, -1));
 
         Hora.addTab("Establecimientos", jPanel3);
 
@@ -278,7 +278,7 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Filtros", Hora);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 460, 250));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 600, 300));
 
         btnFiltrar.setText("Filtrar");
         btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
@@ -297,6 +297,18 @@ public class Mis_servicios extends javax.swing.JFrame {
         C.setVisible(true);
     }//GEN-LAST:event_volverActionPerformed
 
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void ElimTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimTrabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ElimTrabActionPerformed
+
+    private void AñadTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadTrabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AñadTrabActionPerformed
+
     private void Dia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dia2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Dia2ActionPerformed
@@ -305,25 +317,13 @@ public class Mis_servicios extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Dia1ActionPerformed
 
-    private void AñadEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadEstabActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AñadEstabActionPerformed
-
     private void ElimEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimEstabActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ElimEstabActionPerformed
 
-    private void AñadTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadTrabActionPerformed
+    private void AñadEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadEstabActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AñadTrabActionPerformed
-
-    private void ElimTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ElimTrabActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ElimTrabActionPerformed
-
-    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnFiltrarActionPerformed
+    }//GEN-LAST:event_AñadEstabActionPerformed
 
     /**
      * @param args the command line arguments

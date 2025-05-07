@@ -32,7 +32,7 @@ public class Cliente extends javax.swing.JFrame {
         URL = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        CSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -68,13 +68,13 @@ public class Cliente extends javax.swing.JFrame {
         jLabel3.setText("Usuario");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
 
-        jButton1.setText("Cerrar Sesion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        CSesion.setText("Cerrar Sesion");
+        CSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                CSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 110, -1));
+        getContentPane().add(CSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 110, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -95,9 +95,11 @@ public class Cliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_URLActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void CSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CSesionActionPerformed
+        dispose();
+        Inicio i=new Inicio();
+        i.setVisible(true);
+    }//GEN-LAST:event_CSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,10 +137,10 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CSesion;
     private javax.swing.JButton MisServ;
     private javax.swing.JButton PedServ;
     private javax.swing.JButton URL;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -93,6 +93,11 @@ public class Compania extends javax.swing.JFrame {
         jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, -1, -1));
 
         jButton5.setText("Filtrar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, -1, -1));
 
         jLabel5.setText("ID");
@@ -134,6 +139,10 @@ public class Compania extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments

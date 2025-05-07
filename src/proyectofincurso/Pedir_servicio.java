@@ -109,7 +109,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 EnvServicioActionPerformed(evt);
             }
         });
-        getContentPane().add(EnvServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 90, 30));
+        getContentPane().add(EnvServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, 90, 30));
 
         Dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
         Dia.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +117,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 DiaActionPerformed(evt);
             }
         });
-        getContentPane().add(Dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
+        getContentPane().add(Dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, -1, -1));
 
         Mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         Mes.addActionListener(new java.awt.event.ActionListener() {
@@ -125,37 +125,37 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 MesActionPerformed(evt);
             }
         });
-        getContentPane().add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
+        getContentPane().add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
 
         Año.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
-        getContentPane().add(Año, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 50, -1, -1));
+        getContentPane().add(Año, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("de");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("de");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 50, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("El");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        jLabel4.setText("Para el");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("a las");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 50, -1, -1));
 
         Hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
-        getContentPane().add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, -1, -1));
+        getContentPane().add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 50, -1, -1));
 
         jScrollPane2.setViewportView(Listrab2);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 110, 130));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 140, 160));
 
         jScrollPane3.setViewportView(ListTrab1);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 110, 130));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 130, 160));
 
         ElimTrab.setText("Eliminar");
         ElimTrab.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +163,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 ElimTrabActionPerformed(evt);
             }
         });
-        getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, -1, -1));
+        getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
 
         AñadEstab.setText("Añadir");
         AñadEstab.addActionListener(new java.awt.event.ActionListener() {
@@ -171,16 +171,16 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 AñadEstabActionPerformed(evt);
             }
         });
-        getContentPane().add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 70, -1));
+        getContentPane().add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 70, -1));
 
         jLabel3.setText("Establecimientos");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
         jLabel5.setText("Trabajos");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
 
         Estab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        getContentPane().add(Estab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 160, -1));
+        getContentPane().add(Estab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 180, -1));
 
         AñadTrab1.setText("Añadir");
         AñadTrab1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +188,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 AñadTrab1ActionPerformed(evt);
             }
         });
-        getContentPane().add(AñadTrab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 70, -1));
+        getContentPane().add(AñadTrab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 70, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
