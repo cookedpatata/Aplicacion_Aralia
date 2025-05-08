@@ -211,17 +211,17 @@ public class Pedir_servicio extends javax.swing.JFrame {
     private void AñadTrab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadTrab1ActionPerformed
         String Trab1,Trab2;
         int s=obList.size(),c = 0;
-        String Trabs []= new String [s];
-        Trab1=(String)ListTrab1.getSelectedValue();
+        String Trabs []= new String [s]; 
+        Trab1=(String)ListTrab1.getSelectedValue();//elemento q intentamos añadir
         
-        if(s>0){
+        if(s>0){ //ya hay al menos un elemento añadido
             for(int i=0;i!=s;i++){
                 Trab2=(String)obList.getElementAt(i);
-                Trabs[i]=Trab2;
+                Trabs[i]=Trab2;//obtenemos los elementos q ya esten en la otra lista
             }
             for(int i=0;i!=s;i++){
-                if(Trabs[i].equals(Trab1))
-                    c++;
+                if(Trabs[i].equals(Trab1))//comprobamos si el elemento q intentamos añadir ya esta añadido
+                    c++;//elemento coincidente
             }
             if(c>0){
             }
@@ -287,8 +287,9 @@ public class Pedir_servicio extends javax.swing.JFrame {
                     r= s.executeQuery("SELECT id_establecimiento FROM establecimientos WHERE direccion LIKE '"+est+"';");
                     while (r.next())
                         idEst=r.getInt(1);//id_establecimiento
-                    String Fecha="'"; //fecha_inicio
-                    for(int i=0;i<3;i++){
+                    
+                    String Fecha="'"; 
+                    for(int i=0;i<3;i++){ //fecha_inicio
                         if(i==2){
                             Fecha=Fecha+F[i].trim()+"'";
                         }
@@ -296,20 +297,34 @@ public class Pedir_servicio extends javax.swing.JFrame {
                             Fecha=Fecha+F[i].trim()+"-";
                     }
                     r= s.executeQuery("SELECT id_servicio FROM servicios WHERE fecha_inicio LIKE "+Fecha+" AND id_establecimiento="+idEst+";");
-                    if(r.next())
+                    if(r.next()) 
                         JOptionPane.showMessageDialog(null, "Ya ha pedido un servicio en ese establecimiento con esa fecha");
-                    else
+                    else{
                         r= s.executeQuery("SELECT curdate();");
-                        String Cd=r.getString(1);
-                    if(1==1){
+                        String Cd = null, CurdM,CurdD;
+                        while(r.next()){
+                            Cd=r.getString(1);
+                        }
+                        CurdM=Cd.substring(5, 7);
+                        CurdD=Cd.substring(8, 10);
+                        int CdM=Integer.parseInt(CurdM), CdD=Integer.parseInt(CurdD), SelM=Integer.parseInt(M.trim()), SelD=Integer.parseInt(D.trim());
+                        
+                    if(CdM<SelM){
+                        JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
                     }
+                    else
+                    if(CdM==SelM)
+                        if(CdD<SelD){
+                            JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
+                        }
                     else{
                         String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
                         String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
                         sql=sql+Values;
-                        s.executeUpdate(sql);
+                        //s.executeUpdate(sql);
                         JOptionPane.showMessageDialog(null, "¡Servicio pedido con exito!");
-                    } 
+                    }
+                    }
                 }
                 catch(SQLException se){
                     JOptionPane.showMessageDialog(null, "Error en la base de datos");
