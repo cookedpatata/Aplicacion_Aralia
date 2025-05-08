@@ -18,6 +18,12 @@ import proyectofincurso.clases.UsuarioConectado;
 public class Mis_servicios extends javax.swing.JFrame {
     DefaultTableModel mod=new DefaultTableModel();
     
+    DefaultListModel ListTrab=new DefaultListModel();
+    DefaultListModel ListTrabSelec=new DefaultListModel();
+    
+    DefaultListModel ListEstab=new DefaultListModel();
+    DefaultListModel ListEstabSelec=new DefaultListModel();
+    
     public int BtnSelec(JToggleButton b1, JToggleButton b2, JToggleButton b3, JToggleButton b4){
         int c=0;
         if(b1.isSelected())
@@ -34,14 +40,21 @@ public class Mis_servicios extends javax.swing.JFrame {
      * Creates new form Mis_servicios
      */
     public Mis_servicios() {
-        
+
         setLocation(800,400);
         initComponents();
         PEstab.setVisible(false);
         PFechas.setVisible(false);
         PHoras.setVisible(false);
         PTrab.setVisible(false);
-        int Btns=0;
+        
+        ListEstab1.setModel(ListEstab);
+        ListEstab2.setModel(ListEstabSelec);
+        ListTrab1.setModel(ListTrab);
+        ListTrab2.setModel(ListTrabSelec);
+        
+        BtnRdHoras.add(RdHEsp);
+        BtnRdHoras.add(RdHVar);
         
         try{
             String id,E,F,H,T;
@@ -76,6 +89,25 @@ public class Mis_servicios extends javax.swing.JFrame {
                 String row[]={id,E,F,H,T};
                 mod.addRow(row);
             }
+            
+            //lista establecimientos
+            sql="SELECT direccion FROM establecimientos WHERE id_cliente="+idU+";";
+            s= c.createStatement();
+            a= s.executeQuery(sql);
+            
+            while(a.next()){
+                Object Trab=a.getString(1);
+                ListEstab.addElement(Trab);
+            }
+            //Lista trabajos
+            sql="SELECT nombre FROM trabajos;";
+            s= c.createStatement();
+            a= s.executeQuery(sql);
+            
+            while(a.next()){
+                Object Trab=a.getString(1);
+                ListTrab.addElement(Trab);
+            }
         }
         catch(SQLException e){
             JOptionPane.showMessageDialog(null, "error en la BD");
@@ -91,41 +123,44 @@ public class Mis_servicios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtnRdHoras = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         volver = new javax.swing.JButton();
         btnFiltrar = new javax.swing.JButton();
         PHoras = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
+        CBH0 = new javax.swing.JComboBox<>();
+        CBH2 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
+        CBH1 = new javax.swing.JComboBox<>();
+        RdHEsp = new javax.swing.JRadioButton();
+        RdHVar = new javax.swing.JRadioButton();
         PFechas = new javax.swing.JPanel();
-        Dia = new javax.swing.JComboBox<>();
-        Mes = new javax.swing.JComboBox<>();
-        Año = new javax.swing.JComboBox<>();
+        CBDia1 = new javax.swing.JComboBox<>();
+        CBMes1 = new javax.swing.JComboBox<>();
+        CBAño1 = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Dia1 = new javax.swing.JComboBox<>();
-        Mes1 = new javax.swing.JComboBox<>();
-        Año1 = new javax.swing.JComboBox<>();
+        CBDia2 = new javax.swing.JComboBox<>();
+        CBMes2 = new javax.swing.JComboBox<>();
+        CBAño2 = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         PTrab = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jList4 = new javax.swing.JList<>();
+        ListTrab2 = new javax.swing.JList<>();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        ListTrab1 = new javax.swing.JList<>();
+        btnAñadTrab = new javax.swing.JButton();
+        btnQuitTrab = new javax.swing.JButton();
         PEstab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        ListEstab2 = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        ListEstab1 = new javax.swing.JList<>();
+        btnAñadEstab = new javax.swing.JButton();
+        btnQuitEstab = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -134,6 +169,7 @@ public class Mis_servicios extends javax.swing.JFrame {
         btnHoras = new javax.swing.JToggleButton();
         btnFecha = new javax.swing.JToggleButton();
         btnEstablecimientos = new javax.swing.JToggleButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -155,46 +191,52 @@ public class Mis_servicios extends javax.swing.JFrame {
                 btnFiltrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
+        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, -1, -1));
 
         PHoras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PHoras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<hora 1>", "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
-        PHoras.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        CBH0.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        PHoras.add(CBH0, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<hora 2>", "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
-        PHoras.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
-
-        jLabel5.setText("DE");
-        PHoras.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        CBH2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        PHoras.add(CBH2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
 
         jLabel6.setText("A");
-        PHoras.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
+        PHoras.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
 
-        getContentPane().add(PHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 240, 40));
+        CBH1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        PHoras.add(CBH1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+
+        RdHEsp.setText("Especifica");
+        PHoras.add(RdHEsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        RdHVar.setText("Variante");
+        PHoras.add(RdHVar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        getContentPane().add(PHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 290, 70));
 
         PFechas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PFechas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
-        Dia.addActionListener(new java.awt.event.ActionListener() {
+        CBDia1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
+        CBDia1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DiaActionPerformed(evt);
+                CBDia1ActionPerformed(evt);
             }
         });
-        PFechas.add(Dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
+        PFechas.add(CBDia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        Mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        Mes.addActionListener(new java.awt.event.ActionListener() {
+        CBMes1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        CBMes1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MesActionPerformed(evt);
+                CBMes1ActionPerformed(evt);
             }
         });
-        PFechas.add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
+        PFechas.add(CBMes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, -1));
 
-        Año.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
-        PFechas.add(Año, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
+        CBAño1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
+        PFechas.add(CBAño1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 10, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("de");
@@ -208,24 +250,24 @@ public class Mis_servicios extends javax.swing.JFrame {
         jLabel2.setText("Del");
         PFechas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        Dia1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
-        Dia1.addActionListener(new java.awt.event.ActionListener() {
+        CBDia2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
+        CBDia2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Dia1ActionPerformed(evt);
+                CBDia2ActionPerformed(evt);
             }
         });
-        PFechas.add(Dia1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        PFechas.add(CBDia2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        Mes1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        Mes1.addActionListener(new java.awt.event.ActionListener() {
+        CBMes2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        CBMes2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Mes1ActionPerformed(evt);
+                CBMes2ActionPerformed(evt);
             }
         });
-        PFechas.add(Mes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+        PFechas.add(CBMes2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
-        Año1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
-        PFechas.add(Año1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
+        CBAño2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
+        PFechas.add(CBAño2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel12.setText("de");
@@ -244,58 +286,58 @@ public class Mis_servicios extends javax.swing.JFrame {
         PTrab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PTrab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jList4.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane4.setViewportView(jList4);
+        jScrollPane4.setViewportView(ListTrab2);
 
         PTrab.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 130, 140));
 
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane5.setViewportView(jList3);
+        jScrollPane5.setViewportView(ListTrab1);
 
         PTrab.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 140));
 
-        jButton7.setText("Añadir");
-        PTrab.add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+        btnAñadTrab.setText("Añadir");
+        btnAñadTrab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAñadTrabActionPerformed(evt);
+            }
+        });
+        PTrab.add(btnAñadTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
-        jButton8.setText("Quitar");
-        PTrab.add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
+        btnQuitTrab.setText("Quitar");
+        btnQuitTrab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitTrabActionPerformed(evt);
+            }
+        });
+        PTrab.add(btnQuitTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
 
         getContentPane().add(PTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 340, 160));
 
         PEstab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PEstab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(ListEstab2);
 
         PEstab.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, 130, 140));
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(jList1);
+        jScrollPane3.setViewportView(ListEstab1);
 
         PEstab.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 140));
 
-        jButton5.setText("Añadir");
-        PEstab.add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
+        btnAñadEstab.setText("Añadir");
+        btnAñadEstab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAñadEstabActionPerformed(evt);
+            }
+        });
+        PEstab.add(btnAñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, -1, -1));
 
-        jButton6.setText("Quitar");
-        PEstab.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
+        btnQuitEstab.setText("Quitar");
+        btnQuitEstab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitEstabActionPerformed(evt);
+            }
+        });
+        PEstab.add(btnQuitEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, -1, -1));
 
         getContentPane().add(PEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 340, 160));
 
@@ -355,6 +397,9 @@ public class Mis_servicios extends javax.swing.JFrame {
         });
         getContentPane().add(btnEstablecimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
 
+        jCheckBox1.setText("Finalizado");
+        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -365,27 +410,95 @@ public class Mis_servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_volverActionPerformed
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
-        // TODO add your handling code here:
+        //comprobamos que filtros que quieren aplicar
+        //Horas
+        if(RdHEsp.isSelected()){
+            String H0= (String) CBH0.getSelectedItem();
+            System.out.println("'"+H0.trim()+"'");
+        }
+        else
+        if (RdHVar.isSelected()){
+            String H1= (String) CBH1.getSelectedItem();
+            String H2= (String) CBH2.getSelectedItem();
+            System.out.println("'"+H1.trim()+"', '"+H2.trim()+"'");
+        }
+        //Fechas
+        int Idia1, Imes1, Iaño1, f = 0; 
+        Idia1= CBDia1.getSelectedIndex();
+        Imes1= CBMes1.getSelectedIndex();
+        Iaño1= CBAño1.getSelectedIndex();
+        int I1[]={Idia1,Imes1,Iaño1};
+        
+        for(int i=0;i<3;i++){//CBoxFecha1 seleccionados
+            if(I1[i]!=0)
+                f++;
+        }
+        if(f==3){
+            String D1,M1,A1;
+            D1= (String) CBDia1.getSelectedItem();
+            M1= (String) CBMes1.getSelectedItem();
+            A1= (String) CBAño1.getSelectedItem();
+            String F1[]={A1,M1,D1};
+            String Fecha1="'"; 
+            for(int i=0;i<3;i++){ //fecha_inicio1
+                if(i==2){
+                    Fecha1=Fecha1+F1[i].trim()+"'";
+                }
+                else
+                    Fecha1=Fecha1+F1[i].trim()+"-";
+            }
+            
+            int Idia2, Imes2, Iaño2; 
+            Idia2= CBDia2.getSelectedIndex();
+            Imes2= CBMes2.getSelectedIndex();
+            Iaño2= CBAño2.getSelectedIndex();
+            int I2[]={Idia2,Imes2,Iaño2};
+            for(int i=0;i<3;i++){//CBoxFecha2 seleccionados
+            if(I2[i]!=0)
+                f++;
+            }
+            if(f==6){
+                String D2,M2,A2;
+                D2= (String) CBDia2.getSelectedItem();
+                M2= (String) CBMes2.getSelectedItem();
+                A2= (String) CBAño2.getSelectedItem();
+                String F2[]={A2,M2,D2};
+                String Fecha2="'"; 
+                for(int i=0;i<3;i++){ //fecha_inicio2
+                    if(i==2){
+                        Fecha2=Fecha2+F2[i].trim()+"'";
+                    }
+                    else
+                        Fecha2=Fecha2+F2[i].trim()+"-";
+                }
+                System.out.println(Fecha1);
+                System.out.println(Fecha2);
+            }
+            if(f<6)
+                System.out.println(Fecha1);    
+        } 
+        //establecimientos
+        
+        //trabajos
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
-    private void DiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiaActionPerformed
+    private void CBDia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDia1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_DiaActionPerformed
+    }//GEN-LAST:event_CBDia1ActionPerformed
 
-    private void MesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MesActionPerformed
+    private void CBMes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBMes1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MesActionPerformed
+    }//GEN-LAST:event_CBMes1ActionPerformed
 
-    private void Dia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Dia1ActionPerformed
+    private void CBDia2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDia2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Dia1ActionPerformed
+    }//GEN-LAST:event_CBDia2ActionPerformed
 
-    private void Mes1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Mes1ActionPerformed
+    private void CBMes2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBMes2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Mes1ActionPerformed
+    }//GEN-LAST:event_CBMes2ActionPerformed
 
     private void btnHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHorasActionPerformed
-        System.out.println(BtnSelec(btnFecha, btnEstablecimientos, btnHoras, btnTrabajos));
         if(BtnSelec(btnFecha, btnEstablecimientos, btnHoras, btnTrabajos)==1){
             if(btnHoras.isSelected()){
                 PHoras.setVisible(true);
@@ -398,7 +511,6 @@ public class Mis_servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnHorasActionPerformed
 
     private void btnFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFechaActionPerformed
-        System.out.println(BtnSelec(btnFecha, btnEstablecimientos, btnHoras, btnTrabajos));
         if(BtnSelec(btnFecha, btnEstablecimientos, btnHoras, btnTrabajos)==1){
             if(btnFecha.isSelected())
                 PFechas.setVisible(true);
@@ -410,7 +522,6 @@ public class Mis_servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFechaActionPerformed
 
     private void btnEstablecimientosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstablecimientosActionPerformed
-        System.out.println(BtnSelec(btnFecha, btnEstablecimientos, btnHoras, btnTrabajos));
         if(BtnSelec(btnFecha, btnEstablecimientos, btnHoras, btnTrabajos)==1){
             if(btnEstablecimientos.isSelected())
                 PEstab.setVisible(true);
@@ -422,7 +533,6 @@ public class Mis_servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEstablecimientosActionPerformed
 
     private void btnTrabajosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajosActionPerformed
-        System.out.println(BtnSelec(btnFecha, btnEstablecimientos, btnHoras, btnTrabajos));
         if(BtnSelec(btnFecha, btnEstablecimientos, btnHoras, btnTrabajos)==1){
             if(btnTrabajos.isSelected())
                 PTrab.setVisible(true);
@@ -432,6 +542,76 @@ public class Mis_servicios extends javax.swing.JFrame {
             PTrab.setVisible(false);
         }          
     }//GEN-LAST:event_btnTrabajosActionPerformed
+
+    private void btnAñadTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadTrabActionPerformed
+        String Trab1,Trab2;
+        int s=ListTrabSelec.size(),c = 0;
+        String Trabs []= new String [s]; 
+        Trab1=(String)ListTrab1.getSelectedValue();//elemento q intentamos añadir
+        
+        if(s>0){ //ya hay al menos un elemento añadido
+            for(int i=0;i!=s;i++){
+                Trab2=(String)ListTrabSelec.getElementAt(i);
+                Trabs[i]=Trab2;//obtenemos los elementos q ya esten en la otra lista
+            }
+            for(int i=0;i!=s;i++){
+                if(Trabs[i].equals(Trab1))//comprobamos si el elemento q intentamos añadir ya esta añadido
+                    c++;//elemento coincidente
+            }
+            if(c>0){
+            }
+            else
+                ListTrabSelec.addElement(Trab1);
+        }
+        else{
+            ListTrabSelec.addElement(Trab1);
+        }
+    }//GEN-LAST:event_btnAñadTrabActionPerformed
+
+    private void btnQuitTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitTrabActionPerformed
+        int indice=ListTrab2.getSelectedIndex();
+        
+        try{
+        ListTrabSelec.remove(indice); 
+        }
+        catch(IndexOutOfBoundsException ie){
+        }
+    }//GEN-LAST:event_btnQuitTrabActionPerformed
+
+    private void btnAñadEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadEstabActionPerformed
+        String Estab1,Estab2;
+        int s=ListEstabSelec.size(),c = 0;
+        String Trabs []= new String [s]; 
+        Estab1=(String)ListEstab1.getSelectedValue();//elemento q intentamos añadir
+        
+        if(s>0){ //ya hay al menos un elemento añadido
+            for(int i=0;i!=s;i++){
+                Estab2=(String)ListEstabSelec.getElementAt(i);
+                Trabs[i]=Estab2;//obtenemos los elementos q ya esten en la otra lista
+            }
+            for(int i=0;i!=s;i++){
+                if(Trabs[i].equals(Estab1))//comprobamos si el elemento q intentamos añadir ya esta añadido
+                    c++;//elemento coincidente
+            }
+            if(c>0){
+            }
+            else
+                ListEstabSelec.addElement(Estab1);
+        }
+        else{
+            ListEstabSelec.addElement(Estab1);
+        }
+    }//GEN-LAST:event_btnAñadEstabActionPerformed
+
+    private void btnQuitEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitEstabActionPerformed
+        int indice=ListEstab2.getSelectedIndex();
+        
+        try{
+        ListEstabSelec.remove(indice); 
+        }
+        catch(IndexOutOfBoundsException ie){
+        }
+    }//GEN-LAST:event_btnQuitEstabActionPerformed
 
     /**
      * @param args the command line arguments
@@ -469,28 +649,37 @@ public class Mis_servicios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Año;
-    private javax.swing.JComboBox<String> Año1;
-    private javax.swing.JComboBox<String> Dia;
-    private javax.swing.JComboBox<String> Dia1;
-    private javax.swing.JComboBox<String> Mes;
-    private javax.swing.JComboBox<String> Mes1;
+    private javax.swing.ButtonGroup BtnRdHoras;
+    private javax.swing.JComboBox<String> CBAño1;
+    private javax.swing.JComboBox<String> CBAño2;
+    private javax.swing.JComboBox<String> CBDia1;
+    private javax.swing.JComboBox<String> CBDia2;
+    private javax.swing.JComboBox<String> CBH0;
+    private javax.swing.JComboBox<String> CBH1;
+    private javax.swing.JComboBox<String> CBH2;
+    private javax.swing.JComboBox<String> CBMes1;
+    private javax.swing.JComboBox<String> CBMes2;
+    private javax.swing.JList<String> ListEstab1;
+    private javax.swing.JList<String> ListEstab2;
+    private javax.swing.JList<String> ListTrab1;
+    private javax.swing.JList<String> ListTrab2;
     private javax.swing.JPanel PEstab;
     private javax.swing.JPanel PFechas;
     private javax.swing.JPanel PHoras;
     private javax.swing.JPanel PTrab;
+    private javax.swing.JRadioButton RdHEsp;
+    private javax.swing.JRadioButton RdHVar;
     private javax.swing.JTable Tabla;
+    private javax.swing.JButton btnAñadEstab;
+    private javax.swing.JButton btnAñadTrab;
     private javax.swing.JToggleButton btnEstablecimientos;
     private javax.swing.JToggleButton btnFecha;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.JToggleButton btnHoras;
+    private javax.swing.JButton btnQuitEstab;
+    private javax.swing.JButton btnQuitTrab;
     private javax.swing.JToggleButton btnTrabajos;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -498,13 +687,8 @@ public class Mis_servicios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JList<String> jList3;
-    private javax.swing.JList<String> jList4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

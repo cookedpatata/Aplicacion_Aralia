@@ -248,7 +248,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
     }//GEN-LAST:event_MesActionPerformed
 
     private void EnvServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnvServicioActionPerformed
-        int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0, Index ;
+        int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0;
         int idU=UsuarioConectado.idU, idEst = 0; //id_cliente
             idU=1;
         
@@ -266,7 +266,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
         }
 
         if ((f>0)||(obList.size()==0))
-            JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos");
+            JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos necesarios");
         else{
             int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
             if(op==0){
@@ -296,10 +296,8 @@ public class Pedir_servicio extends javax.swing.JFrame {
                         else
                             Fecha=Fecha+F[i].trim()+"-";
                     }
+                    //comprovaciones
                     r= s.executeQuery("SELECT id_servicio FROM servicios WHERE fecha_inicio LIKE "+Fecha+" AND id_establecimiento="+idEst+";");
-                    
-                    //compronaciones
-                    
                     if(r.next()) 
                         JOptionPane.showMessageDialog(null, "Ya ha pedido un servicio en ese establecimiento con esa fecha");
                     
@@ -328,6 +326,15 @@ public class Pedir_servicio extends javax.swing.JFrame {
                         sql=sql+Values;
                         s.executeUpdate(sql);
                         JOptionPane.showMessageDialog(null, "¡Servicio pedido con exito!");
+                        
+                        //añadir los trabajos que relacionan con el servicio
+                        int idServ = 0;
+                        r=s.executeQuery("SELECT id_servicio FROM servicios WHERE id_cliente="+idU+" AND id_establecimiento LIKE "+idEst+" AND fecha_inicio LIKE "+Fecha+";");
+                        while(r.next())
+                            idServ=r.getInt(1);
+                        sql="INSER INTO labores VALUES ";
+                        
+                        //bucle para hacer las inserciones de todos los trabajos pedidos
                     }
                     }
                 }
