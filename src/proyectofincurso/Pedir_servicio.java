@@ -297,9 +297,13 @@ public class Pedir_servicio extends javax.swing.JFrame {
                             Fecha=Fecha+F[i].trim()+"-";
                     }
                     r= s.executeQuery("SELECT id_servicio FROM servicios WHERE fecha_inicio LIKE "+Fecha+" AND id_establecimiento="+idEst+";");
+                    
+                    //compronaciones
+                    
                     if(r.next()) 
                         JOptionPane.showMessageDialog(null, "Ya ha pedido un servicio en ese establecimiento con esa fecha");
-                    else{
+                    
+                    else{//comprobamos que la fecha ingresada no sea menor que la actual
                         r= s.executeQuery("SELECT curdate();");
                         String Cd = null, CurdM,CurdD;
                         while(r.next()){
@@ -317,11 +321,12 @@ public class Pedir_servicio extends javax.swing.JFrame {
                         if(CdD<SelD){
                             JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
                         }
-                    else{
+                        
+                    else{//comprobacion pasada, insertamos el nuevo servicio pedido
                         String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
                         String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
                         sql=sql+Values;
-                        //s.executeUpdate(sql);
+                        s.executeUpdate(sql);
                         JOptionPane.showMessageDialog(null, "¡Servicio pedido con exito!");
                     }
                     }
