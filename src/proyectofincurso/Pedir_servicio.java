@@ -311,31 +311,56 @@ public class Pedir_servicio extends javax.swing.JFrame {
                         CurdD=Cd.substring(8, 10);
                         int CdM=Integer.parseInt(CurdM), CdD=Integer.parseInt(CurdD), SelM=Integer.parseInt(M.trim()), SelD=Integer.parseInt(D.trim());
                         
-                    if(CdM<SelM){
-                        JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
-                    }
-                    else
-                    if(CdM==SelM)
-                        if(CdD<SelD){
+                        if(CdM>SelM){
                             JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
                         }
+                        else
+                        if((CdM==SelM)&&(CdD>SelD)){
+                            JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
+                        }    
+                        else{//comprobacion pasada, insertamos el nuevo servicio pedido
+                            String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
+                            String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
+                            sql=sql+Values;
+                            s.executeUpdate(sql);
                         
-                    else{//comprobacion pasada, insertamos el nuevo servicio pedido
-                        String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
-                        String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
-                        sql=sql+Values;
-                        s.executeUpdate(sql);
-                        JOptionPane.showMessageDialog(null, "¡Servicio pedido con exito!");
-                        
-                        //añadir los trabajos que relacionan con el servicio
-                        int idServ = 0;
-                        r=s.executeQuery("SELECT id_servicio FROM servicios WHERE id_cliente="+idU+" AND id_establecimiento LIKE "+idEst+" AND fecha_inicio LIKE "+Fecha+";");
-                        while(r.next())
-                            idServ=r.getInt(1);
-                        sql="INSER INTO labores VALUES ";
-                        
-                        //bucle para hacer las inserciones de todos los trabajos pedidos
-                    }
+                            //añadir los trabajos que relacionan con el servicio
+                            int idServ = 0;
+                            r=s.executeQuery("SELECT id_servicio FROM servicios WHERE id_cliente="+idU+" AND id_establecimiento LIKE "+idEst+" AND fecha_inicio LIKE "+Fecha+";");
+                            while(r.next())
+                            idServ=r.getInt(1);//id del servicio creado
+                            
+                            //obtener trabajos seleccionados
+                            int numtrab=obList.size();
+                            String TrabSelec[]= new String [numtrab];
+                            for(int i=0; i<numtrab;i++){
+                                TrabSelec[i]=(String) obList.getElementAt(i);
+                            }
+                            
+                            //obtener los ids de los trabajos
+                            sql="Select id_trabajo FROM trabajos WHERE nombre LIKE ";
+                            int idTrabs[]=new int [numtrab];
+                            for(int i=0;i<numtrab;i++){
+                                r=s.executeQuery(sql+TrabSelec[i]);
+                                while(r.next()){
+                                    idTrabs[i]=r.getInt(1);
+                                }
+                            }
+                            //for(int i=0;i<numtrab;i++){
+                            //    System.out.print(TrabSelec[i]+" ");
+                            //}
+                            //for(int i=0;i<numtrab;i++){
+                            //    System.out.print(idTrabs[i]+" ");
+                            //}
+                            
+                            //sentencias a labores
+                            sql="INSERT INTO labores VALUES ";
+                            for(int i=0;i<numtrab;i++){
+                                s.executeUpdate(sql+"("+idServ+", "+idTrabs[i]+");");
+                            }
+                            
+                            JOptionPane.showMessageDialog(null, "¡Servicio pedido con exito!");
+                        }
                     }
                 }
                 catch(SQLException se){
