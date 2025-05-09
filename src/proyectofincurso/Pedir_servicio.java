@@ -27,7 +27,6 @@ public class Pedir_servicio extends javax.swing.JFrame {
         Listrab2.setModel(obList);
         try{
             Connection c = ConectBD.Conexion();
-            
             int idU=UsuarioConectado.idU;
             idU=1;
             
@@ -327,9 +326,9 @@ public class Pedir_servicio extends javax.swing.JFrame {
                             //añadir los trabajos que relacionan con el servicio
                             int idServ = 0;
                             r=s.executeQuery("SELECT id_servicio FROM servicios WHERE id_cliente="+idU+" AND id_establecimiento LIKE "+idEst+" AND fecha_inicio LIKE "+Fecha+";");
-                            while(r.next())
+                            while(r.next()){
                             idServ=r.getInt(1);//id del servicio creado
-                            
+                            }
                             //obtener trabajos seleccionados
                             int numtrab=obList.size();
                             String TrabSelec[]= new String [numtrab];
@@ -341,17 +340,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
                             sql="Select id_trabajo FROM trabajos WHERE nombre LIKE ";
                             int idTrabs[]=new int [numtrab];
                             for(int i=0;i<numtrab;i++){
-                                r=s.executeQuery(sql+TrabSelec[i]);
+                                r=s.executeQuery(sql+"'"+TrabSelec[i]+"'");
                                 while(r.next()){
                                     idTrabs[i]=r.getInt(1);
                                 }
                             }
-                            //for(int i=0;i<numtrab;i++){
-                            //    System.out.print(TrabSelec[i]+" ");
-                            //}
-                            //for(int i=0;i<numtrab;i++){
-                            //    System.out.print(idTrabs[i]+" ");
-                            //}
                             
                             //sentencias a labores
                             sql="INSERT INTO labores VALUES ";

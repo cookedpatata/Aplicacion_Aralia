@@ -9,7 +9,7 @@ package proyectofincurso;
  * @author DAW
  */
 public class Cliente extends javax.swing.JFrame {
-
+    
     
     public Cliente() {
         setLocation(800,400);
