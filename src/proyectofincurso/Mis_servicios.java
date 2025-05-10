@@ -66,7 +66,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             idU=1;
             
             //tabla
-            String titulosC[]={"Servicio","Establecimiento","Fecha","Hora","Trabajos"};
+            String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio","Trabajos"};
             mod.setColumnIdentifiers(titulosC);
             Tabla.setModel(mod);
             Tabla.setPreferredScrollableViewportSize(new Dimension(700, 150));
@@ -411,16 +411,23 @@ public class Mis_servicios extends javax.swing.JFrame {
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         //comprobamos que filtros que quieren aplicar
+        int idU=UsuarioConectado.idU;
+        idU=1;
+        String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,t.nombre FROM servicios s\n" +
+                        "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
+                        "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
+                        "JOIN trabajos t ON l.id_trabajo = t.id_trabajo\n" +
+                        "WHERE s.id_cliente ="+idU+"\n";
         //Horas
-        if(RdHEsp.isSelected()){
+        if(RdHEsp.isSelected()){//cualquiera de los selcted para horas
             String H0= (String) CBH0.getSelectedItem();
-            System.out.println("'"+H0.trim()+"'");
+            sql=sql+"AND s.hora_inicio ='"+H0.trim()+"'\n";
         }
         else
         if (RdHVar.isSelected()){
             String H1= (String) CBH1.getSelectedItem();
             String H2= (String) CBH2.getSelectedItem();
-            System.out.println("'"+H1.trim()+"', '"+H2.trim()+"'");
+            sql=sql+"AND s.hora_inicio BETWEEN '"+H1.trim()+"' AND '"+H2.trim()+"'\n";
         }
         //Fechas
         int Idia1, Imes1, Iaño1, f = 0; 
@@ -433,7 +440,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             if(I1[i]!=0)
                 f++;
         }
-        if(f==3){
+        if(f==3){//f>0 para fechas
             String D1,M1,A1;
             D1= (String) CBDia1.getSelectedItem();
             M1= (String) CBMes1.getSelectedItem();
@@ -471,15 +478,102 @@ public class Mis_servicios extends javax.swing.JFrame {
                     else
                         Fecha2=Fecha2+F2[i].trim()+"-";
                 }
+                //ambas fechas
+                sql=sql+"AND s.fecha_inicio BETWEEN "+Fecha1+" AND "+Fecha2+"\n";
                 System.out.println(Fecha1);
                 System.out.println(Fecha2);
             }
-            if(f<6)
-                System.out.println(Fecha1);    
+            else{
+                //solo una fecha
+                sql=sql+"AND s.fecha_inicio = "+Fecha1+"\n";
+                System.out.println(Fecha1); 
+            }
+            
         } 
         //establecimientos
-        
+        //comprobar que haya seleccionado algo
+        int numEstab=ListEstabSelec.size();
+        if(numEstab>0){
+            //obtener los objetos seleccionados
+            String EstabSelec[]= new String [numEstab];
+            for(int i=0; i<numEstab;i++){
+                EstabSelec[i]=(String) ListEstabSelec.getElementAt(i);
+            }
+            sql=sql+"AND e.direccion IN (";
+            for(int i=0;i<numEstab;i++){
+                if(i!=numEstab-1)
+                    sql=sql+"'"+EstabSelec[i].trim()+"',";
+                else
+                    sql=sql+"'"+EstabSelec[i].trim()+"'";
+            }
+            sql=sql+")";       
+        }
         //trabajos
+        int numTrab=ListTrabSelec.size();
+        if(numTrab>0){
+            //obtener los objetos seleccionados
+            String TrabSelec[]= new String [numTrab];
+            for(int i=0; i<numTrab;i++){
+                TrabSelec[i]=(String) ListTrabSelec.getElementAt(i);
+            }       
+            sql=sql+"AND e.direccion IN (";
+            for(int i=0;i<numTrab;i++){
+                if(i!=numTrab-1)
+                    sql=sql+"'"+TrabSelec[i].trim()+"',";
+                else
+                    sql=sql+"'"+TrabSelec[i].trim()+"'";
+            }
+            sql=sql+")";
+        }
+        //comprobamos los filtros seleccionados
+        try{
+            Connection c=ConectBD.Conexion();
+            Statement s= c.createStatement();
+            String id,E,F,H,T;
+            int idn;
+            
+            if((f>0)||((RdHEsp.isSelected())||(RdHVar.isSelected())==true)||(numEstab>0)||(numTrab>0)){ 
+                mod.setRowCount(0);
+                sql=sql+";";        
+                ResultSet a= s.executeQuery(sql);
+
+                while (a.next()){
+                    idn=a.getInt(1);
+                    id=Integer.toString(idn);
+                    E=a.getString(2);
+                    F=a.getString(3);
+                    H=a.getString(4);
+                    T=a.getString(5);
+                    String row[]={id,E,F,H,T};
+                    mod.addRow(row);
+                }  
+            }
+            else{
+                mod.setRowCount(0);
+                sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,t.nombre FROM servicios s\n" +
+                "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
+                "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
+                "JOIN trabajos t ON l.id_trabajo = t.id_trabajo\n" +
+                "WHERE s.id_cliente ="+idU+";";                
+                ResultSet a= s.executeQuery(sql);
+                
+                while (a.next()){
+                    idn=a.getInt(1);
+                    id=Integer.toString(idn);
+                    E=a.getString(2);
+                    F=a.getString(3);
+                    H=a.getString(4);
+                    T=a.getString(5);
+                    String row[]={id,E,F,H,T};
+                    mod.addRow(row);
+                }
+            }
+        }
+        catch(SQLException se){
+                    JOptionPane.showMessageDialog(null, "Error en la BD");
+                }    
+        
+        System.out.println(sql);
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void CBDia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDia1ActionPerformed
