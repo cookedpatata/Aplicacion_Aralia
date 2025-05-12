@@ -57,7 +57,7 @@ public class Mis_servicios extends javax.swing.JFrame {
         BtnRdHoras.add(RdHVar);
         
         try{
-            String id,E,F,H,T;
+            String id,E,FI,HI,FF,HF,TR,TE;
             int idn;
             
             Connection c = ConectBD.Conexion();
@@ -66,12 +66,12 @@ public class Mis_servicios extends javax.swing.JFrame {
             idU=1;
             
             //tabla
-            String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio","Trabajos"};
+            String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio","Fecha de terminado","Hora de terminado","Trabajos","Terminado"};
             mod.setColumnIdentifiers(titulosC);
             Tabla.setModel(mod);
             Tabla.setPreferredScrollableViewportSize(new Dimension(700, 150));
             
-            String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,t.nombre FROM servicios s\n" +
+            String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,s.fecha_fin,s.hora_fin,t.nombre,s.terminado FROM servicios s\n" +
                         "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
                         "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
                         "JOIN trabajos t ON l.id_trabajo = t.id_trabajo\n" +
@@ -83,10 +83,25 @@ public class Mis_servicios extends javax.swing.JFrame {
                 idn=a.getInt(1);
                 id=Integer.toString(idn);
                 E=a.getString(2);
-                F=a.getString(3);
-                H=a.getString(4);
-                T=a.getString(5);
-                String row[]={id,E,F,H,T};
+                FI=a.getString(3);
+                HI=a.getString(4);
+                if(a.getString(5)!=null){
+                    FF=a.getString(5);
+                    HF=a.getString(6);
+                }
+                else{
+                    FF="----------------";
+                    HF="---:---:---";
+                }
+                TR=a.getString(7);
+                TE=a.getString(8);
+                if("1".equals(TE))
+                    TE="SI";
+                else
+                    TE="NO";
+                System.out.println(TE.trim());
+                
+                String row[]={id,E,FI,HI,FF,HF,TR,TE};
                 mod.addRow(row);
             }
             
@@ -361,9 +376,9 @@ public class Mis_servicios extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jScrollPane7);
 
         jLayeredPane1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 750, 240);
+        jScrollPane1.setBounds(0, 0, 1030, 400);
 
-        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 750, 280));
+        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1030, 420));
 
         btnTrabajos.setText("Trabajos");
         btnTrabajos.addActionListener(new java.awt.event.ActionListener() {
@@ -413,7 +428,7 @@ public class Mis_servicios extends javax.swing.JFrame {
         //comprobamos que filtros que quieren aplicar
         int idU=UsuarioConectado.idU;
         idU=1;
-        String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,t.nombre FROM servicios s\n" +
+        String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,s.fecha_fin,s.hora_fin,t.nombre,s.terminado FROM servicios s\n" +
                         "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
                         "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
                         "JOIN trabajos t ON l.id_trabajo = t.id_trabajo\n" +
