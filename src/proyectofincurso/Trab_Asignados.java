@@ -3,18 +3,55 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package proyectofincurso;
+import javax.swing.*;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import proyectofincurso.clases.ConectBD;
+import proyectofincurso.clases.UsuarioConectado;
 
 /**
  *
  * @author DAW
  */
 public class Trab_Asignados extends javax.swing.JFrame {
-
+    DefaultTableModel mod=new DefaultTableModel();
     /**
      * Creates new form Trab_Asignados
      */
     public Trab_Asignados() {
         initComponents();
+        Tabla.setModel(mod);
+        String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio"};
+        mod.setColumnIdentifiers(titulosC);
+        try{
+            String id,E,FI,HI,FF,HF,TR,TE;
+            int idU=UsuarioConectado.idU, idn;
+            idU=1;
+            Connection c = ConectBD.Conexion();
+             
+            String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio FROM servicios s\n"+
+                "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
+                "WHERE s.id_servicio IN (\n"+
+                "SELECT id_servicio FROM jornadas\n"+
+                "WHERE id_trabajador="+idU+")\n"+
+                "AND s.terminado=0;";
+            
+            Statement s= c.createStatement();
+            ResultSet a= s.executeQuery(sql);
+            while(a.next()){
+                idn=a.getInt(1);
+                id=Integer.toString(idn);
+                E=a.getString(2);
+                FI=a.getString(3);
+                HI=a.getString(4);
+                
+                String row[]={id,E,FI,HI};
+                mod.addRow(row);
+            }
+        }
+        catch(SQLException se){
+            JOptionPane.showMessageDialog(null, "Error en la BD");
+        }
     }
 
     /**
@@ -26,21 +63,66 @@ public class Trab_Asignados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        Volver = new javax.swing.JButton();
+        btnTerTrab = new javax.swing.JButton();
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Tabla = new javax.swing.JTable();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setText("¿Has terminado algunos de los trabajos?, ¡Documentalo!");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        Volver.setText("Volver");
+        Volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        btnTerTrab.setText("Terminar");
+        btnTerTrab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerTrabActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTerTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
+
+        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(Tabla);
+
+        jLayeredPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 260));
+
+        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 570, 280));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VolverActionPerformed
+        dispose();
+        Trabajador i= new Trabajador();
+        i.setVisible(true);
+    }//GEN-LAST:event_VolverActionPerformed
+
+    private void btnTerTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerTrabActionPerformed
+        
+    }//GEN-LAST:event_btnTerTrabActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +160,11 @@ public class Trab_Asignados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tabla;
+    private javax.swing.JButton Volver;
+    private javax.swing.JButton btnTerTrab;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

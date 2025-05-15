@@ -50,6 +50,7 @@ public class Mis_servicios extends javax.swing.JFrame {
         
         ListEstab1.setModel(ListEstab);
         ListEstab2.setModel(ListEstabSelec);
+        
         ListTrab1.setModel(ListTrab);
         ListTrab2.setModel(ListTrabSelec);
         
@@ -99,7 +100,6 @@ public class Mis_servicios extends javax.swing.JFrame {
                     TE="SI";
                 else
                     TE="NO";
-                System.out.println(TE.trim());
                 
                 String row[]={id,E,FI,HI,FF,HF,TR,TE};
                 mod.addRow(row);
@@ -139,6 +139,7 @@ public class Mis_servicios extends javax.swing.JFrame {
     private void initComponents() {
 
         BtnRdHoras = new javax.swing.ButtonGroup();
+        BtnRdTer = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
         volver = new javax.swing.JButton();
         btnFiltrar = new javax.swing.JButton();
@@ -184,13 +185,14 @@ public class Mis_servicios extends javax.swing.JFrame {
         btnHoras = new javax.swing.JToggleButton();
         btnFecha = new javax.swing.JToggleButton();
         btnEstablecimientos = new javax.swing.JToggleButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        chkF = new javax.swing.JCheckBox();
+        chkNF = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Mis servicios");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, -1, -1));
 
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
@@ -206,21 +208,21 @@ public class Mis_servicios extends javax.swing.JFrame {
                 btnFiltrarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, -1, -1));
+        getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, -1, -1));
 
         PHoras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PHoras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        CBH0.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        CBH0.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<hora0>", "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
         PHoras.add(CBH0, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
 
-        CBH2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        CBH2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<hora2>", "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
         PHoras.add(CBH2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 40, -1, -1));
 
         jLabel6.setText("A");
         PHoras.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
 
-        CBH1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        CBH1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<hora1>", "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
         PHoras.add(CBH1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
 
         RdHEsp.setText("Especifica");
@@ -412,8 +414,11 @@ public class Mis_servicios extends javax.swing.JFrame {
         });
         getContentPane().add(btnEstablecimientos, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, -1, -1));
 
-        jCheckBox1.setText("Finalizado");
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 50, -1, -1));
+        chkF.setText("Finalizado");
+        getContentPane().add(chkF, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 50, -1, -1));
+
+        chkNF.setText("No finalizado");
+        getContentPane().add(chkNF, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -435,14 +440,20 @@ public class Mis_servicios extends javax.swing.JFrame {
                         "WHERE s.id_cliente ="+idU+"\n";
         //Horas
         if(RdHEsp.isSelected()){//cualquiera de los selcted para horas
-            String H0= (String) CBH0.getSelectedItem();
-            sql=sql+"AND s.hora_inicio ='"+H0.trim()+"'\n";
+            if (CBH0.getSelectedIndex()!=1){
+                int he=1;
+                String H0= (String) CBH0.getSelectedItem();
+                sql=sql+"AND s.hora_inicio ='"+H0.trim()+"'\n";
+            }
         }
         else
         if (RdHVar.isSelected()){
-            String H1= (String) CBH1.getSelectedItem();
-            String H2= (String) CBH2.getSelectedItem();
-            sql=sql+"AND s.hora_inicio BETWEEN '"+H1.trim()+"' AND '"+H2.trim()+"'\n";
+            if((CBH1.getSelectedIndex()!=1)&&(CBH2.getSelectedIndex()!=1)){
+                int hv=1;
+                String H1= (String) CBH1.getSelectedItem();
+                String H2= (String) CBH2.getSelectedItem();
+                sql=sql+"AND s.hora_inicio BETWEEN '"+H1.trim()+"' AND '"+H2.trim()+"'\n";
+            } 
         }
         //Fechas
         int Idia1, Imes1, Iaño1, f = 0; 
@@ -538,49 +549,89 @@ public class Mis_servicios extends javax.swing.JFrame {
                 else
                     sql=sql+"'"+TrabSelec[i].trim()+"'";
             }
-            sql=sql+")";
+            sql=sql+")\n";
         }
+        //terminados
+        if(chkF.isSelected()||chkNF.isSelected()){
+            if(chkF.isSelected()&&chkNF.isSelected())
+                sql=sql;
+            else
+                if(chkF.isSelected()&&!chkNF.isSelected())
+                    sql=sql+"AND s.terminado=1";
+            else
+                    sql=sql+"AND s.terminado=0";
+        }       
         //comprobamos los filtros seleccionados
         try{
             Connection c=ConectBD.Conexion();
             Statement s= c.createStatement();
-            String id,E,F,H,T;
+            String id,E,FI,HI,FF,HF,TR,TE;
             int idn;
             
-            if((f>0)||((RdHEsp.isSelected())||(RdHVar.isSelected())==true)||(numEstab>0)||(numTrab>0)){ 
+            if((f>0)||(RdHEsp.isSelected())||(RdHVar.isSelected())||(numEstab>0)||(numTrab>0)||(chkF.isSelected())||(chkNF.isSelected())){ 
+                System.out.println(sql);
                 mod.setRowCount(0);
                 sql=sql+";";        
                 ResultSet a= s.executeQuery(sql);
-
+                
+                
                 while (a.next()){
-                    idn=a.getInt(1);
-                    id=Integer.toString(idn);
-                    E=a.getString(2);
-                    F=a.getString(3);
-                    H=a.getString(4);
-                    T=a.getString(5);
-                    String row[]={id,E,F,H,T};
-                    mod.addRow(row);
-                }  
+                idn=a.getInt(1);
+                id=Integer.toString(idn);
+                E=a.getString(2);
+                FI=a.getString(3);
+                HI=a.getString(4);
+                if(a.getString(5)!=null){
+                    FF=a.getString(5);
+                    HF=a.getString(6);
+                }
+                else{
+                    FF="----------------";
+                    HF="---:---:---";
+                }
+                TR=a.getString(7);
+                TE=a.getString(8);
+                if("1".equals(TE))
+                    TE="SI";
+                else
+                    TE="NO";
+                
+                String row[]={id,E,FI,HI,FF,HF,TR,TE};
+                mod.addRow(row);
+            }  
             }
             else{
                 mod.setRowCount(0);
-                sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,t.nombre FROM servicios s\n" +
-                "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
-                "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
-                "JOIN trabajos t ON l.id_trabajo = t.id_trabajo\n" +
-                "WHERE s.id_cliente ="+idU+";";                
+                sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,s.fecha_fin,s.hora_fin,t.nombre,s.terminado FROM servicios s\n" +
+                        "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
+                        "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
+                        "JOIN trabajos t ON l.id_trabajo = t.id_trabajo\n" +
+                        "WHERE s.id_cliente ="+idU+";";               
                 ResultSet a= s.executeQuery(sql);
                 
                 while (a.next()){
-                    idn=a.getInt(1);
-                    id=Integer.toString(idn);
-                    E=a.getString(2);
-                    F=a.getString(3);
-                    H=a.getString(4);
-                    T=a.getString(5);
-                    String row[]={id,E,F,H,T};
-                    mod.addRow(row);
+                idn=a.getInt(1);
+                id=Integer.toString(idn);
+                E=a.getString(2);
+                FI=a.getString(3);
+                HI=a.getString(4);
+                if(a.getString(5)!=null){
+                    FF=a.getString(5);
+                    HF=a.getString(6);
+                }
+                else{
+                    FF="----------------";
+                    HF="---:---:---";
+                }
+                TR=a.getString(7);
+                TE=a.getString(8);
+                if("1".equals(TE))
+                    TE="SI";
+                else
+                    TE="NO";
+                
+                String row[]={id,E,FI,HI,FF,HF,TR,TE};
+                mod.addRow(row);
                 }
             }
         }
@@ -759,6 +810,7 @@ public class Mis_servicios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BtnRdHoras;
+    private javax.swing.ButtonGroup BtnRdTer;
     private javax.swing.JComboBox<String> CBAño1;
     private javax.swing.JComboBox<String> CBAño2;
     private javax.swing.JComboBox<String> CBDia1;
@@ -788,7 +840,8 @@ public class Mis_servicios extends javax.swing.JFrame {
     private javax.swing.JButton btnQuitEstab;
     private javax.swing.JButton btnQuitTrab;
     private javax.swing.JToggleButton btnTrabajos;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox chkF;
+    private javax.swing.JCheckBox chkNF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

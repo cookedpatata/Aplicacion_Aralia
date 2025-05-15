@@ -4,6 +4,9 @@
  */
 package proyectofincurso;
 
+import proyectofincurso.clases.ConectBD;
+import java.sql.*;
+import proyectofincurso.clases.UsuarioConectado;
 /**
  *
  * @author DAW
@@ -15,6 +18,19 @@ public class Trabajador extends javax.swing.JFrame {
      */
     public Trabajador() {
         initComponents();
+        int idU=UsuarioConectado.idU;
+        idU=1;
+        try{
+            Connection c=ConectBD.Conexion();
+            Statement s= c.createStatement();
+            ResultSet a= s.executeQuery("SELECT nombre FROM trabajadores WHERE id_trabajador="+idU);
+            while (a.next()){
+                Usuario.setText(a.getString(1));
+            }
+        }
+        catch(SQLException e){
+            System.out.println("no");
+        }
     }
 
     /**
@@ -26,36 +42,61 @@ public class Trabajador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        Usuario = new javax.swing.JLabel();
+        btnTrabAsig = new javax.swing.JButton();
+        CS = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Usuario");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, 20));
+        Usuario.setText("Usuario");
+        getContentPane().add(Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, 20));
 
-        jButton2.setText("Trabajos asignados");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        btnTrabAsig.setText("Trabajos asignados");
+        btnTrabAsig.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrabAsigActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTrabAsig, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        jButton1.setText("Trabajos terminados");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        jToggleButton1.setText("Cerrar Sesión");
-        getContentPane().add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        CS.setText("Cerrar Sesión");
+        CS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CSActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jLabel3.setText("Bienvenido");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, 20));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 50, 110, 140));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 120, 150));
+
+        jButton1.setText("Nominas");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        jButton2.setText("Mensajes");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTrabAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabAsigActionPerformed
+        dispose();
+        Trab_Asignados i=new Trab_Asignados();
+    }//GEN-LAST:event_btnTrabAsigActionPerformed
+
+    private void CSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CSActionPerformed
+        dispose();
+        Inicio i=new Inicio();
+        i.setVisible(true);
+    }//GEN-LAST:event_CSActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,11 +134,12 @@ public class Trabajador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton CS;
+    private javax.swing.JLabel Usuario;
+    private javax.swing.JButton btnTrabAsig;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -74,8 +74,7 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
         else{
             int conf=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
             if(conf==0){
-                f= s.executeUpdate("INSERT INTO establecimientos (id_cliente, direccion) VALUES ("+idU+", '"+Estab+"');");
-                System.out.println(f+" filas afectadas");
+                s.executeUpdate("INSERT INTO establecimientos (id_cliente, direccion) VALUES ("+idU+", '"+Estab+"');");    
             }
             else{
             }            
