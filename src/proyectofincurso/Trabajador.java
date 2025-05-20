@@ -47,8 +47,6 @@ public class Trabajador extends javax.swing.JFrame {
         CS = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -73,16 +71,10 @@ public class Trabajador extends javax.swing.JFrame {
         getContentPane().add(CS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jLabel3.setText("Bienvenido");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, 20));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 120, 150));
-
-        jButton1.setText("Nominas");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
-
-        jButton2.setText("Mensajes");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -90,6 +82,7 @@ public class Trabajador extends javax.swing.JFrame {
     private void btnTrabAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabAsigActionPerformed
         dispose();
         Trab_Asignados i=new Trab_Asignados();
+        i.setVisible(true);
     }//GEN-LAST:event_btnTrabAsigActionPerformed
 
     private void CSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CSActionPerformed
@@ -137,8 +130,6 @@ public class Trabajador extends javax.swing.JFrame {
     private javax.swing.JToggleButton CS;
     private javax.swing.JLabel Usuario;
     private javax.swing.JButton btnTrabAsig;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

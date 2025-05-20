@@ -121,6 +121,19 @@ public class Trab_Asignados extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverActionPerformed
 
     private void btnTerTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerTrabActionPerformed
+        int op=JOptionPane.showConfirmDialog(null,"¿Está seguros?", "confirmación", 0);
+        if(op==0){
+            int i=0;
+            int rc=Tabla.getRowCount();
+            while (i<rc){
+                if (Tabla.isRowSelected(i)){
+                    Trab_Terminados o= new Trab_Terminados();
+                    o.setVisible(true);
+                }
+                i++;
+        }
+        
+        }
         
     }//GEN-LAST:event_btnTerTrabActionPerformed
 
