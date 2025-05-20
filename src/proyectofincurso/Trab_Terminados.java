@@ -4,9 +4,11 @@
  */
 package proyectofincurso;
 
+import java.sql.*;
 import javax.swing.JOptionPane;
+import proyectofincurso.clases.ConectBD;
 import proyectofincurso.clases.UsuarioConectado;
-
+import proyectofincurso.Añadir_Establecimiento.ids;
 /**
  *
  * @author DAW
@@ -16,7 +18,7 @@ public class Trab_Terminados extends javax.swing.JFrame {
     /**
      * Creates new form Trab_Terminados
      */
-    public Trab_Terminados() {
+    public Trab_Terminados(int ids) {
         initComponents();
     }
 
@@ -99,6 +101,8 @@ public class Trab_Terminados extends javax.swing.JFrame {
     }//GEN-LAST:event_MesActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        System.out.println(ids);
+        
         int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0;
         int idU=UsuarioConectado.idU, idEst = 0; //id_cliente
             idU=1;
@@ -107,9 +111,8 @@ public class Trab_Terminados extends javax.swing.JFrame {
         Imes= Mes.getSelectedIndex();
         Iaño= Año.getSelectedIndex();
         Ihora= Hora.getSelectedIndex();
-        int I[]={Idia,Imes,Iaño,Iest};
-        
-        
+        int I[]={Idia,Imes,Iaño,Ihora};
+           
         for(int i=0;i<4;i++){//CBox seleccionados
             if(I[i]==0)
                 f++;
@@ -126,6 +129,47 @@ public class Trab_Terminados extends javax.swing.JFrame {
                 A= (String) Año.getSelectedItem();
                 H= (String) Hora.getSelectedItem();//Hora_inicio
                 String F[]={A,M,D};
+                
+                try{   
+                    Connection c= ConectBD.Conexion();
+                    Statement s= c.createStatement(); 
+                    ResultSet r;
+                    
+                    String Fecha="'"; 
+                    for(int i=0;i<3;i++){ //fecha_fin
+                        if(i==2){
+                            Fecha=Fecha+F[i].trim()+"'";
+                        }
+                        else
+                            Fecha=Fecha+F[i].trim()+"-";
+                    }
+                    //comprobamos que la fecha ingresada no sea menor que la actual
+                    r= s.executeQuery("SELECT curdate();");
+                    String Cd = null, CurdM,CurdD;
+                    while(r.next()){
+                        Cd=r.getString(1);
+                    }
+                    CurdM=Cd.substring(5, 7);
+                    CurdD=Cd.substring(8, 10);
+                    int CdM=Integer.parseInt(CurdM), CdD=Integer.parseInt(CurdD), SelM=Integer.parseInt(M.trim()), SelD=Integer.parseInt(D.trim());
+                        
+                    if(CdM>SelM){
+                            JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
+                    }
+                    else
+                    if((CdM==SelM)&&(CdD>SelD)){
+                        JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
+                    }    
+                    else{
+                    //comprobacion pasada
+                        String sql="UPDATE servicios "
+                                + "SET fecha_fin="+Fecha+", hora_fin="+H.trim()+", terminado=TRUE\n"
+                                + "WHERE id_servicio=";
+                    }    
+                }
+                catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erroe en la BD");
+                }
             }
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
@@ -160,7 +204,8 @@ public class Trab_Terminados extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Trab_Terminados().setVisible(true);
+                int ids = 0;
+                new Trab_Terminados(ids).setVisible(true);
             }
         });
     }

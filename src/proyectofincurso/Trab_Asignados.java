@@ -24,8 +24,8 @@ public class Trab_Asignados extends javax.swing.JFrame {
         String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio"};
         mod.setColumnIdentifiers(titulosC);
         try{
-            String id,E,FI,HI,FF,HF,TR,TE;
-            int idU=UsuarioConectado.idU, idn;
+            String id,E,FI,HI;
+            int idU=UsuarioConectado.idU, ids;
             idU=1;
             Connection c = ConectBD.Conexion();
              
@@ -39,8 +39,8 @@ public class Trab_Asignados extends javax.swing.JFrame {
             Statement s= c.createStatement();
             ResultSet a= s.executeQuery(sql);
             while(a.next()){
-                idn=a.getInt(1);
-                id=Integer.toString(idn);
+                ids=a.getInt(1);
+                id=Integer.toString(ids);
                 E=a.getString(2);
                 FI=a.getString(3);
                 HI=a.getString(4);
@@ -48,6 +48,7 @@ public class Trab_Asignados extends javax.swing.JFrame {
                 String row[]={id,E,FI,HI};
                 mod.addRow(row);
             }
+            
         }
         catch(SQLException se){
             JOptionPane.showMessageDialog(null, "Error en la BD");
@@ -170,6 +171,10 @@ public class Trab_Asignados extends javax.swing.JFrame {
                 new Trab_Asignados().setVisible(true);
             }
         });
+    }
+    
+    public static int ids(int ids){
+        return ids;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
