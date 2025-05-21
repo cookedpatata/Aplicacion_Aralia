@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import proyectofincurso.clases.ConectBD;
+import proyectofincurso.clases.ServicioCompletado;
 import proyectofincurso.clases.UsuarioConectado;
 
 /**
@@ -122,20 +123,26 @@ public class Trab_Asignados extends javax.swing.JFrame {
     }//GEN-LAST:event_VolverActionPerformed
 
     private void btnTerTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerTrabActionPerformed
-        int op=JOptionPane.showConfirmDialog(null,"¿Está seguros?", "confirmación", 0);
-        if(op==0){
-            int i=0;
-            int rc=Tabla.getRowCount();
-            while (i<rc){
-                if (Tabla.isRowSelected(i)){
+        int i=0;
+        int rc=Tabla.getRowCount();
+        String ids;
+        while(i<rc){
+            if(Tabla.isRowSelected(i)){
+                int op=JOptionPane.showConfirmDialog(null,"¿Está seguros?", "confirmación", 0);
+                if(op==0){
+                    ids=(String) mod.getValueAt(i, 0);
+                    ids=ServicioCompletado.ids;
+                    
+                    dispose();
                     Trab_Terminados o= new Trab_Terminados();
                     o.setVisible(true);
                 }
-                i++;
+                else{
+                    break;
+                }
+            }
+            i++;
         }
-        
-        }
-        
     }//GEN-LAST:event_btnTerTrabActionPerformed
 
     /**

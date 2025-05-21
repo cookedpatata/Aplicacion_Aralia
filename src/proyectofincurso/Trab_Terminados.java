@@ -7,8 +7,8 @@ package proyectofincurso;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import proyectofincurso.clases.ConectBD;
+import proyectofincurso.clases.ServicioCompletado;
 import proyectofincurso.clases.UsuarioConectado;
-import proyectofincurso.Añadir_Establecimiento.ids;
 /**
  *
  * @author DAW
@@ -18,7 +18,7 @@ public class Trab_Terminados extends javax.swing.JFrame {
     /**
      * Creates new form Trab_Terminados
      */
-    public Trab_Terminados(int ids) {
+    public Trab_Terminados() {
         initComponents();
     }
 
@@ -101,7 +101,7 @@ public class Trab_Terminados extends javax.swing.JFrame {
     }//GEN-LAST:event_MesActionPerformed
 
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        System.out.println(ids);
+        System.out.println();
         
         int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0;
         int idU=UsuarioConectado.idU, idEst = 0; //id_cliente
@@ -162,9 +162,11 @@ public class Trab_Terminados extends javax.swing.JFrame {
                     }    
                     else{
                     //comprobacion pasada
+                        String ids=ServicioCompletado.ids;
                         String sql="UPDATE servicios "
                                 + "SET fecha_fin="+Fecha+", hora_fin="+H.trim()+", terminado=TRUE\n"
-                                + "WHERE id_servicio=";
+                                + "WHERE id_servicio="+ids;
+                        System.out.println(sql);
                     }    
                 }
                 catch(SQLException ex){
@@ -205,7 +207,7 @@ public class Trab_Terminados extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 int ids = 0;
-                new Trab_Terminados(ids).setVisible(true);
+                new Trab_Terminados().setVisible(true);
             }
         });
     }
