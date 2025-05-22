@@ -28,8 +28,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
         try{
             Connection c = ConectBD.Conexion();
             int idU=UsuarioConectado.idU;
-            idU=1;
-            
+
             Estab.removeAllItems();
             //establecimientos
             Estab.addItem("<Seleccionar>");
@@ -100,7 +99,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 volverActionPerformed(evt);
             }
         });
-        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        getContentPane().add(volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 10, 80, 30));
 
         EnvServicio.setText("Enviar");
         EnvServicio.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +161,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 ElimTrabActionPerformed(evt);
             }
         });
-        getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 220, -1, -1));
+        getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, -1, -1));
 
         AñadEstab.setText("Añadir");
         AñadEstab.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +186,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
                 AñadTrab1ActionPerformed(evt);
             }
         });
-        getContentPane().add(AñadTrab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 70, -1));
+        getContentPane().add(AñadTrab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 70, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -249,7 +248,6 @@ public class Pedir_servicio extends javax.swing.JFrame {
     private void EnvServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnvServicioActionPerformed
         int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0;
         int idU=UsuarioConectado.idU, idEst = 0; //id_cliente
-            idU=1;
         
         Idia= Dia.getSelectedIndex();
         Imes= Mes.getSelectedIndex();

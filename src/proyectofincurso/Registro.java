@@ -118,7 +118,7 @@ public class Registro extends javax.swing.JFrame {
                 btnRegActionPerformed(evt);
             }
         });
-        getContentPane().add(btnReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
+        getContentPane().add(btnReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 203, 130, 30));
 
         jLabel9.setText("(Introduzca el codigo de su empresa)");
         getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
@@ -131,7 +131,7 @@ public class Registro extends javax.swing.JFrame {
                 btnVolActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVol, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, -1, -1));
+        getContentPane().add(btnVol, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 203, 80, 30));
 
         btnSal.setText("SALIR");
         btnSal.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +139,7 @@ public class Registro extends javax.swing.JFrame {
                 btnSalActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, -1, -1));
+        getContentPane().add(btnSal, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 203, 80, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

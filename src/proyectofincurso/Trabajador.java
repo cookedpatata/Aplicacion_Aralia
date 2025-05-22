@@ -16,10 +16,11 @@ public class Trabajador extends javax.swing.JFrame {
     /**
      * Creates new form Trabajador
      */
-    public Trabajador() {
+    public Trabajador() {  
         initComponents();
+        setLocation(800,400);
+        setSize(200, 200);
         int idU=UsuarioConectado.idU;
-        idU=1;
         try{
             Connection c=ConectBD.Conexion();
             Statement s= c.createStatement();
@@ -46,13 +47,12 @@ public class Trabajador extends javax.swing.JFrame {
         btnTrabAsig = new javax.swing.JButton();
         CS = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Usuario.setText("Usuario");
-        getContentPane().add(Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, 20));
+        getContentPane().add(Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, 20));
 
         btnTrabAsig.setText("Trabajos asignados");
         btnTrabAsig.addActionListener(new java.awt.event.ActionListener() {
@@ -68,13 +68,10 @@ public class Trabajador extends javax.swing.JFrame {
                 CSActionPerformed(evt);
             }
         });
-        getContentPane().add(CS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+        getContentPane().add(CS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         jLabel3.setText("Bienvenido");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, -1, 20));
-
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 120, 150));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -131,6 +128,5 @@ public class Trabajador extends javax.swing.JFrame {
     private javax.swing.JLabel Usuario;
     private javax.swing.JButton btnTrabAsig;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

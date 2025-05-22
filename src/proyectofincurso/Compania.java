@@ -4,17 +4,70 @@
  */
 package proyectofincurso;
 
+import java.awt.Dimension;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+import proyectofincurso.clases.ConectBD;
+import proyectofincurso.clases.UsuarioConectado;
+
 /**
  *
  * @author DAW
  */
 public class Compania extends javax.swing.JFrame {
-
+    DefaultTableModel modS=new DefaultTableModel();
+    DefaultTableModel modC=new DefaultTableModel();
+    DefaultTableModel modT=new DefaultTableModel();
     /**
      * Creates new form Compania
      */
     public Compania() {
         initComponents();
+        try{
+            String id,E,FI,HI,FF,HF,TR,TE;
+            int idn;
+            
+            Connection c = ConectBD.Conexion();
+            
+            int idU=UsuarioConectado.idU;
+            
+            //tabla
+            String titulosC[]={"Servicio","Compañia","Cliente","Establecimiento","Fecha de inicio","Hora de inicio","Fecha de terminado","Hora de terminado","Trabajos","Terminado"};
+            modS.setColumnIdentifiers(titulosC);
+            TServ.setModel(modS);
+            
+            String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,s.fecha_fin,s.hora_fin,t.nombre,s.terminado FROM servicios s\n" +
+                        "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
+                        "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
+                        "JOIN trabajos t ON l.id_trabajo = t.id_trabajo\n" +
+                        "WHERE s.id_cliente ="+idU+";";                
+            Statement s= c.createStatement();
+            ResultSet a= s.executeQuery(sql);
+            
+            while (a.next()){
+                idn=a.getInt(1);
+                id=Integer.toString(idn);
+                E=a.getString(2);
+                FI=a.getString(3);
+                HI=a.getString(4);
+                if(a.getString(5)!=null){
+                    FF=a.getString(5);
+                    HF=a.getString(6);
+                }
+                else{
+                    FF="----------------";
+                    HF="---:---:---";
+                }
+                TR=a.getString(7);
+                TE=a.getString(8);
+                if("1".equals(TE))
+                    TE="SI";
+                else
+                    TE="NO";
+                
+                String row[]={id,E,FI,HI,FF,HF,TR,TE};
+                mod.addRow(row);
+            }
     }
 
     /**
@@ -27,51 +80,23 @@ public class Compania extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        TServ = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        TCli = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TTrab = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 270));
-
-        jTabbedPane1.addTab("Trabajadores", jPanel3);
-
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        TServ.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -82,7 +107,7 @@ public class Compania extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(TServ);
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 270));
 
@@ -90,7 +115,7 @@ public class Compania extends javax.swing.JFrame {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        TCli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -101,69 +126,46 @@ public class Compania extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(TCli);
 
         jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 270));
 
         jTabbedPane1.addTab("Clientes", jPanel1);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 650, 300));
+        TTrab.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(TTrab);
 
-        jPanel4.setBackground(new java.awt.Color(0, 153, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jTabbedPane1.addTab("Trabajadores", jScrollPane1);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 650, 300));
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 106, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 136, Short.MAX_VALUE)
-        );
+        jButton2.setText("Editar");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 30, 90, 30));
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 110, 140));
-
-        jLabel1.setText("Nombre");
-        jPanel4.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, -1, -1));
-
-        jLabel2.setText("Apellidos");
-        jPanel4.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
-
-        jLabel3.setText("DNI");
-        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
-
-        jLabel4.setText("Telefono");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
-
-        jButton3.setText("Editar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton9.setText("Eliminar");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton9ActionPerformed(evt);
             }
         });
-        jPanel4.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, -1));
-
-        jButton4.setText("Eliminar");
-        jPanel4.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, -1, -1));
-
-        jLabel5.setText("ID");
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
-
-        jButton6.setText("Asignar trabajo");
-        jPanel4.add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
-
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 410, 330, 170));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, 90, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,25 +203,16 @@ public class Compania extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTable TCli;
+    private javax.swing.JTable TServ;
+    private javax.swing.JTable TTrab;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }

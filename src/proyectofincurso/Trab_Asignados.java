@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.sql.*;
 import javax.swing.table.DefaultTableModel;
 import proyectofincurso.clases.ConectBD;
-import proyectofincurso.clases.ServicioCompletado;
 import proyectofincurso.clases.UsuarioConectado;
 
 /**
@@ -16,29 +15,32 @@ import proyectofincurso.clases.UsuarioConectado;
  */
 public class Trab_Asignados extends javax.swing.JFrame {
     DefaultTableModel mod=new DefaultTableModel();
+    private static String ids;
     /**
      * Creates new form Trab_Asignados
      */
     public Trab_Asignados() {
+        setLocation(800,400);
         initComponents();
         Tabla.setModel(mod);
+        Ter.setVisible(false);
         String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio"};
         mod.setColumnIdentifiers(titulosC);
         try{
             String id,E,FI,HI;
             int idU=UsuarioConectado.idU, ids;
-            idU=1;
             Connection c = ConectBD.Conexion();
              
             String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio FROM servicios s\n"+
                 "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
                 "WHERE s.id_servicio IN (\n"+
                 "SELECT id_servicio FROM jornadas\n"+
-                "WHERE id_trabajador="+idU+")\n"+
-                "AND s.terminado=0;";
+                "WHERE id_trabajador="+idU+"\n"+
+                "AND s.terminado=0);";
             
             Statement s= c.createStatement();
             ResultSet a= s.executeQuery(sql);
+            
             while(a.next()){
                 ids=a.getInt(1);
                 id=Integer.toString(ids);
@@ -67,8 +69,17 @@ public class Trab_Asignados extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         Volver = new javax.swing.JButton();
-        btnTerTrab = new javax.swing.JButton();
-        jLayeredPane1 = new javax.swing.JLayeredPane();
+        btnTerminado = new javax.swing.JToggleButton();
+        Ter = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        Dia = new javax.swing.JComboBox<>();
+        Mes = new javax.swing.JComboBox<>();
+        Año = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        Hora = new javax.swing.JComboBox<>();
+        btnEnviar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
 
@@ -84,17 +95,65 @@ public class Trab_Asignados extends javax.swing.JFrame {
                 VolverActionPerformed(evt);
             }
         });
-        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(Volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 80, 30));
 
-        btnTerTrab.setText("Terminar");
-        btnTerTrab.addActionListener(new java.awt.event.ActionListener() {
+        btnTerminado.setText("Terminado");
+        btnTerminado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTerTrabActionPerformed(evt);
+                btnTerminadoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTerTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, -1, -1));
+        getContentPane().add(btnTerminado, new org.netbeans.lib.awtextra.AbsoluteConstraints(468, 30, 100, 30));
 
-        jLayeredPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        Ter.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        Ter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setText("Porfavor ingrese la hora en la que se termino el servicio:");
+        Ter.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        Dia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Dia>", "1  ", "2  ", "3  ", "4  ", "5  ", "6  ", "7  ", "8  ", "9  ", "10  ", "11  ", "12  ", "13  ", "14  ", "15  ", "16  ", "17  ", "18  ", "19  ", "20  ", "21  ", "22  ", "23  ", "24  ", "25  ", "26  ", "27  ", "28  ", "29  ", "30  ", "31" }));
+        Dia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DiaActionPerformed(evt);
+            }
+        });
+        Ter.add(Dia, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+
+        Mes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Mes>", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        Mes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MesActionPerformed(evt);
+            }
+        });
+        Ter.add(Mes, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+
+        Año.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<Año>", "2025  ", "2026  ", "2027  ", "2028  ", "2029  ", "2030  ", "2031  ", "2032  ", "2033  ", "2034  ", "2035  ", "2036  ", "2037  ", "2038  ", "2039  ", "2040  ", "2041  ", "2042  ", "2043  ", "2044  ", "2045  ", "2046  ", "2047  ", "2048  ", "2049  ", "2050" }));
+        Ter.add(Año, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 50, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setText("de");
+        Ter.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 50, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setText("de");
+        Ter.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("a las");
+        Ter.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        Hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<hora>", "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        Ter.add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+
+        btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
+        Ter.add(btnEnviar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
+
+        getContentPane().add(Ter, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, 320, 180));
 
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,9 +168,7 @@ public class Trab_Asignados extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(Tabla);
 
-        jLayeredPane1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 260));
-
-        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 570, 280));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 560, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -122,28 +179,145 @@ public class Trab_Asignados extends javax.swing.JFrame {
         i.setVisible(true);
     }//GEN-LAST:event_VolverActionPerformed
 
-    private void btnTerTrabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerTrabActionPerformed
-        int i=0;
-        int rc=Tabla.getRowCount();
-        String ids;
-        while(i<rc){
-            if(Tabla.isRowSelected(i)){
-                int op=JOptionPane.showConfirmDialog(null,"¿Está seguros?", "confirmación", 0);
-                if(op==0){
-                    ids=(String) mod.getValueAt(i, 0);
-                    ids=ServicioCompletado.ids;
-                    
-                    dispose();
-                    Trab_Terminados o= new Trab_Terminados();
-                    o.setVisible(true);
+    private void btnTerminadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminadoActionPerformed
+        if(btnTerminado.isSelected()){
+           int i=0;
+            int rc=Tabla.getRowCount();
+            
+            while(i<rc){
+                if(Tabla.isRowSelected(i)){
+                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguros?", "confirmación", 0);
+                    if(op==0){
+                        ids=(String) mod.getValueAt(i, 0);
+                        Ter.setVisible(true); 
+                    }
+                    else{
+                        break;
+                    }
                 }
-                else{
-                    break;
+                i++;
+            } 
+        }
+        else{
+            Ter.setVisible(false);
+            Año.setSelectedIndex(0);
+            Dia.setSelectedIndex(0);
+            Mes.setSelectedIndex(0);
+            Hora.setSelectedIndex(0);
+        }
+    }//GEN-LAST:event_btnTerminadoActionPerformed
+
+    private void DiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DiaActionPerformed
+
+    private void MesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MesActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0;
+        int idU=UsuarioConectado.idU, idEst = 0; //id_cliente
+        idU=1;
+
+        Idia= Dia.getSelectedIndex();
+        Imes= Mes.getSelectedIndex();
+        Iaño= Año.getSelectedIndex();
+        Ihora= Hora.getSelectedIndex();
+        int I[]={Idia,Imes,Iaño,Ihora};
+
+        for(int i=0;i<4;i++){//CBox seleccionados
+            if(I[i]==0)
+            f++;
+        }
+
+        if (f>0)
+        JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos necesarios");
+        else{
+            int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
+            if(op==0){
+                String D,M,A,H;
+                D= (String) Dia.getSelectedItem();
+                M= (String) Mes.getSelectedItem();
+                A= (String) Año.getSelectedItem();
+                H= (String) Hora.getSelectedItem();//Hora_inicio
+                String F[]={A,M,D};
+
+                try{
+                    Connection c= ConectBD.Conexion();
+                    Statement s= c.createStatement();
+                    ResultSet r;
+
+                    String Fecha="'";
+                    for(int i=0;i<3;i++){ //fecha_fin
+                        if(i==2){
+                            Fecha=Fecha+F[i].trim()+"'";
+                        }
+                        else
+                        Fecha=Fecha+F[i].trim()+"-";
+                    }
+                    //comprobamos que la fecha ingresada no sea menor que la actual
+                    r= s.executeQuery("SELECT fecha_inicio FROM servicios WHERE id_servicio="+ids+";");
+                    String Cd = null, CurdM,CurdD;
+                    while(r.next()){
+                        Cd=r.getString(1);
+                    }
+                    CurdM=Cd.substring(5, 7);
+                    CurdD=Cd.substring(8, 10);
+                    int CdM=Integer.parseInt(CurdM), CdD=Integer.parseInt(CurdD), SelM=Integer.parseInt(M.trim()), SelD=Integer.parseInt(D.trim());
+
+                    if(CdM>SelM){
+                        JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
+                    }
+                    else
+                    if((CdM==SelM)&&(CdD>SelD)){
+                        JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
+                    }
+                    else{
+                        //comprobacion pasada
+                        String sql="UPDATE servicios "
+                        + "SET fecha_fin="+Fecha+", hora_fin='"+H.trim()+":00', terminado=TRUE\n"
+                        + "WHERE id_servicio="+ids;
+                        s.executeUpdate(sql);
+                        JOptionPane.showMessageDialog(null, "¡Buen trabajo!");
+                        
+                        //resetear tabla
+                        mod.setRowCount(0);
+                        String id,E,FI,HI;
+                        int ids;
+
+                        sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio FROM servicios s\n"+
+                            "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
+                            "WHERE s.id_servicio IN (\n"+
+                            "SELECT id_servicio FROM jornadas\n"+
+                            "WHERE id_trabajador="+idU+"\n"+
+                            "AND s.terminado=0);";
+                        ResultSet a= s.executeQuery(sql);
+
+                        while(a.next()){
+                            ids=a.getInt(1);
+                            id=Integer.toString(ids);
+                            E=a.getString(2);
+                            FI=a.getString(3);
+                            HI=a.getString(4);
+
+                            String row[]={id,E,FI,HI};
+                            mod.addRow(row);
+                        }
+                        //reseteo de btnTerminado
+                        Ter.setVisible(false);
+                        Año.setSelectedIndex(0);
+                        Dia.setSelectedIndex(0);
+                        Mes.setSelectedIndex(0);
+                        Hora.setSelectedIndex(0);
+                    }
+                }
+                catch(SQLException ex){
+                    JOptionPane.showMessageDialog(null, "Erroe en la BD");
                 }
             }
-            i++;
         }
-    }//GEN-LAST:event_btnTerTrabActionPerformed
+    }//GEN-LAST:event_btnEnviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,11 +359,20 @@ public class Trab_Asignados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Año;
+    private javax.swing.JComboBox<String> Dia;
+    private javax.swing.JComboBox<String> Hora;
+    private javax.swing.JComboBox<String> Mes;
     private javax.swing.JTable Tabla;
+    private javax.swing.JPanel Ter;
     private javax.swing.JButton Volver;
-    private javax.swing.JButton btnTerTrab;
+    private javax.swing.JButton btnEnviar;
+    private javax.swing.JToggleButton btnTerminado;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

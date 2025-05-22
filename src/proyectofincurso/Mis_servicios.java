@@ -64,7 +64,6 @@ public class Mis_servicios extends javax.swing.JFrame {
             Connection c = ConectBD.Conexion();
             
             int idU=UsuarioConectado.idU;
-            idU=1;
             
             //tabla
             String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio","Fecha de terminado","Hora de terminado","Trabajos","Terminado"};

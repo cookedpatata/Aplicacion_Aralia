@@ -4,6 +4,9 @@
  */
 package proyectofincurso;
 
+import proyectofincurso.clases.ConectBD;
+import java.sql.*;
+import proyectofincurso.clases.UsuarioConectado;
 /**
  *
  * @author DAW
@@ -15,6 +18,43 @@ public class Cliente extends javax.swing.JFrame {
         setLocation(800,400);
         initComponents();
         
+        
+        try{
+            Connection c=ConectBD.Conexion();
+            Statement s= c.createStatement();
+            int idU=UsuarioConectado.idU;
+            idU=5;
+            String Usuario;
+            ResultSet r= s.executeQuery("SELECT nombre FROM clientes WHERE id_cliente="+idU);
+            while(r.next()){
+                LUsuario.setText(r.getString(1));
+            }
+            
+            r=s.executeQuery("SELECT nombre FROM empresas WHERE id_cliente="+idU);
+            if(r.next()){
+                String nom;
+                nom=r.getString(1);
+                TComp.setText(nom);
+                
+                TComp.setVisible(true);
+                TitComp.setVisible(true);
+                modComp.setVisible(true);
+                Tit1AñadComp.setVisible(false);
+                Tit2AñadComp.setVisible(false);
+                AñadComp.setVisible(false);    
+            }
+            else{
+                Tit1AñadComp.setVisible(true);
+                Tit2AñadComp.setVisible(true);
+                AñadComp.setVisible(true);
+                TComp.setVisible(false);
+                TitComp.setVisible(false);
+                modComp.setVisible(false);
+            }
+        }
+        catch(SQLException ex){
+            
+        }
     }
 
     /**
@@ -29,16 +69,23 @@ public class Cliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         PedServ = new javax.swing.JButton();
         MisServ = new javax.swing.JButton();
-        URL = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        LUsuario = new javax.swing.JLabel();
         CSesion = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        TitComp = new javax.swing.JLabel();
+        TComp = new javax.swing.JLabel();
+        AñadComp = new javax.swing.JButton();
+        modComp = new javax.swing.JButton();
+        Tit1AñadComp = new javax.swing.JLabel();
+        Tit2AñadComp = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Bienvenido estimado Cliente");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
         PedServ.setText("Pedir servicio");
         PedServ.addActionListener(new java.awt.event.ActionListener() {
@@ -46,7 +93,7 @@ public class Cliente extends javax.swing.JFrame {
                 PedServActionPerformed(evt);
             }
         });
-        getContentPane().add(PedServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        getContentPane().add(PedServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 110, 30));
 
         MisServ.setText("Mis servicios");
         MisServ.addActionListener(new java.awt.event.ActionListener() {
@@ -54,19 +101,11 @@ public class Cliente extends javax.swing.JFrame {
                 MisServActionPerformed(evt);
             }
         });
-        getContentPane().add(MisServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
-
-        URL.setText("Sobre nosotros");
-        URL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                URLActionPerformed(evt);
-            }
-        });
-        getContentPane().add(URL, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, -1, -1));
+        getContentPane().add(MisServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 110, 30));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
-        jLabel3.setText("Usuario");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 10, -1, -1));
+        LUsuario.setText("Usuario");
+        getContentPane().add(LUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 90, 20));
 
         CSesion.setText("Cerrar Sesion");
         CSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +113,40 @@ public class Cliente extends javax.swing.JFrame {
                 CSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(CSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 110, -1));
+        getContentPane().add(CSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, 30));
+
+        jButton1.setText("Sobre nosotros");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, 30));
+
+        TitComp.setText("De la empresa");
+        getContentPane().add(TitComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        TComp.setText("Compañia");
+        TComp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(TComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 80, -1));
+
+        AñadComp.setText("Añadir");
+        AñadComp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AñadCompActionPerformed(evt);
+            }
+        });
+        getContentPane().add(AñadComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 70, 20));
+
+        modComp.setText("Modificar");
+        modComp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modCompActionPerformed(evt);
+            }
+        });
+        getContentPane().add(modComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 90, 20));
+
+        Tit1AñadComp.setText("¿Eres representante de una");
+        getContentPane().add(Tit1AñadComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        Tit2AñadComp.setText("Compañia?");
+        getContentPane().add(Tit2AñadComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -91,15 +163,19 @@ public class Cliente extends javax.swing.JFrame {
         MS.setVisible(true);
     }//GEN-LAST:event_MisServActionPerformed
 
-    private void URLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_URLActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_URLActionPerformed
-
     private void CSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CSesionActionPerformed
         dispose();
         Inicio i=new Inicio();
         i.setVisible(true);
     }//GEN-LAST:event_CSesionActionPerformed
+
+    private void modCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCompActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modCompActionPerformed
+
+    private void AñadCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadCompActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AñadCompActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,12 +213,19 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AñadComp;
     private javax.swing.JButton CSesion;
+    private javax.swing.JLabel LUsuario;
     private javax.swing.JButton MisServ;
     private javax.swing.JButton PedServ;
-    private javax.swing.JButton URL;
+    private javax.swing.JLabel TComp;
+    private javax.swing.JLabel Tit1AñadComp;
+    private javax.swing.JLabel Tit2AñadComp;
+    private javax.swing.JLabel TitComp;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton modComp;
     // End of variables declaration//GEN-END:variables
 }
