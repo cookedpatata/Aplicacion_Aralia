@@ -6,6 +6,7 @@ package proyectofincurso;
 
 import proyectofincurso.clases.ConectBD;
 import java.sql.*;
+import javax.swing.JOptionPane;
 import proyectofincurso.clases.UsuarioConectado;
 /**
  *
@@ -17,13 +18,12 @@ public class Cliente extends javax.swing.JFrame {
     public Cliente() {
         setLocation(800,400);
         initComponents();
-        
+        PEmp.setVisible(false);
         
         try{
             Connection c=ConectBD.Conexion();
             Statement s= c.createStatement();
             int idU=UsuarioConectado.idU;
-            idU=5;
             String Usuario;
             ResultSet r= s.executeQuery("SELECT nombre FROM clientes WHERE id_cliente="+idU);
             while(r.next()){
@@ -66,6 +66,13 @@ public class Cliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        PEmp = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        nomtxt = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        NIFtxt = new javax.swing.JTextField();
+        btnAñadir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         PedServ = new javax.swing.JButton();
         MisServ = new javax.swing.JButton();
@@ -83,6 +90,30 @@ public class Cliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        PEmp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PEmp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setText("Porfavor introduzca los siguientes datos:");
+        PEmp.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+        PEmp.add(nomtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, 100, -1));
+
+        jLabel5.setText("NIF:");
+        PEmp.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+
+        jLabel6.setText("Nombre:");
+        PEmp.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        PEmp.add(NIFtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 100, -1));
+
+        btnAñadir.setText("Añadir");
+        btnAñadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAñadirActionPerformed(evt);
+            }
+        });
+        PEmp.add(btnAñadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+
+        getContentPane().add(PEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 230, 140));
 
         jLabel1.setText("Bienvenido estimado Cliente");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
@@ -170,12 +201,57 @@ public class Cliente extends javax.swing.JFrame {
     }//GEN-LAST:event_CSesionActionPerformed
 
     private void modCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCompActionPerformed
-        // TODO add your handling code here:
+        PEmp.setVisible(true);
+        int idU=UsuarioConectado.idU;
+        String NIF,nom,sql="SELECT NIF, nombre FROM empresas WHERE id_cliente="+idU+";";
+        try{
+            Connection c= ConectBD.Conexion();
+            Statement s= c.createStatement();
+            ResultSet r= s.executeQuery(sql);
+            while(r.next()){
+                NIF=r.getString(1).trim();
+                nom=r.getString(2).trim();
+                NIFtxt.setText(NIF);
+                nomtxt.setText(nom);
+            }         
+        }
+        catch(SQLException ex){
+            
+        }
     }//GEN-LAST:event_modCompActionPerformed
 
     private void AñadCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadCompActionPerformed
-        // TODO add your handling code here:
+        PEmp.setVisible(true);
     }//GEN-LAST:event_AñadCompActionPerformed
+
+    private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
+        try{
+            Connection c= ConectBD.Conexion();
+            Statement s= c.createStatement();
+            int idU=UsuarioConectado.idU;
+            String NIF = null,nom = null;
+            NIF=NIFtxt.getText().trim();
+            nom=nomtxt.getText().trim();
+            if(NIF.length()==0||nom.length()==0){
+                JOptionPane.showMessageDialog(null, "Porfavor completa los campos");
+                PEmp.setVisible(false);
+            }
+            else{
+                ResultSet r=s.executeQuery("Select id_cliente FROM empresas WHERE id_cliente="+idU);
+                if(r.next()){
+                    s.executeUpdate("UPDATE empresas SET NIF='"+NIF+"', nombre='"+nom+"';");
+                    PEmp.setVisible(false);
+                }
+                else{
+                    s.executeUpdate("INSERT INTO (NIF,nombre) empresas VALUES('"+NIF+"','"+nom+"');");
+                    PEmp.setVisible(false);
+                }
+            }
+        }
+        catch(SQLException ex){
+            
+        }
+    }//GEN-LAST:event_btnAñadirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,15 +293,22 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JButton CSesion;
     private javax.swing.JLabel LUsuario;
     private javax.swing.JButton MisServ;
+    private javax.swing.JTextField NIFtxt;
+    private javax.swing.JPanel PEmp;
     private javax.swing.JButton PedServ;
     private javax.swing.JLabel TComp;
     private javax.swing.JLabel Tit1AñadComp;
     private javax.swing.JLabel Tit2AñadComp;
     private javax.swing.JLabel TitComp;
+    private javax.swing.JButton btnAñadir;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton modComp;
+    private javax.swing.JTextField nomtxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -217,7 +217,7 @@ public class Compania extends javax.swing.JFrame {
         jLabel7.setText("Establecimiento");
         PS.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
 
-        getContentPane().add(PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 450, 170));
+        getContentPane().add(PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 410, 170));
 
         PCT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PCT.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -259,7 +259,7 @@ public class Compania extends javax.swing.JFrame {
         PCT.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
         PCT.add(Contxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 120, -1));
 
-        getContentPane().add(PCT, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 490, 170));
+        getContentPane().add(PCT, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 490, 170));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {

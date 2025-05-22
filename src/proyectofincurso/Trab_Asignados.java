@@ -29,6 +29,7 @@ public class Trab_Asignados extends javax.swing.JFrame {
         try{
             String id,E,FI,HI;
             int idU=UsuarioConectado.idU, ids;
+            idU=1;
             Connection c = ConectBD.Conexion();
              
             String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio FROM servicios s\n"+

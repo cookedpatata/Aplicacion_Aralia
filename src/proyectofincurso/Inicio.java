@@ -80,7 +80,7 @@ public class Inicio extends javax.swing.JFrame {
                 RegActionPerformed(evt);
             }
         });
-        getContentPane().add(Reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 173, 90, 30));
+        getContentPane().add(Reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 173, 100, 30));
 
         IniciarS.setText("Iniciar sesión");
         IniciarS.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +88,7 @@ public class Inicio extends javax.swing.JFrame {
                 IniciarSActionPerformed(evt);
             }
         });
-        getContentPane().add(IniciarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 100, 30));
+        getContentPane().add(IniciarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 110, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
