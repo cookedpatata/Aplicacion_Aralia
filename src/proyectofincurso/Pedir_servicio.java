@@ -28,7 +28,6 @@ public class Pedir_servicio extends javax.swing.JFrame {
         try{
             Connection c = ConectBD.Conexion();
             int idU=UsuarioConectado.idU;
-
             Estab.removeAllItems();
             //establecimientos
             Estab.addItem("<Seleccionar>");
@@ -253,7 +252,6 @@ public class Pedir_servicio extends javax.swing.JFrame {
     private void EnvServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EnvServicioActionPerformed
         int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0;
         int idU=UsuarioConectado.idU, idEst = 0; //id_cliente
-        
         Idia= Dia.getSelectedIndex();
         Imes= Mes.getSelectedIndex();
         Iaño= Año.getSelectedIndex();
@@ -321,14 +319,14 @@ public class Pedir_servicio extends javax.swing.JFrame {
                             JOptionPane.showMessageDialog(null, "Porfavor escoja una fecha valida");
                         }    
                         else{//comprobacion pasada, insertamos el nuevo servicio pedido
-                            String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00');";
-                            String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio) VALUES ";
+                            String Values="(1,"+idU+","+idEst+","+Fecha+",'"+H.trim()+":00', 0);";
+                            String sql="INSERT INTO servicios (id_compañia,id_cliente,id_establecimiento,fecha_inicio,hora_inicio,terminado) VALUES ";
                             sql=sql+Values;
                             s.executeUpdate(sql);
                         
                             //añadir los trabajos que relacionan con el servicio
                             int idServ = 0;
-                            r=s.executeQuery("SELECT id_servicio FROM servicios WHERE id_cliente="+idU+" AND id_establecimiento LIKE "+idEst+" AND fecha_inicio LIKE "+Fecha+";");
+                            r=s.executeQuery("SELECT id_servicio FROM servicios WHERE id_cliente="+idU+" AND id_establecimiento="+idEst+" AND fecha_inicio LIKE "+Fecha+";");
                             while(r.next()){
                             idServ=r.getInt(1);//id del servicio creado
                             }
@@ -351,10 +349,17 @@ public class Pedir_servicio extends javax.swing.JFrame {
                             
                             //sentencias a labores
                             sql="INSERT INTO labores VALUES ";
+                            String values="";
                             for(int i=0;i<numtrab;i++){
-                                s.executeUpdate(sql+"("+idServ+", "+idTrabs[i]+");");
+                                if(i==numtrab-1){
+                                    values=values+"("+idServ+","+idTrabs[i]+");";
+                                }
+                                else{
+                                    values=values+"("+idServ+","+idTrabs[i]+"),";
+                                }
                             }
-                            
+                            System.out.println(sql+values);
+                            s.executeUpdate(sql+values);
                             JOptionPane.showMessageDialog(null, "¡Servicio pedido con exito!");
                         }
                     }

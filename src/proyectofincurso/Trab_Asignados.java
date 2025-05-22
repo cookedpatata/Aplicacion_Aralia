@@ -29,7 +29,6 @@ public class Trab_Asignados extends javax.swing.JFrame {
         try{
             String id,E,FI,HI;
             int idU=UsuarioConectado.idU, ids;
-            idU=1;
             Connection c = ConectBD.Conexion();
              
             String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio FROM servicios s\n"+
@@ -219,7 +218,6 @@ public class Trab_Asignados extends javax.swing.JFrame {
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         int Idia = 0,Imes = 0,Iaño = 0,Ihora = 0, Iest=0, f=0;
         int idU=UsuarioConectado.idU, idEst = 0; //id_cliente
-        idU=1;
 
         Idia= Dia.getSelectedIndex();
         Imes= Mes.getSelectedIndex();

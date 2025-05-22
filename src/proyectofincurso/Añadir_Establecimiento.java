@@ -63,7 +63,6 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
     private void AñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirActionPerformed
         try{
         int idU=UsuarioConectado.idU, f;
-        idU=1;
         String Estab=Estabtxt.getText();
         Connection c= ConectBD.Conexion();
         Statement s= c.createStatement();

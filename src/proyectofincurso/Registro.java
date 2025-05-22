@@ -178,23 +178,9 @@ public class Registro extends javax.swing.JFrame {
     }
     
     public static boolean DNI(String a){
-        String n="0123456789";
-        String l="ABCDEFGHIJKLMNOPRSTVWXYZ";
-        int c=0;
-        for(int i=0;i<8;i++){//nº numeros
-            for(int j=0;j<10;j++){//nºs
-                if(a.substring(i, i+1).equals(n.substring(j, j+1))){
-                    c++;
-                    break;
-                }
-            }
-        }
-        for(int i=0;i<l.length();i++){//Letra al final
-            if(a.substring(8).equals(l.substring(i,i+1)))
-                if(c==8)
-                    return true;
-        }
-        return false;
+        Pattern pat= Pattern.compile("[0-9]{8}[A-Z]");
+        Matcher mat= pat.matcher(a);
+        return mat.find();
     }
     public static boolean CERep(String CE) throws SQLException{
         Connection c = ConectBD.Conexion();
@@ -252,7 +238,7 @@ public class Registro extends javax.swing.JFrame {
                         if(C9(Tel)==false)
                             JOptionPane.showMessageDialog(null, "Telfono no valido");
                         else
-                        if((C9(DNI))||(DNI(DNI)==false))
+                        if((DNI(DNI)==false))
                             JOptionPane.showMessageDialog(null, "DNI no valido");
                         else
                         if(CE(CE)==false)
@@ -301,7 +287,7 @@ public class Registro extends javax.swing.JFrame {
                     if((C9(Tel)==false))
                         JOptionPane.showMessageDialog(null, "Telfono no valido");  
                     else
-                    if((C9(DNI)==false)||(DNI(DNI)==false))
+                    if((DNI(DNI)==false))
                         JOptionPane.showMessageDialog(null, "DNI no valido");
                     else
                     if(CE(CE)==false)

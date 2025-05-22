@@ -431,7 +431,6 @@ public class Mis_servicios extends javax.swing.JFrame {
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         //comprobamos que filtros que quieren aplicar
         int idU=UsuarioConectado.idU;
-        idU=1;
         String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,s.fecha_fin,s.hora_fin,t.nombre,s.terminado FROM servicios s\n" +
                         "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
                         "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
@@ -541,7 +540,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             for(int i=0; i<numTrab;i++){
                 TrabSelec[i]=(String) ListTrabSelec.getElementAt(i);
             }       
-            sql=sql+"AND e.direccion IN (";
+            sql=sql+"AND t.nombre IN (";
             for(int i=0;i<numTrab;i++){
                 if(i!=numTrab-1)
                     sql=sql+"'"+TrabSelec[i].trim()+"',";

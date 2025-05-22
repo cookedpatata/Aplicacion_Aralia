@@ -6,6 +6,8 @@ package proyectofincurso;
 
 import proyectofincurso.clases.ConectBD;
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import proyectofincurso.clases.UsuarioConectado;
 /**
@@ -24,6 +26,7 @@ public class Cliente extends javax.swing.JFrame {
             Connection c=ConectBD.Conexion();
             Statement s= c.createStatement();
             int idU=UsuarioConectado.idU;
+            idU=11;
             String Usuario;
             ResultSet r= s.executeQuery("SELECT nombre FROM clientes WHERE id_cliente="+idU);
             while(r.next()){
@@ -203,6 +206,7 @@ public class Cliente extends javax.swing.JFrame {
     private void modCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCompActionPerformed
         PEmp.setVisible(true);
         int idU=UsuarioConectado.idU;
+        idU=11;
         String NIF,nom,sql="SELECT NIF, nombre FROM empresas WHERE id_cliente="+idU+";";
         try{
             Connection c= ConectBD.Conexion();
@@ -223,12 +227,17 @@ public class Cliente extends javax.swing.JFrame {
     private void AñadCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadCompActionPerformed
         PEmp.setVisible(true);
     }//GEN-LAST:event_AñadCompActionPerformed
-
+    public static boolean NIF(String a){
+        Pattern pat= Pattern.compile("[A-Z][0-9]{8}");
+        Matcher mat= pat.matcher(a);
+        return mat.find(); 
+    }
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
         try{
             Connection c= ConectBD.Conexion();
             Statement s= c.createStatement();
             int idU=UsuarioConectado.idU;
+            idU=11;
             String NIF = null,nom = null;
             NIF=NIFtxt.getText().trim();
             nom=nomtxt.getText().trim();
@@ -236,15 +245,20 @@ public class Cliente extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Porfavor completa los campos");
                 PEmp.setVisible(false);
             }
+            else 
+                if(NIF(NIF)==false){
+                    JOptionPane.showMessageDialog(null, "Formato de NIF no valido");
+                }
             else{
                 ResultSet r=s.executeQuery("Select id_cliente FROM empresas WHERE id_cliente="+idU);
                 if(r.next()){
-                    s.executeUpdate("UPDATE empresas SET NIF='"+NIF+"', nombre='"+nom+"';");
+                    s.executeUpdate("UPDATE empresas SET NIF='"+NIF+"', nombre='"+nom+"'\n"
+                            + "WHERE id_cliente="+idU+";");
                     PEmp.setVisible(false);
                 }
                 else{
-                    s.executeUpdate("INSERT INTO (NIF,nombre) empresas VALUES('"+NIF+"','"+nom+"');");
                     PEmp.setVisible(false);
+                    s.executeUpdate("INSERT INTO empresas VALUES('"+NIF+"',"+idU+",'"+nom+"');");
                 }
             }
         }
