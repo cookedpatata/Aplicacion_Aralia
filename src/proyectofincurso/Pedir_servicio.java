@@ -178,6 +178,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, -1, -1));
 
         Estab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Estab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EstabActionPerformed(evt);
+            }
+        });
         getContentPane().add(Estab, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 180, -1));
 
         AñadTrab1.setText("Añadir");
@@ -362,6 +367,10 @@ public class Pedir_servicio extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_EnvServicioActionPerformed
+
+    private void EstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EstabActionPerformed
 
     /**
      * @param args the command line arguments

@@ -186,7 +186,7 @@ public class Trab_Asignados extends javax.swing.JFrame {
             
             while(i<rc){
                 if(Tabla.isRowSelected(i)){
-                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguros?", "confirmación", 0);
+                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro?", "confirmación", 0);
                     if(op==0){
                         ids=(String) mod.getValueAt(i, 0);
                         Ter.setVisible(true); 
