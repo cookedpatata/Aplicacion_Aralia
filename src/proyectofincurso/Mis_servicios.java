@@ -24,6 +24,8 @@ public class Mis_servicios extends javax.swing.JFrame {
     DefaultListModel ListEstab=new DefaultListModel();
     DefaultListModel ListEstabSelec=new DefaultListModel();
     
+    private int idU=UsuarioConectado.idU;
+    
     public int BtnSelec(JToggleButton b1, JToggleButton b2, JToggleButton b3, JToggleButton b4){
         int c=0;
         if(b1.isSelected())
@@ -64,7 +66,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             Connection c = ConectBD.Conexion();
             
             int idU=UsuarioConectado.idU;
-            
+            //idU=11;
             //tabla
             String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio","Fecha de terminado","Hora de terminado","Trabajos","Terminado"};
             mod.setColumnIdentifiers(titulosC);
@@ -109,7 +111,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             s= c.createStatement();
             a= s.executeQuery(sql);
             
-            while(a.next()){
+            while(!a.next()){
                 Object Trab=a.getString(1);
                 ListEstab.addElement(Trab);
             }
@@ -430,7 +432,8 @@ public class Mis_servicios extends javax.swing.JFrame {
 
     private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
         //comprobamos que filtros que quieren aplicar
-        int idU=UsuarioConectado.idU;
+        
+        //idU=11;
         String sql="SELECT s.id_servicio,e.direccion,s.fecha_inicio,s.hora_inicio,s.fecha_fin,s.hora_fin,t.nombre,s.terminado FROM servicios s\n" +
                         "JOIN establecimientos e ON s.id_establecimiento = e.id_establecimiento\n" +
                         "JOIN labores l ON s.id_servicio = l.id_servicio\n" +
@@ -438,7 +441,7 @@ public class Mis_servicios extends javax.swing.JFrame {
                         "WHERE s.id_cliente ="+idU+"\n";
         //Horas
         if(RdHEsp.isSelected()){//cualquiera de los selcted para horas
-            if (CBH0.getSelectedIndex()!=1){
+            if (CBH0.getSelectedIndex()!=0){
                 int he=1;
                 String H0= (String) CBH0.getSelectedItem();
                 sql=sql+"AND s.hora_inicio ='"+H0.trim()+"'\n";
@@ -446,7 +449,7 @@ public class Mis_servicios extends javax.swing.JFrame {
         }
         else
         if (RdHVar.isSelected()){
-            if((CBH1.getSelectedIndex()!=1)&&(CBH2.getSelectedIndex()!=1)){
+            if((CBH1.getSelectedIndex()!=0)&&(CBH2.getSelectedIndex()!=0)){
                 int hv=1;
                 String H1= (String) CBH1.getSelectedItem();
                 String H2= (String) CBH2.getSelectedItem();
@@ -567,7 +570,6 @@ public class Mis_servicios extends javax.swing.JFrame {
             int idn;
             
             if((f>0)||(RdHEsp.isSelected())||(RdHVar.isSelected())||(numEstab>0)||(numTrab>0)||(chkF.isSelected())||(chkNF.isSelected())){ 
-                System.out.println(sql);
                 mod.setRowCount(0);
                 sql=sql+";";        
                 ResultSet a= s.executeQuery(sql);
@@ -636,8 +638,6 @@ public class Mis_servicios extends javax.swing.JFrame {
         catch(SQLException se){
                     JOptionPane.showMessageDialog(null, "Error en la BD");
                 }    
-        
-        System.out.println(sql);
     }//GEN-LAST:event_btnFiltrarActionPerformed
 
     private void CBDia1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBDia1ActionPerformed

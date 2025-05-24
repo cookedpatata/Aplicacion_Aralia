@@ -15,22 +15,24 @@ import proyectofincurso.clases.UsuarioConectado;
  * @author DAW
  */
 public class Cliente extends javax.swing.JFrame {
-    
+    private int idU=UsuarioConectado.idU;
     
     public Cliente() {
-        setLocation(800,400);
+        idU=11;
         initComponents();
+        setLocation(800,400);
         PEmp.setVisible(false);
         
         try{
             Connection c=ConectBD.Conexion();
             Statement s= c.createStatement();
-            int idU=UsuarioConectado.idU;
-            idU=11;
-            String Usuario;
+            System.out.println(idU);
+            //idU=11;
             ResultSet r= s.executeQuery("SELECT nombre FROM clientes WHERE id_cliente="+idU);
-            while(r.next()){
-                LUsuario.setText(r.getString(1));
+            String U = null;
+            while(!r.next()){
+                U=r.getString(1);
+                r= s.executeQuery("SELECT nombre FROM clientes WHERE id_cliente="+idU);
             }
             
             r=s.executeQuery("SELECT nombre FROM empresas WHERE id_cliente="+idU);
@@ -54,6 +56,7 @@ public class Cliente extends javax.swing.JFrame {
                 TitComp.setVisible(false);
                 modComp.setVisible(false);
             }
+            LUsuario.setText(U);
         }
         catch(SQLException ex){
             
@@ -76,13 +79,14 @@ public class Cliente extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         NIFtxt = new javax.swing.JTextField();
         btnAñadir = new javax.swing.JButton();
+        btnSalirAñadEmp = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         PedServ = new javax.swing.JButton();
         MisServ = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         LUsuario = new javax.swing.JLabel();
         CSesion = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        SobreNosotros = new javax.swing.JButton();
         TitComp = new javax.swing.JLabel();
         TComp = new javax.swing.JLabel();
         AñadComp = new javax.swing.JButton();
@@ -114,7 +118,15 @@ public class Cliente extends javax.swing.JFrame {
                 btnAñadirActionPerformed(evt);
             }
         });
-        PEmp.add(btnAñadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, -1));
+        PEmp.add(btnAñadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
+
+        btnSalirAñadEmp.setText("Salir");
+        btnSalirAñadEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirAñadEmpActionPerformed(evt);
+            }
+        });
+        PEmp.add(btnSalirAñadEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
 
         getContentPane().add(PEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 230, 140));
 
@@ -149,8 +161,8 @@ public class Cliente extends javax.swing.JFrame {
         });
         getContentPane().add(CSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, 30));
 
-        jButton1.setText("Sobre nosotros");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, 30));
+        SobreNosotros.setText("Sobre nosotros");
+        getContentPane().add(SobreNosotros, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, 30));
 
         TitComp.setText("De la empresa");
         getContentPane().add(TitComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
@@ -187,7 +199,7 @@ public class Cliente extends javax.swing.JFrame {
 
     private void PedServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PedServActionPerformed
         dispose();
-        Pedir_servicio PS=new Pedir_servicio();
+        Pedir_servicio PS= new Pedir_servicio();
         PS.setVisible(true);
     }//GEN-LAST:event_PedServActionPerformed
 
@@ -206,7 +218,7 @@ public class Cliente extends javax.swing.JFrame {
     private void modCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCompActionPerformed
         PEmp.setVisible(true);
         int idU=UsuarioConectado.idU;
-        idU=11;
+        //idU=11;
         String NIF,nom,sql="SELECT NIF, nombre FROM empresas WHERE id_cliente="+idU+";";
         try{
             Connection c= ConectBD.Conexion();
@@ -226,9 +238,10 @@ public class Cliente extends javax.swing.JFrame {
 
     private void AñadCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadCompActionPerformed
         PEmp.setVisible(true);
+        CSesion.setEnabled(false);
     }//GEN-LAST:event_AñadCompActionPerformed
     public static boolean NIF(String a){
-        Pattern pat= Pattern.compile("[A-Z][0-9]{8}");
+        Pattern pat= Pattern.compile("^[A-Z][0-9]{8}$");
         Matcher mat= pat.matcher(a);
         return mat.find(); 
     }
@@ -237,12 +250,13 @@ public class Cliente extends javax.swing.JFrame {
             Connection c= ConectBD.Conexion();
             Statement s= c.createStatement();
             int idU=UsuarioConectado.idU;
-            idU=11;
+            //idU=11;
             String NIF = null,nom = null;
             NIF=NIFtxt.getText().trim();
             nom=nomtxt.getText().trim();
             if(NIF.length()==0||nom.length()==0){
                 JOptionPane.showMessageDialog(null, "Porfavor completa los campos");
+                CSesion.setEnabled(true);
                 PEmp.setVisible(false);
             }
             else 
@@ -254,9 +268,11 @@ public class Cliente extends javax.swing.JFrame {
                 if(r.next()){
                     s.executeUpdate("UPDATE empresas SET NIF='"+NIF+"', nombre='"+nom+"'\n"
                             + "WHERE id_cliente="+idU+";");
+                    CSesion.setEnabled(true);
                     PEmp.setVisible(false);
                 }
                 else{
+                    CSesion.setEnabled(true);
                     PEmp.setVisible(false);
                     s.executeUpdate("INSERT INTO empresas VALUES('"+NIF+"',"+idU+",'"+nom+"');");
                 }
@@ -266,6 +282,11 @@ public class Cliente extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnAñadirActionPerformed
+
+    private void btnSalirAñadEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirAñadEmpActionPerformed
+       PEmp.setVisible(false);
+       CSesion.setEnabled(true);
+    }//GEN-LAST:event_btnSalirAñadEmpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,12 +331,13 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JTextField NIFtxt;
     private javax.swing.JPanel PEmp;
     private javax.swing.JButton PedServ;
+    private javax.swing.JButton SobreNosotros;
     private javax.swing.JLabel TComp;
     private javax.swing.JLabel Tit1AñadComp;
     private javax.swing.JLabel Tit2AñadComp;
     private javax.swing.JLabel TitComp;
     private javax.swing.JButton btnAñadir;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSalirAñadEmp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
