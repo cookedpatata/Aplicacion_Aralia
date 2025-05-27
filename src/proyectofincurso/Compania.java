@@ -20,6 +20,7 @@ public class Compania extends javax.swing.JFrame {
     DefaultTableModel modS=new DefaultTableModel();
     DefaultTableModel modC=new DefaultTableModel();
     DefaultTableModel modT=new DefaultTableModel();
+    DefaultTableModel modTR=new DefaultTableModel();
     private static String ids;
     /**
      * Creates new form Compania
@@ -29,28 +30,28 @@ public class Compania extends javax.swing.JFrame {
         PS.setVisible(false);
         PCT.setVisible(false);
         try{
-            String id,E,C,Cli,FI,HI,FF,HF,TR,TE;
+            String id,E,C,Cli,FI,HI,FF,HF,TE;
             int idn;
-            
-            Connection c = ConectBD.Conexion();
-            
+            Connection c = ConectBD.Conexion();        
             int idU=UsuarioConectado.idU;
             
             //tabla
             String titulosS[]={"Servicio","Compañia","Cliente","Establecimiento","Fecha de inicio","Hora de inicio","Fecha de terminado","Hora de terminado","Terminado"};
             String titulosC[]={"id","DNI","nombre","1º apellido","2º apellido","correo","contraseña","telefono"};
             String titulosT[]={"id","DNI","nombre","1º apellido","2º apellido","correo","contraseña","telefono"};
+            String titulosTR[]={"id","nombre"};
             modS.setColumnIdentifiers(titulosS);
             modC.setColumnIdentifiers(titulosC);
             modT.setColumnIdentifiers(titulosT);
+            modTR.setColumnIdentifiers(titulosTR);
             TServ.setModel(modS);
             TTrab.setModel(modT);
             TCli.setModel(modC);
+            TRTR.setModel(modTR);
             
             String sql="SELECT * FROM Servicios;";                
             Statement s= c.createStatement();
-            ResultSet a= s.executeQuery(sql);
-            
+            ResultSet a= s.executeQuery(sql);          
             while (a.next()){
                 idn=a.getInt(1);
                 id=Integer.toString(idn);
@@ -76,10 +77,10 @@ public class Compania extends javax.swing.JFrame {
                 String row[]={id,C,Cli,E,FI,HI,FF,HF,TE};
                 modS.addRow(row);
             }
+            
             String DNI,nom,A1,A2,CE,Con,Tel;
             sql="SELECT * FROM clientes;";                
             a= s.executeQuery(sql);
-            
             while (a.next()){
                 idn=a.getInt(1);
                 id=Integer.toString(idn);
@@ -94,9 +95,9 @@ public class Compania extends javax.swing.JFrame {
                 String row[]={id,DNI,nom,A1,A2,CE,Con,Tel};
                 modC.addRow(row);
             }
-            sql="SELECT * FROM trabajadores;";                
-            a= s.executeQuery(sql);
             
+            sql="SELECT * FROM trabajadores;";                
+            a= s.executeQuery(sql); 
             while (a.next()){
                 idn=a.getInt(1);
                 id=Integer.toString(idn);
@@ -111,6 +112,18 @@ public class Compania extends javax.swing.JFrame {
                 String row[]={id,DNI,nom,A1,A2,CE,Con,Tel};
                 modT.addRow(row);
             }
+            
+            sql="SELECT * FROM trabajos;";                
+            a= s.executeQuery(sql);
+            while (a.next()){
+                idn=a.getInt(1);
+                id=Integer.toString(idn);
+                nom=a.getString(2);
+                
+                String row[]={id,nom};
+                modTR.addRow(row);
+            }
+            
             Estab.addItem("<Seleccionar>");
             sql="SELECT id_establecimiento from establecimientos";
             s= c.createStatement();
@@ -175,8 +188,12 @@ public class Compania extends javax.swing.JFrame {
         TCli = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         TTrab = new javax.swing.JTable();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TRTR = new javax.swing.JTable();
+        btnEditar = new javax.swing.JToggleButton();
         jButton2 = new javax.swing.JButton();
+        btnAsigServ = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -267,7 +284,7 @@ public class Compania extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 60, 90, 30));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 100, 30));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -322,21 +339,48 @@ public class Compania extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Trabajadores", jScrollPane1);
 
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TRTR.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(TRTR);
+
+        jPanel3.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 270, 210));
+
+        jTabbedPane1.addTab("tab4", jPanel3);
+
         jLayeredPane1.add(jTabbedPane1);
         jTabbedPane1.setBounds(0, 0, 660, 300);
 
         getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 670, 300));
 
-        jToggleButton1.setText("Editar");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
-        getContentPane().add(jToggleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, 90, 30));
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 100, 30));
 
         jButton2.setText("Cerrar sesion");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 110, 30));
+
+        btnAsigServ.setText("Asignar Servicio");
+        btnAsigServ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsigServActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAsigServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 120, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -344,7 +388,7 @@ public class Compania extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
     int selec=jTabbedPane1.getSelectedIndex();
     String DNI,nom,A1,A2,CE,Con,Tel;
-    String id,E,C,Cli,FI,HI,FF,HF,TR,TE;
+    String id,E,C,Cli,FI,HI,FF,HF,TE;
     int idn;
     if(selec==0){
         int rc=TServ.getRowCount(),i=0;
@@ -394,6 +438,7 @@ public class Compania extends javax.swing.JFrame {
                 i++;
             }
     }
+    else
     if(selec==1){
         int rc=TServ.getRowCount(),i=0;
             while(i<rc){
@@ -430,6 +475,7 @@ public class Compania extends javax.swing.JFrame {
                 i++;
             }
     }
+    else
     if(selec==2){
         int rc=TServ.getRowCount(),i=0;
             while(i<rc){
@@ -466,6 +512,37 @@ public class Compania extends javax.swing.JFrame {
                 i++;
             }
     }
+    else
+        if(selec==3){
+            int rc=TServ.getRowCount(),i=0;
+            while(i<rc){
+                if(TTrab.isRowSelected(i)){
+                    ids=(String) modS.getValueAt(i, 0);
+                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de eliminar este trabajo?", "confirmación", 0);
+                    if(op==0){
+                        try{
+                            Connection c=ConectBD.Conexion();
+                            Statement s= c.createStatement();
+                            s.executeUpdate("DELETE FROM trabajadores WHERE id_trabajo="+ids);
+                            
+                            ResultSet a= s.executeQuery("SELECT * FROM trabajos;");
+                            while (a.next()){
+                                idn=a.getInt(1);
+                                id=Integer.toString(idn);
+                                nom=a.getString(2);
+
+                                String row[]={id,nom};
+                                modTR.addRow(row);
+                            }
+                        }
+                        catch(SQLException ex){
+                            JOptionPane.showMessageDialog(null, "error en la BD");
+                        }
+                    }
+                }
+                i++;
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void DNItxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DNItxtActionPerformed
@@ -476,105 +553,33 @@ public class Compania extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_HItxtActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int selec=jTabbedPane1.getSelectedIndex();
+        System.out.println(selec);
         PS.setVisible(false);
         PCT.setVisible(false);
-        if(selec==0){
+        if(selec==0&&btnEditar.isSelected()){//servicio
             int i=0;
             PS.setVisible(true);
             int rc=TServ.getRowCount();
-            
             while(i<rc){
-                if(TServ.isRowSelected(i)){
-                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro?", "confirmación", 0);
-                    if(op==0){
-                        String FI,FF,HI,HF;
-                        Estab.removeAllItems();
-                        Estab.addItem("<Seleccionar>");
-                        FI=FItxt.getText().trim();
-                        HI=FItxt.getText().trim();
-                        FF=FItxt.getText().trim();
-                        HF=FItxt.getText().trim();
-                        
-                        ids=(String) modS.getValueAt(i, 0);
-                        int c=0,Est=Estab.getSelectedIndex();
-                        String sql1,sql2,sql3,sql4,sql5,sql6,EstSel;
-                        if(Est!=0){
-                            EstSel=Estab.getItemAt(Est);
-                            sql5="UPDATE servicios set id_establecimiento="+EstSel;
-                        }
-                        if(FI.length()!=0){
-                            sql1="UPDATE servicios set Fecha_inicio="+FI+" WHERE id_Servicio="+ids+";";
-                        }
-                        if(HI.length()!=0){
-                            sql2="UPDATE servicios set Hora_inicio="+HI+" WHERE id_Servicio="+ids+";";
-                        }
-                        if(FF.length()!=0){
-                            sql3="UPDATE servicios set Fecha_fin="+FF+" WHERE id_Servicio="+ids+";";
-                        }
-                        if(HF.length()!=0){
-                            sql4="UPDATE servicios set Hora_fin="+HF+" WHERE id_Servicio="+ids+";";
-                        }
-                        if(chTerminado.isSelected()){
-                            sql6="UPdate servicios set Terminado=TRUE WHERE id_Servicio="+ids+";";
-                        }
-                    }
-                    else{
-                        break;
-                    }
-                }
+                
                 i++;
             } 
         }
-        if(selec==1){
+        else
+        if(selec==1&&btnEditar.isSelected()){//cliente 
             PCT.setVisible(true);
             int i=0;
             int rc=TServ.getRowCount();
             
             while(i<rc){
-                if(TCli.isRowSelected(i)){
-                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro?", "confirmación", 0);
-                    if(op==0){
-                        ids=(String) modS.getValueAt(i, 0);
-                        String DNI,nom,ap1,ap2,ce,con,tel;
-                        DNI=DNItxt.getText();
-                        nom=Nomtxt.getText();
-                        ap1=Ap1txt.getText();
-                        ap2=Ap2txt.getText();
-                        ce=CEtxt.getText();
-                        con=Contxt.getText();
-                        tel=Teltxt.getText();
-                        int c=0,Est=Estab.getSelectedIndex();
-                        String sql1,sql2,sql3,sql4,sql5,sql6,EstSel;
-                        if(Est!=0){
-                            EstSel=Estab.getItemAt(Est);
-                            sql5="UPDATE servicios set id_establecimiento="+EstSel;
-                        }
-                        if(DNI.length()!=0){
-                            sql1="UPDATE servicios set Fecha_inicio="+DNI+" WHERE id_Servicio="+ids+";";
-                        }
-                        if(nom.length()!=0){
-                            sql2="UPDATE servicios set Hora_inicio="+nom+" WHERE id_Servicio="+ids+";";
-                        }
-                        if(ap1.length()!=0){
-                            sql3="UPDATE servicios set Fecha_fin="+ap1+" WHERE id_Servicio="+ids+";";
-                        }
-                        if(ap2.length()!=0){
-                            sql4="UPDATE servicios set Hora_fin="+ap2+" WHERE id_Servicio="+ids+";";
-                        }
-                        if(ce.length()!=0){
-                            sql6="UPdate servicios set Terminado=TRUE WHERE id_Servicio="+ids+";";
-                        }
-                    }
-                    else{
-                        break;
-                    }
-                }
+                
                 i++;
             } 
         }
-        if(selec==2){
+        else
+        if(selec==2&&btnEditar.isSelected()){//trabajador
             PCT.setVisible(true);
             int i=0;
             int rc=TTrab.getRowCount();
@@ -592,7 +597,30 @@ public class Compania extends javax.swing.JFrame {
                 i++;
             } 
         }
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+        else
+        if(selec==3&&btnEditar.isSelected()){//trabajos
+            PCT.setVisible(true);
+            int i=0;
+            int rc=TTrab.getRowCount();
+            
+            while(i<rc){
+                if(TServ.isRowSelected(i)){
+                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro?", "confirmación", 0);
+                    if(op==0){
+                        ids=(String) modS.getValueAt(i, 0);
+                    }
+                    else{
+                        break;
+                    }
+                }
+                i++;
+            } 
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnAsigServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsigServActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAsigServActionPerformed
 
     /**
      * @param args the command line arguments
@@ -644,9 +672,12 @@ public class Compania extends javax.swing.JFrame {
     private javax.swing.JPanel PCT;
     private javax.swing.JPanel PS;
     private javax.swing.JTable TCli;
+    private javax.swing.JTable TRTR;
     private javax.swing.JTable TServ;
     private javax.swing.JTable TTrab;
     private javax.swing.JTextField Teltxt;
+    private javax.swing.JButton btnAsigServ;
+    private javax.swing.JToggleButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JCheckBox chTerminado;
     private javax.swing.JButton jButton1;
@@ -667,10 +698,11 @@ public class Compania extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
 }
