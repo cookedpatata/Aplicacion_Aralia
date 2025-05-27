@@ -21,7 +21,11 @@ public class Compania extends javax.swing.JFrame {
     DefaultTableModel modC=new DefaultTableModel();
     DefaultTableModel modT=new DefaultTableModel();
     DefaultTableModel modTR=new DefaultTableModel();
-    private static String ids;
+    
+    private Connection c = ConectBD.Conexion(); 
+    
+    private String ids,id,E,C,Cli,FI,HI,FF,HF,TE,DNI,nom,A1,A2,CE,Con,Tel;
+    private int idn,idU=UsuarioConectado.idU;
     /**
      * Creates new form Compania
      */
@@ -29,12 +33,8 @@ public class Compania extends javax.swing.JFrame {
         initComponents();
         PS.setVisible(false);
         PCT.setVisible(false);
+        btnAsigServ.setVisible(false);
         try{
-            String id,E,C,Cli,FI,HI,FF,HF,TE;
-            int idn;
-            Connection c = ConectBD.Conexion();        
-            int idU=UsuarioConectado.idU;
-            
             //tabla
             String titulosS[]={"Servicio","Compañia","Cliente","Establecimiento","Fecha de inicio","Hora de inicio","Fecha de terminado","Hora de terminado","Terminado"};
             String titulosC[]={"id","DNI","nombre","1º apellido","2º apellido","correo","contraseña","telefono"};
@@ -78,7 +78,6 @@ public class Compania extends javax.swing.JFrame {
                 modS.addRow(row);
             }
             
-            String DNI,nom,A1,A2,CE,Con,Tel;
             sql="SELECT * FROM clientes;";                
             a= s.executeQuery(sql);
             while (a.next()){
@@ -148,6 +147,7 @@ public class Compania extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         PS = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
@@ -161,6 +161,7 @@ public class Compania extends javax.swing.JFrame {
         chTerminado = new javax.swing.JCheckBox();
         Estab = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        btnAplicServ = new javax.swing.JButton();
         PCT = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -175,7 +176,7 @@ public class Compania extends javax.swing.JFrame {
         Teltxt = new javax.swing.JTextField();
         CEtxt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAplicUsuario = new javax.swing.JButton();
         Contxt = new javax.swing.JTextField();
         btnEliminar = new javax.swing.JButton();
         jLayeredPane1 = new javax.swing.JLayeredPane();
@@ -194,6 +195,8 @@ public class Compania extends javax.swing.JFrame {
         btnEditar = new javax.swing.JToggleButton();
         jButton2 = new javax.swing.JButton();
         btnAsigServ = new javax.swing.JButton();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -234,6 +237,9 @@ public class Compania extends javax.swing.JFrame {
         jLabel7.setText("Establecimiento");
         PS.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
 
+        btnAplicServ.setText("Aplicar");
+        PS.add(btnAplicServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+
         getContentPane().add(PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 410, 170));
 
         PCT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -272,8 +278,8 @@ public class Compania extends javax.swing.JFrame {
         jLabel8.setText("2º Apellido ");
         PCT.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
 
-        jButton1.setText("Aplicar");
-        PCT.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
+        btnAplicUsuario.setText("Aplicar");
+        PCT.add(btnAplicUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
         PCT.add(Contxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 120, -1));
 
         getContentPane().add(PCT, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 490, 170));
@@ -387,9 +393,6 @@ public class Compania extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
     int selec=jTabbedPane1.getSelectedIndex();
-    String DNI,nom,A1,A2,CE,Con,Tel;
-    String id,E,C,Cli,FI,HI,FF,HF,TE;
-    int idn;
     if(selec==0){
         int rc=TServ.getRowCount(),i=0;
             while(i<rc){
@@ -398,7 +401,6 @@ public class Compania extends javax.swing.JFrame {
                     int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de eliminar este servicio?", "confirmación", 0);
                     if(op==0){
                         try{
-                            Connection c=ConectBD.Conexion();
                             Statement s= c.createStatement();
                             s.executeUpdate("DELETE FROM servicios WHERE id_servicio="+ids);
                             
@@ -447,7 +449,6 @@ public class Compania extends javax.swing.JFrame {
                     int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de eliminar este cliente?", "confirmación", 0);
                     if(op==0){
                         try{
-                            Connection c=ConectBD.Conexion();
                             Statement s= c.createStatement();
                             s.executeUpdate("DELETE FROM clientes WHERE id_cliente="+ids);
                             
@@ -484,7 +485,6 @@ public class Compania extends javax.swing.JFrame {
                     int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de eliminar este trabajador?", "confirmación", 0);
                     if(op==0){
                         try{
-                            Connection c=ConectBD.Conexion();
                             Statement s= c.createStatement();
                             s.executeUpdate("DELETE FROM trabajadores WHERE id_trabajador="+ids);
                             
@@ -521,7 +521,6 @@ public class Compania extends javax.swing.JFrame {
                     int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de eliminar este trabajo?", "confirmación", 0);
                     if(op==0){
                         try{
-                            Connection c=ConectBD.Conexion();
                             Statement s= c.createStatement();
                             s.executeUpdate("DELETE FROM trabajadores WHERE id_trabajo="+ids);
                             
@@ -563,7 +562,15 @@ public class Compania extends javax.swing.JFrame {
             PS.setVisible(true);
             int rc=TServ.getRowCount();
             while(i<rc){
-                
+                if(TServ.isRowSelected(i)){
+                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro?", "confirmación", 0);
+                    if(op==0){
+                        ids=(String) modS.getValueAt(i, 0);
+                    }
+                    else{
+                        break;
+                    }
+                }
                 i++;
             } 
         }
@@ -574,7 +581,15 @@ public class Compania extends javax.swing.JFrame {
             int rc=TServ.getRowCount();
             
             while(i<rc){
-                
+                if(TServ.isRowSelected(i)){
+                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro?", "confirmación", 0);
+                    if(op==0){
+                        ids=(String) modS.getValueAt(i, 0);
+                    }
+                    else{
+                        break;
+                    }
+                }
                 i++;
             } 
         }
@@ -599,19 +614,28 @@ public class Compania extends javax.swing.JFrame {
         }
         else
         if(selec==3&&btnEditar.isSelected()){//trabajos
-            PCT.setVisible(true);
             int i=0;
             int rc=TTrab.getRowCount();
             
             while(i<rc){
                 if(TServ.isRowSelected(i)){
-                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro?", "confirmación", 0);
-                    if(op==0){
-                        ids=(String) modS.getValueAt(i, 0);
-                    }
-                    else{
-                        break;
-                    }
+                    ids=(String) modS.getValueAt(i, 0);
+                    String nom=JOptionPane.showInputDialog(null, "nombre").trim();
+                        if(nom.length()==0){
+                            JOptionPane.showMessageDialog(null, "porfavor introduzca el campo");
+                        }
+                        else{
+                            int op=JOptionPane.showConfirmDialog(null,"¿Está seguro?", "confirmación", 0);
+                            if(op==0){
+                                try{
+                                    Statement s= c.createStatement();
+                                    s.executeUpdate("UPDATE trabajos SET nombre="+nom+" WHERE id_trabajo="+ids);        
+                                }
+                                catch(SQLException ex){
+                                    JOptionPane.showMessageDialog(null, "Error en la BD");
+                                }
+                            }
+                        }
                 }
                 i++;
             } 
@@ -619,7 +643,7 @@ public class Compania extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnAsigServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsigServActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnAsigServActionPerformed
 
     /**
@@ -676,11 +700,12 @@ public class Compania extends javax.swing.JFrame {
     private javax.swing.JTable TServ;
     private javax.swing.JTable TTrab;
     private javax.swing.JTextField Teltxt;
+    private javax.swing.JButton btnAplicServ;
+    private javax.swing.JButton btnAplicUsuario;
     private javax.swing.JButton btnAsigServ;
     private javax.swing.JToggleButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JCheckBox chTerminado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
@@ -704,5 +729,6 @@ public class Compania extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
