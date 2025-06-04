@@ -66,6 +66,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             Connection c = ConectBD.Conexion();
             
             int idU=UsuarioConectado.idU;
+            System.out.println(idU);
             //idU=11;
             //tabla
             String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio","Fecha de terminado","Hora de terminado","Trabajos","Terminado"};
@@ -81,7 +82,8 @@ public class Mis_servicios extends javax.swing.JFrame {
             Statement s= c.createStatement();
             ResultSet a= s.executeQuery(sql);
             
-            while (a.next()){
+            if(a.next()){
+                while (a.next()){
                 idn=a.getInt(1);
                 id=Integer.toString(idn);
                 E=a.getString(2);
@@ -104,8 +106,8 @@ public class Mis_servicios extends javax.swing.JFrame {
                 
                 String row[]={id,E,FI,HI,FF,HF,TR,TE};
                 mod.addRow(row);
-            }
-            
+                }
+            } 
             //lista establecimientos
             sql="SELECT direccion FROM establecimientos WHERE id_cliente="+idU+";";
             s= c.createStatement();

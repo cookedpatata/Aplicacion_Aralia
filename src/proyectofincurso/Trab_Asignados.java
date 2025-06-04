@@ -312,7 +312,7 @@ public class Trab_Asignados extends javax.swing.JFrame {
                     }
                 }
                 catch(SQLException ex){
-                    JOptionPane.showMessageDialog(null, "Erroe en la BD");
+                    JOptionPane.showMessageDialog(null, "Error en la BD");
                 }
             }
         }
