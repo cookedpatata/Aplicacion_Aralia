@@ -20,11 +20,11 @@ public class Trabajador extends javax.swing.JFrame {
         initComponents();
         setLocation(800,400);
         setSize(200, 200);
-        int idU=UsuarioConectado.idU;
+        int id=UsuarioConectado.idU;
         try{
             Connection c=ConectBD.Conexion();
             Statement s= c.createStatement();
-            ResultSet a= s.executeQuery("SELECT nombre FROM trabajadores WHERE id_trabajador="+idU);
+            ResultSet a= s.executeQuery("SELECT nombre FROM trabajadores WHERE id_trabajador="+id);
             while (a.next()){
                 Usuario.setText(a.getString(1));
             }

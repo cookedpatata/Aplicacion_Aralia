@@ -15,19 +15,17 @@ import proyectofincurso.clases.UsuarioConectado;
  * @author DAW
  */
 public class Cliente extends javax.swing.JFrame {
-    private int idU=UsuarioConectado.idU;
+    
     
     public Cliente() {
-        idU=11;
         initComponents();
         setLocation(800,400);
         PEmp.setVisible(false);
-        
+        int idU=UsuarioConectado.idU;
         try{
             Connection c=ConectBD.Conexion();
             Statement s= c.createStatement();
-            System.out.println(idU);
-            //idU=11;
+            
             ResultSet r= s.executeQuery("SELECT nombre FROM clientes WHERE id_cliente="+idU);
             String U = null;
             while(!r.next()){
@@ -218,7 +216,6 @@ public class Cliente extends javax.swing.JFrame {
     private void modCompActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modCompActionPerformed
         PEmp.setVisible(true);
         int idU=UsuarioConectado.idU;
-        //idU=11;
         String NIF,nom,sql="SELECT NIF, nombre FROM empresas WHERE id_cliente="+idU+";";
         try{
             Connection c= ConectBD.Conexion();
@@ -247,10 +244,9 @@ public class Cliente extends javax.swing.JFrame {
     }
     private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
         try{
+            int idU=UsuarioConectado.idU;
             Connection c= ConectBD.Conexion();
             Statement s= c.createStatement();
-            int idU=UsuarioConectado.idU;
-            //idU=11;
             String NIF = null,nom = null;
             NIF=NIFtxt.getText().trim();
             nom=nomtxt.getText().trim();

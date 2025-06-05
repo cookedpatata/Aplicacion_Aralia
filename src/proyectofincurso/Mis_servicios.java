@@ -128,7 +128,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             }
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "error en la BD");
+            JOptionPane.showMessageDialog(null, "Aun no ha pedido ningun servicio!");
         }
     }
 

@@ -73,8 +73,8 @@ public class Asignar_Servicio extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
         lab = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAsig = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         btnFiltro = new javax.swing.JButton();
         ChYAsig = new javax.swing.JCheckBox();
         ChTodos = new javax.swing.JCheckBox();
@@ -100,16 +100,21 @@ public class Asignar_Servicio extends javax.swing.JFrame {
         lab.setText("Asignar servicio para NOMBRE APELLIDOS ");
         getContentPane().add(lab, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, -1, -1));
 
-        jButton1.setText("Asignar");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, 80, 30));
-
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnAsig.setText("Asignar");
+        btnAsig.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnAsigActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 80, 30));
+        getContentPane().add(btnAsig, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 310, 80, 30));
+
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 80, 30));
 
         btnFiltro.setText("Filtrar");
         btnFiltro.addActionListener(new java.awt.event.ActionListener() {
@@ -128,11 +133,11 @@ public class Asignar_Servicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         dispose();
         Compania i=new Compania();
         i.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltroActionPerformed
         if(ChTodos.isSelected()==true||(ChTodos.isSelected()==true&&ChYAsig.isSelected()==true)){
@@ -199,7 +204,8 @@ public class Asignar_Servicio extends javax.swing.JFrame {
             }
             }
             else{
-                try{   
+                try{
+                    modS.setRowCount(0);
                     Statement s= c.createStatement();
                     ResultSet r= s.executeQuery("SELECT nombre, apellido1 FROM trabajadores WHERE id_trabajador="+idT);
                     while(r.next()){
@@ -229,6 +235,46 @@ public class Asignar_Servicio extends javax.swing.JFrame {
                 }
             }
     }//GEN-LAST:event_btnFiltroActionPerformed
+
+    private void btnAsigActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsigActionPerformed
+        int rc=Tabla.getRowCount();
+        for(int i=0;i<rc;i++){
+            if(Tabla.isRowSelected(i)==true){
+                String ids=(String) modS.getValueAt(i, 0);
+                int op=JOptionPane.showConfirmDialog(null, "¿Esta seguro que quiere asignar le este servicio?","confirmacion",0);
+                if(op==0){
+                    try{
+                        Statement s= c.createStatement();
+                        s.executeUpdate("INSERT INTO jornadas VALUES ("+ids+","+idT+");");
+                        JOptionPane.showMessageDialog(null, "Asignacion completada con exito");
+                        
+                        modS.setRowCount(0);
+                        ResultSet a= s.executeQuery("SELECT s.*\n" +
+                            "FROM servicios s\n" +
+                            "WHERE s.id_servicio NOT IN (\n" +
+                            "    SELECT j.id_servicio\n" +
+                            "    FROM jornadas j\n" +
+                            ");");                  
+                        while (a.next()){
+                            idn=a.getInt(1);
+                            id=Integer.toString(idn);
+                            C=a.getString(2);
+                            Cli=a.getString(3);
+                            E=a.getString(4);
+                            FI=a.getString(5);
+                            HI=a.getString(6);
+
+                            String row[]={id,C,Cli,E,FI,HI};
+                            modS.addRow(row);
+                            }
+                    }
+                    catch(SQLException e){
+                        JOptionPane.showMessageDialog(null, "Error en la BD");
+                    }
+                }
+            }
+        } 
+    }//GEN-LAST:event_btnAsigActionPerformed
 
     /**
      * @param args the command line arguments
@@ -269,10 +315,10 @@ public class Asignar_Servicio extends javax.swing.JFrame {
     private javax.swing.JCheckBox ChTodos;
     private javax.swing.JCheckBox ChYAsig;
     private javax.swing.JTable Tabla;
+    private javax.swing.JButton btnAsig;
     private javax.swing.JButton btnFiltro;
+    private javax.swing.JButton btnVolver;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lab;
     // End of variables declaration//GEN-END:variables
