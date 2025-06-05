@@ -1,14 +1,14 @@
 INSERT INTO clientes (DNI, nombre, apellido1, apellido2, correo, contraseña, telefono) VALUES
-('12345678A', 'Carlos', 'Gómez', 'Fernández', 'carlos.gomez@mail.com', 'Pass1234', 611223344),
-('23456789B', 'Laura', 'Martínez', NULL, 'laura.martinez@mail.com', 'SecurePass1', 622334455),
-('34567890C', 'Miguel', 'López', 'Sánchez', 'miguel.lopez@mail.com', 'ClaveSegura', 633445566),
-('45678901D', 'Ana', 'Hernández', 'Ruiz', 'ana.hernandez@mail.com', 'Pass5678', 644556677),
-('56789012E', 'Javier', 'Díaz', NULL, 'javier.diaz@mail.com', 'JaviClave99', 655667788),
-('67890123F', 'Sofía', 'Pérez', 'Torres', 'sofia.perez@mail.com', 'SofiPass22', 666778899),
-('78901234G', 'Pablo', 'Santos', NULL, 'pablo.santos@mail.com', 'PabloClave77', 677889900),
-('89012345H', 'Elena', 'Ortega', 'Morales', 'elena.ortega@mail.com', 'ElenaPass45', 688990011),
-('90123456I', 'David', 'Ramírez', NULL, 'david.ramirez@mail.com', 'David123!', 699001122),
-('01234567J', 'María', 'Fernández', 'García', 'maria.fernandez@mail.com', 'MariaSecure', 600112233);
+('12345678A', 'Carlos', 'Gómez', 'Fernández', 'carlosgomez@gmail.com', 'Pass1234', 611223344),
+('23456789B', 'Laura', 'Martínez', NULL, 'lauramartinez@gmail.com', 'SecurePass1', 622334455),
+('34567890C', 'Miguel', 'López', 'Sánchez', 'miguellopez@gmail.com', 'ClaveSegura', 633445566),
+('45678901D', 'Ana', 'Hernández', 'Ruiz', 'anahernandez@gmail.com', 'Pass5678', 644556677),
+('56789012E', 'Javier', 'Díaz', NULL, 'javierdiaz@gmail.com', 'JaviClave99', 655667788),
+('67890123F', 'Sofía', 'Pérez', 'Torres', 'sofiaperez@gmail.com', 'SofiPass22', 666778899),
+('78901234G', 'Pablo', 'Santos', NULL, 'pablosantos@gmail.com', 'PabloClave77', 677889900),
+('89012345H', 'Elena', 'Ortega', 'Morales', 'elenaortega@gmail.com', 'ElenaPass45', 688990011),
+('90123456I', 'David', 'Ramírez', NULL, 'davidramirez@gmail.com', 'David123!', 699001122),
+('01234567J', 'María', 'Fernández', 'García', 'mariafernandez@gmail.com', 'MariaSecure', 600112233);
 
 
 INSERT INTO compañias VALUES
@@ -22,16 +22,16 @@ INSERT INTO trabajos VALUES
 (5,'Desinfeccion');
 
 INSERT INTO trabajadores (DNI, id_compañia, nombre, apellido1, apellido2, correo, contraseña, telefono) VALUES
-('11111111A', 1, 'Juan', 'Pérez', 'Gómez', 'juan.perez@mail.com', 'PassJuan01', 611112233),
-('22222222B', 1, 'Lucía', 'García', NULL, 'lucia.garcia@mail.com', 'LuciaPass02', 622223344),
-('33333333C', 1, 'Carlos', 'López', 'Martínez', 'carlos.lopez@mail.com', 'CarlosClave03', 633334455),
-('44444444D', 1, 'Ana', 'Sánchez', 'Ruiz', 'ana.sanchez@mail.com', 'AnaPass04', 644445566),
-('55555555E', 1, 'Diego', 'Hernández', NULL, 'diego.hernandez@mail.com', 'DiegoClave05', 655556677),
-('66666666F', 1, 'Marta', 'Díaz', 'Ortega', 'marta.diaz@mail.com', 'MartaPass06', 666667788),
-('77777777G', 1, 'Raúl', 'Ortega', NULL, 'raul.ortega@mail.com', 'RaulClave07', 677778899),
-('88888888H', 1, 'Elena', 'Morales', 'Torres', 'elena.morales@mail.com', 'ElenaPass08', 688889900),
-('99999999I', 1, 'David', 'Fernández', NULL, 'david.fernandez@mail.com', 'DavidClave09', 699990011),
-('10101010J', 1, 'Sara', 'Ramírez', 'Núñez', 'sara.ramirez@mail.com', 'SaraPass10', 600001122);
+('11111111A', 1, 'Juan', 'Pérez', 'Gómez', 'juanperez@gmail.com', 'PassJuan01', 611112233),
+('22222222B', 1, 'Lucía', 'García', NULL, 'luciagarcia@gmail.com', 'LuciaPass02', 622223344),
+('33333333C', 1, 'Carlos', 'López', 'Martínez', 'carloslopez@gmail.com', 'CarlosClave03', 633334455),
+('44444444D', 1, 'Ana', 'Sánchez', 'Ruiz', 'anasanchez@gmail.com', 'AnaPass04', 644445566),
+('55555555E', 1, 'Diego', 'Hernández', NULL, 'diegohernandez@gmail.com', 'DiegoClave05', 655556677),
+('66666666F', 1, 'Marta', 'Díaz', 'Ortega', 'martadiaz@gmail.com', 'MartaPass06', 666667788),
+('77777777G', 1, 'Raúl', 'Ortega', NULL, 'raulortega@gmail.com', 'RaulClave07', 677778899),
+('88888888H', 1, 'Elena', 'Morales', 'Torres', 'elenamorales@gmail.com', 'ElenaPass08', 688889900),
+('99999999I', 1, 'David', 'Fernández', NULL, 'davidfernandez@gmail.com', 'DavidClave09', 699990011),
+('10101010J', 1, 'Sara', 'Ramírez', 'Núñez', 'sararamirez@gmail.com', 'SaraPass10', 600001122);
 
 INSERT INTO establecimientos (id_cliente,direccion) VALUES
 (1,'C/1'),
