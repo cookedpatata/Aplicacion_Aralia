@@ -56,6 +56,7 @@ public class Registro extends javax.swing.JFrame {
         repConttxt = new javax.swing.JPasswordField();
         btnVol = new javax.swing.JButton();
         btnSal = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -140,6 +141,9 @@ public class Registro extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnSal, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 203, 80, 30));
+
+        jPanel1.setBackground(new java.awt.Color(255, 204, 102));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 250));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -394,6 +398,7 @@ public class Registro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField repConttxt;
     // End of variables declaration//GEN-END:variables
 }

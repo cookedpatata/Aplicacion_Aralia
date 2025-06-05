@@ -19,7 +19,6 @@ public class Trabajador extends javax.swing.JFrame {
     public Trabajador() {  
         initComponents();
         setLocation(800,400);
-        setSize(200, 200);
         int id=UsuarioConectado.idU;
         try{
             Connection c=ConectBD.Conexion();
@@ -47,12 +46,13 @@ public class Trabajador extends javax.swing.JFrame {
         btnTrabAsig = new javax.swing.JButton();
         CS = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Usuario.setText("Usuario");
-        getContentPane().add(Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, -1, 20));
+        getContentPane().add(Usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, -1, 20));
 
         btnTrabAsig.setText("Trabajos asignados");
         btnTrabAsig.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +60,7 @@ public class Trabajador extends javax.swing.JFrame {
                 btnTrabAsigActionPerformed(evt);
             }
         });
-        getContentPane().add(btnTrabAsig, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+        getContentPane().add(btnTrabAsig, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 140, 30));
 
         CS.setText("Cerrar Sesión");
         CS.addActionListener(new java.awt.event.ActionListener() {
@@ -68,10 +68,13 @@ public class Trabajador extends javax.swing.JFrame {
                 CSActionPerformed(evt);
             }
         });
-        getContentPane().add(CS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        getContentPane().add(CS, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 100, 30));
 
         jLabel3.setText("Bienvenido");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, 20));
+
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 220, 190));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -128,5 +131,6 @@ public class Trabajador extends javax.swing.JFrame {
     private javax.swing.JLabel Usuario;
     private javax.swing.JButton btnTrabAsig;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

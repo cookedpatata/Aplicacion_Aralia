@@ -42,6 +42,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         Reg = new javax.swing.JButton();
         IniciarS = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         jButton1.setText("jButton1");
 
@@ -89,6 +90,9 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(IniciarS, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 110, 30));
+
+        jPanel1.setBackground(new java.awt.Color(255, 153, 153));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 220));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -213,5 +217,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -76,6 +76,7 @@ public class Compania extends javax.swing.JFrame {
      */
     public Compania() {
         initComponents();
+        setLocation(800,400);
         PS.setVisible(false);
         PCT.setVisible(false);
         try{
@@ -248,12 +249,14 @@ public class Compania extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         Trabtxt = new javax.swing.JTextField();
         AñadTrab = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        PS.setBackground(new java.awt.Color(204, 204, 204));
         PS.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PS.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -347,6 +350,7 @@ public class Compania extends javax.swing.JFrame {
 
         getContentPane().add(PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 580, 200));
 
+        PCT.setBackground(new java.awt.Color(204, 204, 204));
         PCT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PCT.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -482,6 +486,7 @@ public class Compania extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Trabajadores", jScrollPane1);
 
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         TRTR.setModel(new javax.swing.table.DefaultTableModel(
@@ -514,6 +519,9 @@ public class Compania extends javax.swing.JFrame {
         jTabbedPane1.addTab("Trabajos", jPanel3);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 830, 350));
+
+        jPanel4.setBackground(new java.awt.Color(153, 153, 153));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1215,6 +1223,7 @@ public class Compania extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

@@ -61,6 +61,7 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
         btnEdit = new javax.swing.JButton();
         btnSelec = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -126,6 +127,9 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, 30));
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 0));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 210));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -286,5 +290,6 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

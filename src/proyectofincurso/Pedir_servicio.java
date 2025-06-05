@@ -85,12 +85,13 @@ public class Pedir_servicio extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         Estab = new javax.swing.JComboBox<>();
         AñadTrab1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Pedir servicio");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
 
         volver.setText("Volver");
         volver.addActionListener(new java.awt.event.ActionListener() {
@@ -191,6 +192,9 @@ public class Pedir_servicio extends javax.swing.JFrame {
             }
         });
         getContentPane().add(AñadTrab1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 70, -1));
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 102));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -309,11 +313,11 @@ public class Pedir_servicio extends javax.swing.JFrame {
                     CurdA=Cd.substring(0 ,4);
                     int CdM=Integer.parseInt(CurdM), CdD=Integer.parseInt(CurdD), CdA=Integer.parseInt(CurdA), SelM=Integer.parseInt(M.trim()), SelD=Integer.parseInt(D.trim()), SelA=Integer.parseInt(A.trim());
                     if(CdM>SelM&&CdA==SelA){
-                        JOptionPane.showMessageDialog(null, "Porfavor escoja un mes valida");
+                        JOptionPane.showMessageDialog(null, "Porfavor escoja un mes valido");
                     }
                     else
                         if(CdM==SelM&&CdD>SelD&&CdA==SelA){
-                            JOptionPane.showMessageDialog(null, "Porfavor escoja un dia valida");
+                            JOptionPane.showMessageDialog(null, "Porfavor escoja un dia valido");
                         }
                     else{
                         int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
@@ -428,6 +432,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JButton volver;

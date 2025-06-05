@@ -92,10 +92,13 @@ public class Cliente extends javax.swing.JFrame {
         Tit1AñadComp = new javax.swing.JLabel();
         Tit2AñadComp = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 255, 204));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        PEmp.setBackground(new java.awt.Color(204, 255, 102));
         PEmp.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PEmp.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -191,6 +194,9 @@ public class Cliente extends javax.swing.JFrame {
         Tit2AñadComp.setText("Compañia?");
         getContentPane().add(Tit2AñadComp, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 330, 170));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -340,6 +346,7 @@ public class Cliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton modComp;
     private javax.swing.JTextField nomtxt;
     // End of variables declaration//GEN-END:variables

@@ -126,7 +126,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             }
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Error en la BD");
+            JOptionPane.showMessageDialog(null, "Aun no has pedido ningun Servicio!");
         }
     }
 
@@ -188,6 +188,7 @@ public class Mis_servicios extends javax.swing.JFrame {
         btnEstablecimientos = new javax.swing.JToggleButton();
         chkF = new javax.swing.JCheckBox();
         chkNF = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -211,6 +212,7 @@ public class Mis_servicios extends javax.swing.JFrame {
         });
         getContentPane().add(btnFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 50, -1, -1));
 
+        PHoras.setBackground(new java.awt.Color(153, 204, 0));
         PHoras.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PHoras.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -234,6 +236,7 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         getContentPane().add(PHoras, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 290, 70));
 
+        PFechas.setBackground(new java.awt.Color(153, 204, 0));
         PFechas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PFechas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -301,6 +304,7 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         getContentPane().add(PFechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 340, 80));
 
+        PTrab.setBackground(new java.awt.Color(153, 204, 0));
         PTrab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PTrab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -330,6 +334,7 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         getContentPane().add(PTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 340, 160));
 
+        PEstab.setBackground(new java.awt.Color(153, 204, 0));
         PEstab.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PEstab.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -420,6 +425,9 @@ public class Mis_servicios extends javax.swing.JFrame {
 
         chkNF.setText("No finalizado");
         getContentPane().add(chkNF, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 50, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1070, 520));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -849,6 +857,7 @@ public class Mis_servicios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

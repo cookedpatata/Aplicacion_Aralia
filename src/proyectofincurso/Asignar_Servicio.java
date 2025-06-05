@@ -26,6 +26,7 @@ public class Asignar_Servicio extends javax.swing.JFrame {
      */
     public Asignar_Servicio() {
         initComponents();
+        setLocation(800,400);
         
         Tabla.setModel(modS);
         String titulosS[]={"Servicio","Compañia","Cliente","Establecimiento","Fecha de inicio","Hora de inicio"};
@@ -78,6 +79,7 @@ public class Asignar_Servicio extends javax.swing.JFrame {
         btnFiltro = new javax.swing.JButton();
         ChYAsig = new javax.swing.JCheckBox();
         ChTodos = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -129,6 +131,9 @@ public class Asignar_Servicio extends javax.swing.JFrame {
 
         ChTodos.setText("Todos");
         getContentPane().add(ChTodos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -319,6 +324,7 @@ public class Asignar_Servicio extends javax.swing.JFrame {
     private javax.swing.JButton btnFiltro;
     private javax.swing.JButton btnVolver;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lab;
     // End of variables declaration//GEN-END:variables
