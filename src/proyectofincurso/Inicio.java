@@ -119,27 +119,27 @@ public class Inicio extends javax.swing.JFrame {
             ResultSet comp= s3.executeQuery("SELECT id_compañia FROM compañias \nWHERE correo ='"+CE+"' AND contraseña ='"+Contr+"';");
             
             if(t.next()){
+                UsuarioConectado.idU=t.getInt(1);
                 dispose();
                 Trabajador tr= new Trabajador();
                 tr.setVisible(true);
-                System.out.println("trabajador");
-                UsuarioConectado.idU=t.getInt(1);
+                System.out.println("trabajador");               
             }
             else
                 if(cl.next()){
+                UsuarioConectado.idU=cl.getInt(1);
                 dispose();
                 Cliente tr= new Cliente();
                 tr.setVisible(true);
-                System.out.println("cliente");
-                UsuarioConectado.idU=cl.getInt(1);
+                System.out.println("cliente");            
             }
                 else
                     if(comp.next()){
+                        UsuarioConectado.idU=comp.getInt(1);
                         dispose();
                         Compania cm= new Compania();
                         cm.setVisible(true);
-                        System.out.println("compañia");
-                        UsuarioConectado.idU=comp.getInt(1);
+                        System.out.println("compañia"); 
                     }
             else
                 if((CE.trim().length()==0)||(Contr.trim().length()==0)){
