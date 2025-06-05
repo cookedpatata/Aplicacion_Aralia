@@ -67,8 +67,6 @@ public class Mis_servicios extends javax.swing.JFrame {
             
             int idU=UsuarioConectado.idU;
             System.out.println(idU);
-            //idU=11;
-            //tabla
             String titulosC[]={"Servicio","Establecimiento","Fecha de inicio","Hora de inicio","Fecha de terminado","Hora de terminado","Trabajos","Terminado"};
             mod.setColumnIdentifiers(titulosC);
             Tabla.setModel(mod);
@@ -82,8 +80,8 @@ public class Mis_servicios extends javax.swing.JFrame {
             Statement s= c.createStatement();
             ResultSet a= s.executeQuery(sql);
             
-            if(a.next()){
-                while (a.next()){
+
+            while (a.next()){
                 idn=a.getInt(1);
                 id=Integer.toString(idn);
                 E=a.getString(2);
@@ -103,11 +101,11 @@ public class Mis_servicios extends javax.swing.JFrame {
                     TE="SI";
                 else
                     TE="NO";
-                
+
                 String row[]={id,E,FI,HI,FF,HF,TR,TE};
                 mod.addRow(row);
-                }
-            } 
+            }
+
             //lista establecimientos
             sql="SELECT direccion FROM establecimientos WHERE id_cliente="+idU+";";
             s= c.createStatement();
@@ -128,7 +126,7 @@ public class Mis_servicios extends javax.swing.JFrame {
             }
         }
         catch(SQLException e){
-            JOptionPane.showMessageDialog(null, "Aun no ha pedido ningun servicio!");
+            JOptionPane.showMessageDialog(null, "Error en la BD");
         }
     }
 
@@ -381,9 +379,9 @@ public class Mis_servicios extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jScrollPane7);
 
         jLayeredPane1.add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 1030, 400);
+        jScrollPane1.setBounds(0, 0, 1030, 430);
 
-        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1030, 420));
+        getContentPane().add(jLayeredPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 1030, 440));
 
         btnTrabajos.setText("Trabajos");
         btnTrabajos.addActionListener(new java.awt.event.ActionListener() {

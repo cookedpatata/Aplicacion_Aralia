@@ -211,8 +211,8 @@ public class Compania extends javax.swing.JFrame {
         Año1 = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        Hora = new javax.swing.JComboBox<>();
         Hora1 = new javax.swing.JComboBox<>();
+        Hora = new javax.swing.JComboBox<>();
         PCT = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -339,13 +339,13 @@ public class Compania extends javax.swing.JFrame {
         jLabel17.setText("de");
         PS.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, -1, -1));
 
-        Hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
-        PS.add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
+        Hora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<hora>", "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        PS.add(Hora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, -1, -1));
 
-        Hora1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
-        PS.add(Hora1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+        Hora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "<hora>", "00:00  ", "00:30  ", "01:00  ", "01:30  ", "02:00  ", "02:30  ", "03:00  ", "03:30  ", "04:00  ", "04:30  ", "05:00  ", "05:30  ", "06:00  ", "06:30  ", "07:00  ", "07:30  ", "08:00  ", "08:30  ", "09:00  ", "09:30  ", "10:00  ", "10:30  ", "11:00  ", "11:30  ", "12:00  ", "12:30  ", "13:00  ", "13:30  ", "14:00  ", "14:30  ", "15:00  ", "15:30  ", "16:00  ", "16:30  ", "17:00  ", "17:30  ", "18:00  ", "18:30  ", "19:00  ", "19:30  ", "20:00  ", "20:30  ", "21:00  ", "21:30  ", "22:00  ", "22:30  ", "23:00  ", "23:30  ", "24:00" }));
+        PS.add(Hora, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
 
-        getContentPane().add(PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 580, 200));
+        getContentPane().add(PS, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 580, 200));
 
         PCT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PCT.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -392,7 +392,7 @@ public class Compania extends javax.swing.JFrame {
         PCT.add(btnAplicUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 120, -1, -1));
         PCT.add(Contxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 50, 120, -1));
 
-        getContentPane().add(PCT, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 490, 170));
+        getContentPane().add(PCT, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 500, 170));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -400,7 +400,7 @@ public class Compania extends javax.swing.JFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 100, 30));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 100, 30));
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -408,7 +408,7 @@ public class Compania extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 10, 100, 30));
+        getContentPane().add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 100, 30));
 
         jButton2.setText("Cerrar sesion");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -424,7 +424,7 @@ public class Compania extends javax.swing.JFrame {
                 btnAsigServActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAsigServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 120, 30));
+        getContentPane().add(btnAsigServ, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 120, 30));
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -444,7 +444,7 @@ public class Compania extends javax.swing.JFrame {
         TServ.setFocusable(false);
         jScrollPane2.setViewportView(TServ);
 
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 320));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 320));
 
         jTabbedPane1.addTab("Servicios", jPanel2);
 
@@ -463,7 +463,7 @@ public class Compania extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(TCli);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 320));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 320));
 
         jTabbedPane1.addTab("Clientes", jPanel1);
 
@@ -513,7 +513,7 @@ public class Compania extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Trabajos", jPanel3);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, -1, 350));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 830, 350));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -691,7 +691,7 @@ public class Compania extends javax.swing.JFrame {
                 if(TServ.isRowSelected(i)){
                     PS.setVisible(true);
                     ids=(String) modS.getValueAt(i, 0);
-                    System.out.println(ids);
+                    
                     try{
                         Statement s= c.createStatement();
                     }
@@ -710,7 +710,7 @@ public class Compania extends javax.swing.JFrame {
                 if(TCli.isRowSelected(i)){
                     PCT.setVisible(true);
                     ids=(String) modC.getValueAt(i, 0);
-                    System.out.println(ids);
+                    
                     DNI=(String) modC.getValueAt(i, 1);
                     DNItxt.setText(DNI);
                     nom=(String) modC.getValueAt(i, 2);
@@ -955,7 +955,116 @@ public class Compania extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAplicUsuarioActionPerformed
 
     private void btnAplicServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicServActionPerformed
+        int iD1,iM1,iA1,iH1,iD2,iM2,iA2,iH2;
+        String D1,M1,A1,D2,M2,A2;
+        int nD1,nM1,nA1,nD2,nM2,nA2;
         
+        iD1=Dia.getSelectedIndex();
+        iM1=Mes.getSelectedIndex();
+        iA1=Año.getSelectedIndex();
+        iH1=Hora.getSelectedIndex();
+        iD2=Dia1.getSelectedIndex();
+        iM2=Mes1.getSelectedIndex();
+        iA2=Año1.getSelectedIndex();
+        iH2=Hora1.getSelectedIndex();
+        
+        if(iD1==0||iM1==0||iA1==0||iH1==0){
+            JOptionPane.showMessageDialog(null, "Es necesario una fecha y hora de inicio");
+        }  
+        else{
+            if(!chTerminado.isSelected()&&(iD2!=0||iM2!=0||iA2!=0||iH2!=0)){
+                JOptionPane.showMessageDialog(null, "si tiene fecha de finalizacion tiene que estar terminado el servicio");
+            }     
+            else
+                if(chTerminado.isSelected()&&(iD2!=0&&iM2!=0&&iA2!=0&&iH2!=0)){
+                D1=Dia.getItemAt(iD1).trim();
+                nD1=Integer.parseInt(D1);
+                D2=Dia1.getItemAt(iD2).trim();
+                nD2=Integer.parseInt(D2);
+                M1=Mes.getItemAt(iM1).trim();
+                nM1=Integer.parseInt(M1);
+                M2=Mes1.getItemAt(iM2).trim();
+                nM2=Integer.parseInt(M2);
+                A1=Año.getItemAt(iA1).trim();
+                nA1=Integer.parseInt(A1);
+                A2=Año1.getItemAt(iA2).trim();
+                nA2=Integer.parseInt(A2);
+
+                if(nM1>nM2&&nA1==nA2){
+                    JOptionPane.showMessageDialog(null, "Porfavor escoja un mes valido");
+                }
+                else
+                    if(nM1==nM2&&nD1>nD2&&nA1==nA2){
+                        JOptionPane.showMessageDialog(null, "Porfavor escoja un dia valida");
+                    }
+                else{
+                    int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
+                    if(op==0){
+                        try{
+                            Statement s= c.createStatement();
+                             
+                            String Finicio="'"+A1+"-"+M1+"-"+D1+"'";
+                            String Hinicio="'"+Hora.getItemAt(iH1).trim()+":00'";
+                            String Hfin="'"+Hora1.getItemAt(iH2).trim()+":00'";
+                            String Ffin="'"+A2+"-"+M2+"-"+D2+"'";
+                            String sql="UPDATE servicios SET\n"
+                                    + "fecha_inicio="+Finicio+",\n"
+                                    + "hora_inicio="+Hinicio+",\n"
+                                    + "fecha_fin="+Ffin+",\n"
+                                    + "hora_fin="+Hfin+",\n"
+                                    + "terminado=TRUE";
+                            int iEstab=Estab.getSelectedIndex();
+                            if(iEstab!=0){
+                                String Est=Estab.getItemAt(iEstab);
+                                sql=sql+",\nid_establecimiento="+Est;
+                            }
+                            sql=sql+"\nWHERE id_servicio="+ids;
+                            System.out.println(sql);
+                            s.executeUpdate(sql);
+                        }
+                        catch(SQLException e){
+                            JOptionPane.showMessageDialog(null, "Erroe en la BD");
+                        }
+                    }
+                }
+            }
+            else{
+                int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
+                if(op==0){
+                    try{
+                        D1=Dia.getItemAt(iD1).trim();
+                        nD1=Integer.parseInt(D1);
+                        M1=Mes.getItemAt(iM1).trim();
+                        nM1=Integer.parseInt(M1);
+                        A1=Año.getItemAt(iA1).trim();
+                        nA1=Integer.parseInt(A1);
+                        
+                        Statement s= c.createStatement();
+                             
+                            String Finicio="'"+A1+"-"+M1+"-"+D1+"'";
+                            String Hinicio="'"+Hora.getItemAt(iH1).trim()+":00'";
+                            String sql="UPDATE servicios SET\n"
+                                    + "fecha_inicio="+Finicio+",\n"
+                                    + "hora_inicio="+Hinicio+",\n"
+                                    + "fecha_fin=NULL,\n"
+                                    + "hora_fin=NULL,\n"
+                                    + "terminado=FALSE";
+                            int iEstab=Estab.getSelectedIndex();
+                            if(iEstab!=0){
+                                String Est=Estab.getItemAt(iEstab);
+                                sql=sql+",\n"
+                                        + "id_establecimiento="+Est;
+                            }
+                            sql=sql+"\nWHERE id_servicio="+ids;
+                            System.out.println(sql);                           
+                            s.executeUpdate(sql);
+                    }
+                    catch(SQLException e){
+                            JOptionPane.showMessageDialog(null, "Erroe en la BD");
+                    }
+                }
+            }
+        }
     }//GEN-LAST:event_btnAplicServActionPerformed
 
     private void btnAsigServActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsigServActionPerformed
