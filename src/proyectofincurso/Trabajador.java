@@ -68,7 +68,7 @@ public class Trabajador extends javax.swing.JFrame {
                 CSActionPerformed(evt);
             }
         });
-        getContentPane().add(CS, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 100, 30));
+        getContentPane().add(CS, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 120, 30));
 
         jLabel3.setText("Bienvenido");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, 20));
