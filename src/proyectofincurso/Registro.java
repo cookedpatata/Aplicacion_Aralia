@@ -231,7 +231,7 @@ public class Registro extends javax.swing.JFrame {
                 Statement s = c.createStatement();
                 ResultSet t= s.executeQuery("SELECT código FROM compañias WHERE código LIKE'"+codEmp+"'");             
                 if(t.next()){ //se comprueba que el codigo de la empresa coincida
-                    if((CE.trim().length()==0)||(Ap1.trim().length()==0)||(DNI.trim().length()==0)||(Tel.trim().length()==0)||(CE.trim().length()==0)||(Cont.length==0)||(repCont.length==0)){
+                    if((Ap1.trim().length()==0)||(DNI.trim().length()==0)||(Tel.trim().length()==0)||(CE.trim().length()==0)||(Cont.length==0)||(repCont.length==0)){
                     JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos necesarios");
                     }   
                     else{

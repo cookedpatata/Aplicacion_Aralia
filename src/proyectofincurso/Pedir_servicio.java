@@ -36,7 +36,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
             ResultSet a= s.executeQuery(sql);
             
             while (a.next()){
-                Estab.addItem(""+a.getString(1)+"");;
+                Estab.addItem(""+a.getString(1)+"");
             }
             
             //trabajos
@@ -162,13 +162,13 @@ public class Pedir_servicio extends javax.swing.JFrame {
         });
         getContentPane().add(ElimTrab, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, -1, -1));
 
-        AñadEstab.setText("Añadir");
+        AñadEstab.setText("administrar");
         AñadEstab.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AñadEstabActionPerformed(evt);
             }
         });
-        getContentPane().add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 70, -1));
+        getContentPane().add(AñadEstab, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 100, -1));
 
         jLabel3.setText("Establecimientos");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
@@ -206,6 +206,7 @@ public class Pedir_servicio extends javax.swing.JFrame {
     }//GEN-LAST:event_DiaActionPerformed
 
     private void AñadEstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadEstabActionPerformed
+        dispose();
         Añadir_Establecimiento AE= new Añadir_Establecimiento();
         AE.setVisible(true);
     }//GEN-LAST:event_AñadEstabActionPerformed

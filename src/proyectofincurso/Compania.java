@@ -6,6 +6,8 @@ package proyectofincurso;
 
 import java.awt.Dimension;
 import java.sql.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import proyectofincurso.clases.ConectBD;
@@ -16,6 +18,46 @@ import proyectofincurso.clases.UsuarioConectado;
  * @author DAW
  */
 public class Compania extends javax.swing.JFrame {
+    public static boolean C9(String a){
+        if(a.length()==9)
+            return true;
+        else
+            return false;
+    }
+    
+    public static boolean CE(String a){
+        Pattern pat = Pattern.compile("^[a-zA-Z0-9_-]{2,}@[a-zA-Z0-9_-]{2,}.[a-zA-Z]{2,4}(.[a-zA-Z]{2,4})?$");
+        Matcher mat = pat.matcher(a);
+        return mat.find();
+    }
+    
+    public static boolean Contr(String a){
+        Pattern pat= Pattern.compile("^(?=.*[A-Z])(?=.*\\d).{7,}$");
+        Matcher mat= pat.matcher(a);
+        return mat.find();   
+    }
+    
+    public static boolean DNI(String a){
+        Pattern pat= Pattern.compile("[0-9]{8}[A-Z]");
+        Matcher mat= pat.matcher(a);
+        return mat.find();
+    }
+    public static boolean CERep(String CE) throws SQLException{
+        Connection c = ConectBD.Conexion();
+        Statement s = c.createStatement();
+        ResultSet cc =s.executeQuery("SELECT correo FROM clientes;");
+        Statement s1 = c.createStatement();
+        ResultSet ct =s1.executeQuery("SELECT correo FROM trabajadores;");
+        while (cc.next()){
+            if(CE.equals(cc.getString(1)))
+                return true;                    
+        }
+        while (ct.next()){
+            if(CE.equals(ct.getString(1)))
+                return true;
+        }
+        return false;
+    }
     
     DefaultTableModel modS=new DefaultTableModel();
     DefaultTableModel modC=new DefaultTableModel();
@@ -24,7 +66,9 @@ public class Compania extends javax.swing.JFrame {
     
     private Connection c = ConectBD.Conexion(); 
     
-    private String ids,id,E,C,Cli,FI,HI,FF,HF,TE,DNI,nom,A1,A2,CE,Con,Tel;
+    private String ids,id,E,C,Cli,FI,HI,FF,HF,TE,A1,A2,Con;
+    
+    private String DNI,nom,ap1,ap2,CEo,CEp,contr,Tel;
     private int idn,idU=UsuarioConectado.idU;
     /**
      * Creates new form Compania
@@ -86,11 +130,11 @@ public class Compania extends javax.swing.JFrame {
                 nom=a.getString(3);
                 A1=a.getString(4);
                 A2=a.getString(5);
-                CE=a.getString(6);
+                CEo=a.getString(6);
                 Con=a.getString(7);
                 Tel=a.getString(8);
                 
-                String row[]={id,DNI,nom,A1,A2,CE,Con,Tel};
+                String row[]={id,DNI,nom,A1,A2,CEo,Con,Tel};
                 modC.addRow(row);
             }
             
@@ -103,11 +147,11 @@ public class Compania extends javax.swing.JFrame {
                 nom=a.getString(4);
                 A1=a.getString(5);
                 A2=a.getString(6);
-                CE=a.getString(7);
+                CEo=a.getString(7);
                 Con=a.getString(8);
                 Tel=a.getString(9);
                 
-                String row[]={id,DNI,nom,A1,A2,CE,Con,Tel};
+                String row[]={id,DNI,nom,A1,A2,CEo,Con,Tel};
                 modT.addRow(row);
             }
             
@@ -488,11 +532,11 @@ public class Compania extends javax.swing.JFrame {
                                 nom=a.getString(3);
                                 A1=a.getString(4);
                                 A2=a.getString(5);
-                                CE=a.getString(6);
+                                CEo=a.getString(6);
                                 Con=a.getString(7);
                                 Tel=a.getString(8);
 
-                                String row[]={id,DNI,nom,A1,A2,CE,Con,Tel};
+                                String row[]={id,DNI,nom,A1,A2,CEo,Con,Tel};
                                 modC.addRow(row);
                             }
                         }
@@ -524,11 +568,11 @@ public class Compania extends javax.swing.JFrame {
                                 nom=a.getString(3);
                                 A1=a.getString(4);
                                 A2=a.getString(5);
-                                CE=a.getString(6);
+                                CEo=a.getString(6);
                                 Con=a.getString(7);
                                 Tel=a.getString(8);
 
-                                String row[]={id,DNI,nom,A1,A2,CE,Con,Tel};
+                                String row[]={id,DNI,nom,A1,A2,CEo,Con,Tel};
                                 modC.addRow(row);
                             }
                         }
@@ -586,7 +630,7 @@ public class Compania extends javax.swing.JFrame {
         PS.setVisible(false);
         PCT.setVisible(false);
         
-        String DNI,nom,ap1,ap2,CE,contr,Tel;
+        
         if(selec==0&&btnEditar.isSelected()){//servicio
             int i=0;      
             int rc=TServ.getRowCount();
@@ -594,6 +638,12 @@ public class Compania extends javax.swing.JFrame {
                 if(TServ.isRowSelected(i)){
                     PS.setVisible(true);
                     ids=(String) modS.getValueAt(i, 0);
+                    try{
+                        Statement s= c.createStatement();
+                    }
+                    catch(SQLException ex){
+                        
+                    }
                 }
                 i++;
             } 
@@ -606,6 +656,21 @@ public class Compania extends javax.swing.JFrame {
                 if(TCli.isRowSelected(i)){
                     PCT.setVisible(true);
                     ids=(String) modC.getValueAt(i, 0);
+                    
+                    DNI=(String) modC.getValueAt(i, 1);
+                    DNItxt.setText(DNI);
+                    nom=(String) modC.getValueAt(i, 2);
+                    Nomtxt.setText(nom);
+                    ap1=(String) modC.getValueAt(i, 3);
+                    Ap1txt.setText(ap1);
+                    ap2=(String) modC.getValueAt(i, 4);
+                    Ap2txt.setText(ap2);
+                    CEo=(String) modC.getValueAt(i, 5);
+                    CEtxt.setText(CEo);
+                    contr=(String) modC.getValueAt(i, 6);
+                    Contxt.setText(contr);
+                    Tel=(String) modC.getValueAt(i, 7);
+                    Teltxt.setText(Tel); 
                 }
                 i++;
             } 
@@ -618,6 +683,21 @@ public class Compania extends javax.swing.JFrame {
                 if(TTrab.isRowSelected(i)){
                     PCT.setVisible(true);
                     ids=(String) modT.getValueAt(i, 0);
+                    
+                    DNI=(String) modT.getValueAt(i, 1);
+                    DNItxt.setText(DNI);
+                    nom=(String) modT.getValueAt(i, 2);
+                    Nomtxt.setText(nom);
+                    ap1=(String) modT.getValueAt(i, 3);
+                    Ap1txt.setText(ap1);
+                    ap2=(String) modT.getValueAt(i, 4);
+                    Ap2txt.setText(ap2);
+                    CEo=(String) modT.getValueAt(i, 5);
+                    CEtxt.setText(CEo);
+                    contr=(String) modT.getValueAt(i, 6);
+                    Contxt.setText(contr);
+                    Tel=(String) modT.getValueAt(i, 7);
+                    Teltxt.setText(Tel);
                 }
                 i++;
             } 
@@ -640,8 +720,6 @@ public class Compania extends javax.swing.JFrame {
                             if(op==0){
                                 try{
                                     Statement s= c.createStatement();
-                                    System.out.println(ids);
-                                    System.out.println(NomTrab);
                                     s.executeUpdate("UPDATE trabajos SET nombre='"+nom.trim()+"' WHERE id_trabajo="+ids);        
                                 }
                                 catch(SQLException ex){
@@ -656,6 +734,49 @@ public class Compania extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnAplicUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicUsuarioActionPerformed
+        try{
+            CEp=CEtxt.getText();
+            System.out.println(CEo+" "+CEp);
+            if((ap1.trim().length()==0)||(DNI.trim().length()==0)||(Tel.trim().length()==0)||(CEo.trim().length()==0)||(contr.trim().length()==0)){
+                    JOptionPane.showMessageDialog(null, "Porfavor rellene todos los campos necesarios");
+                }                       
+                else{
+                    if((C9(Tel)==false))
+                        JOptionPane.showMessageDialog(null, "Telfono no valido");  
+                    else
+                    if((DNI(DNI)==false))
+                        JOptionPane.showMessageDialog(null, "DNI no valido");
+                    else
+                    if(CE(CEo)==false)
+                        JOptionPane.showMessageDialog(null, "Correo electronico no valido");
+                    else
+                    if(Contr(Con)==false)
+                        JOptionPane.showMessageDialog(null, "Formato de contraseña no valido, prueba a utilizar mayusculas y numeros");
+                    else
+                    if(CERep(CEp)==true&&(!CEo.equals(CEp))){
+                        JOptionPane.showMessageDialog(null, "Usuario Ya existente");
+                    }
+                    else{
+                        int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
+                        if(op==0){
+                            Statement s= c.createStatement();
+                            String sql="UPDATE clientes SET"
+                                    + "DNI='"+"',"
+                                    + "nombre='"+"',"
+                                    + "apellido1='"+"',"
+                                    + "apellido2='"+"',"
+                                    + "correo='"+"',"
+                                    + "contraseña='"+"',"
+                                    + "telefono="+""
+                                    + "WHERE id_cliente="+ids;
+                            s.executeUpdate(sql);
+                        }
+                    }
+            }
+        }
+        catch(SQLException ex){
+            
+        }
         
     }//GEN-LAST:event_btnAplicUsuarioActionPerformed
 

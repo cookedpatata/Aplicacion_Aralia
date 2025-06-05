@@ -8,19 +8,38 @@ import proyectofincurso.clases.ConectBD;
 import java.sql.*;
 import javax.swing.*;
 import proyectofincurso.clases.UsuarioConectado;
+import static proyectofincurso.clases.UsuarioConectado.idU;
 /**
  *
  * @author Usuario
  */
 public class Añadir_Establecimiento extends javax.swing.JFrame {
-
+    private int idU=UsuarioConectado.idU;
+    private Connection c= ConectBD.Conexion();
     /**
      * Creates new form Añadir_Establecimiento
      */
     public Añadir_Establecimiento() {
         initComponents();
-        setLocation(950, 400);
+        setLocation(950, 400);      
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        try{
+            Connection c = ConectBD.Conexion();
+            Estab.removeAllItems();
+            //establecimientos
+            Estab.addItem("<Seleccionar>");
+            String sql="SELECT direccion from establecimientos WHERE id_cliente="+idU+";";
+            Statement s= c.createStatement();
+            ResultSet a= s.executeQuery(sql);
+            
+            while (a.next()){
+                Estab.addItem(""+a.getString(1)+"");
+            }
+               
+        }
+        catch (SQLException e){
+            JOptionPane.showMessageDialog(null, "error en la base de datos");
+        }
     }
 
     /**
@@ -35,19 +54,26 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         Estabtxt = new javax.swing.JTextField();
         Añadir = new javax.swing.JButton();
+        Estab = new javax.swing.JComboBox<>();
+        EditElimtxt = new javax.swing.JTextField();
+        btnElim = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btnEdit = new javax.swing.JButton();
+        btnSelec = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Añadir Establecimiento");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
         Estabtxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EstabtxtActionPerformed(evt);
             }
         });
-        getContentPane().add(Estabtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 140, -1));
+        getContentPane().add(Estabtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 140, -1));
 
         Añadir.setText("Añadir");
         Añadir.addActionListener(new java.awt.event.ActionListener() {
@@ -55,16 +81,59 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
                 AñadirActionPerformed(evt);
             }
         });
-        getContentPane().add(Añadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        getContentPane().add(Añadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, -1, -1));
+
+        Estab.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Estab.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EstabActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Estab, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 130, -1));
+        getContentPane().add(EditElimtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 110, -1));
+
+        btnElim.setText("Eliminar");
+        btnElim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnElim, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+
+        jLabel2.setText("Modificacion y Eliminacion de Establecimientos");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        btnEdit.setText("Editar");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
+
+        btnSelec.setText("Seleccionar");
+        btnSelec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelecActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSelec, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
+
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirActionPerformed
         try{
-        int idU=UsuarioConectado.idU, f;
+        int f;
         String Estab=Estabtxt.getText();
-        Connection c= ConectBD.Conexion();
         Statement s= c.createStatement();
         
         ResultSet e= s.executeQuery("SELECT direccion FROM establecimientos WHERE id_cliente="+idU+" AND direccion LIKE '"+Estab+"';");
@@ -73,10 +142,10 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
         else{
             int conf=JOptionPane.showConfirmDialog(null,"¿Está seguro de los datos intoducidos?", "confirmación", 0);
             if(conf==0){
-                s.executeUpdate("INSERT INTO establecimientos (id_cliente, direccion) VALUES ("+idU+", '"+Estab+"');");    
+                s.executeUpdate("INSERT INTO establecimientos (id_cliente, direccion) VALUES ("+idU+", '"+Estab+"');");
+                JOptionPane.showMessageDialog(null, "Establecimiento añadido");
             }
-            else{
-            }            
+                        
         }
         }
         catch(SQLException se){
@@ -88,6 +157,89 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EstabtxtActionPerformed
 
+    private void EstabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EstabActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EstabActionPerformed
+
+    private void btnElimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimActionPerformed
+        int idEst = 0;
+        int ind=Estab.getSelectedIndex();
+        if(ind==0||BtnSelec(btnSelec)==0){
+            JOptionPane.showMessageDialog(null, "Porfavor escoja algun servicio");
+        }
+        else{
+            int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de eliminar este establecimiento?", "confirmación", 0);
+            if(op==0){
+                try{
+                    Statement s= c.createStatement();
+                    //Estab.getItemAt(ind).trim()              
+                    String sql="SELECT id_establecimiento FROM establecimientos WHERE direccion LIKE '"+Estab.getItemAt(ind).trim()+"';";
+                    ResultSet r=s.executeQuery(sql);
+                    while(r.next()){
+                        idEst=r.getInt(1);
+                    }
+                    s.executeUpdate("DELETE FROM establecimientos WHERE id_establecimiento="+idEst+";");
+                    JOptionPane.showMessageDialog(null, "Eliminación realizada con exito");
+                }
+                catch(SQLException ex){
+                   JOptionPane.showMessageDialog(null, "Error en la BD");
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_btnElimActionPerformed
+
+    private void btnSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelecActionPerformed
+        int ind=Estab.getSelectedIndex();
+        if(ind==0){
+            JOptionPane.showMessageDialog(null, "Porfavor escoja algun servicio");
+            btnSelec.setSelected(false);
+            EditElimtxt.setText("");
+        }
+        else{
+            EditElimtxt.setText(Estab.getItemAt(ind));
+            System.out.println(BtnSelec(btnSelec));
+        }
+    }//GEN-LAST:event_btnSelecActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        int ind=Estab.getSelectedIndex();
+        int idEst = 0;
+        if(ind==0||BtnSelec(btnSelec)==0){
+            JOptionPane.showMessageDialog(null, "Porfavor escoja algun servicio");
+        }
+        else{
+            int op=JOptionPane.showConfirmDialog(null,"¿Está seguro de editar este establecimiento?", "confirmación", 0);
+            if(op==0){
+                try{
+                    Statement s= c.createStatement();
+                    String sql="SELECT id_establecimiento FROM establecimientos WHERE direccion LIKE '"+Estab.getItemAt(ind).trim()+"';";
+                    ResultSet r=s.executeQuery(sql);
+                    while(r.next()){
+                        idEst=r.getInt(1);
+                    }
+                    s.executeUpdate("UPDATE establecimientos SET direccion ='"+EditElimtxt.getText().trim()+"' WHERE id_establecimiento="+idEst);
+                    JOptionPane.showMessageDialog(null, "Cambio realizado con exito");
+                }
+                catch(SQLException ex){
+                    
+                }
+            }
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        dispose();
+        Pedir_servicio i= new Pedir_servicio();
+        i.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    public int BtnSelec(JToggleButton b1){
+        int c=0;
+        if(btnSelec.isSelected())
+            c++;   
+        return c;
+    }
     /**
      * @param args the command line arguments
      */
@@ -125,7 +277,14 @@ public class Añadir_Establecimiento extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Añadir;
+    private javax.swing.JTextField EditElimtxt;
+    private javax.swing.JComboBox<String> Estab;
     private javax.swing.JTextField Estabtxt;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnElim;
+    private javax.swing.JToggleButton btnSelec;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
